@@ -8,7 +8,7 @@ namespace 專題.Models.EFModels
 	public partial class AppDbContext : DbContext
 	{
 		public AppDbContext()
-			: base("name=AppDbContext")
+			: base("name=TheFifthGroupOfTopics")
 		{
 		}
 

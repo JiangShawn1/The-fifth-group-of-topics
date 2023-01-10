@@ -26,5 +26,11 @@ namespace 專題.Controllers
 
 			return View();
 		}
+		public ActionResult CustomerService()
+		{
+
+			return View();
+		}
+		
 	}
 }

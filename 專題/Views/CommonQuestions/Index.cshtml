@@ -1,10 +1,10 @@
-﻿@model IEnumerable<專題.Models.EFModels.QuestionType>
+﻿@model IEnumerable<專題.Models.EFModels.CommonQuestion>
 
 @{
-    ViewBag.Title = "QuestionTypes";
+    ViewBag.Title = "Index";
 }
 
-<h2>QuestionTypes</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,7 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.QuestionType1)
+            @Html.DisplayNameFor(model => model.QuestionType.QuestionType1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Question)
         </th>
         <th></th>
     </tr>
@@ -20,7 +23,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.QuestionType1)
+            @Html.DisplayFor(modelItem => item.QuestionType.QuestionType1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Question)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
