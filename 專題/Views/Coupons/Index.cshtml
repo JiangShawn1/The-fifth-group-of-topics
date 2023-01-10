@@ -1,0 +1,63 @@
+﻿@model IEnumerable<專題.Models.EFModels.Coupon>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CouponName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CouponContent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoftDelete)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CouponName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CouponContent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoftDelete)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CouponId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CouponId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CouponId })
+        </td>
+    </tr>
+}
+
+</table>

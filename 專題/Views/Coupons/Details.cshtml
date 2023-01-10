@@ -1,0 +1,66 @@
+﻿@model 專題.Models.EFModels.Coupon
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Coupon</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CouponName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CouponName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CouponContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CouponContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartAt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndAt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateAt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoftDelete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoftDelete)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CouponId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
