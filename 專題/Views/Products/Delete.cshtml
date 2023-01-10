@@ -1,0 +1,72 @@
+﻿@model 專題.Models.EFModels.Product
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Brand.Brand1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Brand.Brand1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Color.Color1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Color.Color1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductsImage.ImageUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductsImage.ImageUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductIntroduce)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductIntroduce)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

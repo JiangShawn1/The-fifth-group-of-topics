@@ -1,0 +1,66 @@
+﻿@model 專題.Models.EFModels.Product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Brand.Brand1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Brand.Brand1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Color.Color1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Color.Color1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductsImage.ImageUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductsImage.ImageUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductIntroduce)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductIntroduce)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
