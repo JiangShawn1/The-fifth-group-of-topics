@@ -10,107 +10,112 @@ using 專題.Models.EFModels;
 
 namespace 專題.Controllers
 {
-    public class CouponsController : Controller
+    public class OrdersController : Controller
     {
         private AppDbContext db = new AppDbContext();
 
-        // GET: Coupons
+        // GET: Orders
         public ActionResult Index()
         {
-            return View(db.Coupons.ToList());
+            var orders = db.Orders.Include(o => o.Coupon);
+            return View(orders.ToList());
         }
 
-        // GET: Coupons/Details/5
+        // GET: Orders/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Coupon coupon = db.Coupons.Find(id);
-            if (coupon == null)
+            Order order = db.Orders.Find(id);
+            if (order == null)
             {
                 return HttpNotFound();
             }
-            return View(coupon);
+            return View(order);
         }
 
-        // GET: Coupons/Create
+        // GET: Orders/Create
         public ActionResult Create()
         {
+            ViewBag.UseCoupon = new SelectList(db.Coupons, "Id", "CouponName");
             return View();
         }
 
-        // POST: Coupons/Create
+        // POST: Orders/Create
         // 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CouponName,CouponNumber,CouponType,CouponDiscount,CouponQuantity,AccountQuantity,MinSpend,IsCombine,CouponImage,CouponContent,StartAt,EndAt,CorrespondProduct,CreateAt,SoftDelete")] Coupon coupon)
+        public ActionResult Create([Bind(Include = "Id,MemberId,OrderNumber,CreateAt,OrderType,OrderStatus,TradeStatus,UseCoupon,Amount,ShippingMethod,OrderAddress,OrderContent")] Order order)
         {
             if (ModelState.IsValid)
             {
-                db.Coupons.Add(coupon);
+                db.Orders.Add(order);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(coupon);
+            ViewBag.UseCoupon = new SelectList(db.Coupons, "Id", "CouponName", order.UseCoupon);
+            return View(order);
         }
 
-        // GET: Coupons/Edit/5
+        // GET: Orders/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Coupon coupon = db.Coupons.Find(id);
-            if (coupon == null)
+            Order order = db.Orders.Find(id);
+            if (order == null)
             {
                 return HttpNotFound();
             }
-            return View(coupon);
+            ViewBag.UseCoupon = new SelectList(db.Coupons, "Id", "CouponName", order.UseCoupon);
+            return View(order);
         }
 
-        // POST: Coupons/Edit/5
+        // POST: Orders/Edit/5
         // 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CouponName,CouponNumber,CouponType,CouponDiscount,CouponQuantity,AccountQuantity,MinSpend,IsCombine,CouponImage,CouponContent,StartAt,EndAt,CorrespondProduct,CreateAt,SoftDelete")] Coupon coupon)
+        public ActionResult Edit([Bind(Include = "Id,MemberId,OrderNumber,CreateAt,OrderType,OrderStatus,TradeStatus,UseCoupon,Amount,ShippingMethod,OrderAddress,OrderContent")] Order order)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(coupon).State = EntityState.Modified;
+                db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(coupon);
+            ViewBag.UseCoupon = new SelectList(db.Coupons, "Id", "CouponName", order.UseCoupon);
+            return View(order);
         }
 
-        // GET: Coupons/Delete/5
+        // GET: Orders/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Coupon coupon = db.Coupons.Find(id);
-            if (coupon == null)
+            Order order = db.Orders.Find(id);
+            if (order == null)
             {
                 return HttpNotFound();
             }
-            return View(coupon);
+            return View(order);
         }
 
-        // POST: Coupons/Delete/5
+        // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Coupon coupon = db.Coupons.Find(id);
-            db.Coupons.Remove(coupon);
+            Order order = db.Orders.Find(id);
+            db.Orders.Remove(order);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

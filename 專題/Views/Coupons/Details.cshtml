@@ -19,6 +19,70 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.CouponNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CouponNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CouponType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CouponType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CouponDiscount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CouponDiscount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CouponQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CouponQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccountQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinSpend)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinSpend)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsCombine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsCombine)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CouponImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CouponImage)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.CouponContent)
         </dt>
 
@@ -43,6 +107,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.CorrespondProduct)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CorrespondProduct)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.CreateAt)
         </dt>
 
@@ -61,6 +133,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CouponId }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

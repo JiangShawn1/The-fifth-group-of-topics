@@ -15,6 +15,30 @@
             @Html.DisplayNameFor(model => model.CouponName)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.CouponNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CouponType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CouponDiscount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CouponQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MinSpend)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsCombine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CouponImage)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.CouponContent)
         </th>
         <th>
@@ -22,6 +46,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.EndAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CorrespondProduct)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CreateAt)
@@ -38,6 +65,30 @@
             @Html.DisplayFor(modelItem => item.CouponName)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.CouponNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CouponType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CouponDiscount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CouponQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MinSpend)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsCombine)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CouponImage)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.CouponContent)
         </td>
         <td>
@@ -47,15 +98,18 @@
             @Html.DisplayFor(modelItem => item.EndAt)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.CorrespondProduct)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.CreateAt)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.SoftDelete)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CouponId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CouponId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CouponId })
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

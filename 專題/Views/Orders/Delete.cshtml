@@ -1,0 +1,112 @@
+﻿@model 專題.Models.EFModels.Order
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Coupon.CouponName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Coupon.CouponName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateAt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TradeStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TradeStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShippingMethod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShippingMethod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderContent)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
