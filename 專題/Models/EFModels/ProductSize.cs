@@ -18,8 +18,9 @@ namespace 專題.Models.EFModels
         public int Id { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string Size { get; set; }
+		[StringLength(10, ErrorMessage = "請勿超過10個字")]
+		[Display(Name = "尺寸")]
+		public string Size { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Stock> Stocks { get; set; }
