@@ -10,15 +10,15 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    <tr>
+    <tr >
         <th>
-            @Html.DisplayNameFor(model => model.Brand.Brand1)
+            品牌
+        </th>
+        <th class="">
+            顏色
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Color.Color1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductsImage.ImageUrl)
+            圖片
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ProductName)
@@ -28,6 +28,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            操作
         </th>
         <th></th>
     </tr>
