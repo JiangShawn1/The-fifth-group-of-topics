@@ -12,28 +12,28 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Supplier.SupplierName)
+            主辦單位
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            活動名稱
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreateDateTime)
+            創建日期
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ContestDate)
+            活動日期
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RegistrationDeadline)
+            報名截止日
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Area)
+            活動地區
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Location)
+            活動地點
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Review)
+            審核狀態
         </th>
         <th></th>
     </tr>
@@ -70,9 +70,9 @@
                 @source
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink("修改", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("詳細內容", "Details", new { id = item.Id }) |
+                @Html.ActionLink("刪除", "Delete", new { id = item.Id })
             </td>
         </tr>
     }

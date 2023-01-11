@@ -26,15 +26,59 @@ namespace 專題.Models.Infrastructures.Extensions
 
 			};
 		}
-		public static Contest_Category ToContest_Category(this ContestCreateVM contestCreateRow)
+		public static List<Contest_Category> ToContest_Category(this ContestCreateVM contestCreateRow)
 		{
-			return new Contest_Category
+			List<Contest_Category> list = new List<Contest_Category>();
+
+			for (int i = 0; i < contestCreateRow.QuotaList.Count; i++)
+			{if (contestCreateRow.EnterFeeList[i] == 0) break;
+				list.Add(
+					new Contest_Category
+					{
+						ContestID = contestCreateRow.Id,
+						CategoryID = contestCreateRow.CategoryIDList[i],
+						Quota = contestCreateRow.QuotaList[i],
+						EnterFee = contestCreateRow.EnterFeeList[i],
+					});
+			}
+			return list;
+		}
+		public static Contest ToContestE(this ContestEditVM contestEditRow)
+		{
+			return new Contest
 			{
-				ContestID = contestCreateRow.Id,
-				CategoryID = contestCreateRow.CategoryIDList.First(),
-				Quota = contestCreateRow.QuotaList.First(),
-				EnterFee = contestCreateRow.EnterFeeList.First(),
+				Id=contestEditRow.Id,
+				Name = contestEditRow.Name,
+				SupplierID = contestEditRow.SupplierID,
+				CreateDateTime = DateTime.Now,
+				ContestDate = contestEditRow.ContestDate,
+				RegistrationDeadline = contestEditRow.RegistrationDeadline,
+				Area = contestEditRow.Area,
+				Location = contestEditRow.Location,
+				MapURL = contestEditRow.MapURL,
+				RegistrationURL = contestEditRow.RegistrationURL,
+				Detail = contestEditRow.Detail,
+				Review= contestEditRow.Review,
+
 			};
+		}
+		public static List<Contest_Category> ToContest_CategoryE(this ContestEditVM contestEditRow)
+		{
+			List<Contest_Category> list = new List<Contest_Category>();
+			for (int i = 0; i < contestEditRow.QuotaList.Count; i++)
+			{
+				if (contestEditRow.EnterFeeList[i] == 0) break;
+				list.Add(
+					new Contest_Category
+					{
+						ContestID = contestEditRow.Id,						
+						Id = contestEditRow.Contest_CategoryIDList[i],
+						CategoryID = contestEditRow.CategoryIDList[i],
+						Quota = contestEditRow.QuotaList[i],
+						EnterFee = contestEditRow.EnterFeeList[i],
+					});
+			}
+			return list;
 		}
 	}
 }
