@@ -49,7 +49,7 @@ namespace 專題.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "id,boardId,topicState,replyNumber,replyContent,replyTime,replyState,replyMemberId")] Forum_S1MainTopicsBranch1Thread forum_S1MainTopicsBranch1Thread)
+        public async Task<ActionResult> Create([Bind(Include = "id,boardId,essayId,topicState,replyNumber,replyContent,replyTime,replyState,replyMemberId")] Forum_S1MainTopicsBranch1Thread forum_S1MainTopicsBranch1Thread)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace 專題.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "id,boardId,topicState,replyNumber,replyContent,replyTime,replyState,replyMemberId")] Forum_S1MainTopicsBranch1Thread forum_S1MainTopicsBranch1Thread)
+        public async Task<ActionResult> Edit([Bind(Include = "id,boardId,essayId,topicState,replyNumber,replyContent,replyTime,replyState,replyMemberId")] Forum_S1MainTopicsBranch1Thread forum_S1MainTopicsBranch1Thread)
         {
             if (ModelState.IsValid)
             {

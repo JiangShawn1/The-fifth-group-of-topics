@@ -19,6 +19,7 @@ namespace 專題.Models.EFModels
 
         public int boardId { get; set; }
 
+        public int essayId { get; set; }
         public int topicState { get; set; }
 
         public int replyNumber { get; set; }
