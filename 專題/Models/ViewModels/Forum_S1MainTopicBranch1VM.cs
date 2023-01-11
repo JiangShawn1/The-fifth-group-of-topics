@@ -6,7 +6,7 @@ using System.Web;
 
 namespace 專題.Models.ViewModels
 {
-	public class Forum_S1MainTopicBranch1DTO
+	public class Forum_S1MainTopicBranch1VM
 	{
 		public int id { get; set; }
 

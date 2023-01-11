@@ -6,14 +6,11 @@ using System.Web;
 
 namespace 專題.Models.ViewModels
 {
-	public class Forum_S1MainTopicsBranch1ThreadDTO
+	public class Forum_S1MainTopicsBranch1ThreadVM
 	{
-		public int id { get; set; }
-
 		public int boardId { get; set; }
 
 		public int essayId { get; set; }
-		public int topicState { get; set; }
 
 		public int replyNumber { get; set; }
 

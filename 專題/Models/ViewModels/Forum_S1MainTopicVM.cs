@@ -6,9 +6,8 @@ using System.Web;
 
 namespace 專題.Models.ViewModels
 {
-	public class Forum_S1MainTopicDTO
+	public class Forum_S1MainTopicVM
 	{
-		public int id { get; set; }
 
 		public int boardId { get; set; }
 
@@ -19,6 +18,5 @@ namespace 專題.Models.ViewModels
 
 		public int boardAdministratorId { get; set; }
 
-		public virtual Member Member { get; set; }
 	}
 }
