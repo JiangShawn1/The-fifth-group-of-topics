@@ -1,0 +1,50 @@
+﻿@model 專題.Models.EFModels.Forum_S1MainTopic
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Forum_S1MainTopic</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Member.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Member.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.boardId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.boardId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.boardName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.boardName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.boardAdministrator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.boardAdministrator)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
