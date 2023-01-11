@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using 專題.Models.EFModels;
+using 專題.Models.Infrastructures.Extensions;
+using 專題.Models.ViewModels;
 
 namespace 專題.Controllers
 {
@@ -40,7 +42,19 @@ namespace 專題.Controllers
         public ActionResult Create()
         {
             ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierId", "SupplierName");
-            return View();
+            
+            List<SelectListItem> CategoryDropDownList = new List<SelectListItem>();
+            foreach(var item in db.Categories)
+            {
+                var categoriesRow = new SelectListItem
+                {
+                    Value = item.Id.ToString(),
+                    Text = item.Category1 +" "+ item.Distance+"K",
+                };
+				CategoryDropDownList.Add(categoriesRow);                
+            }
+			ViewBag.CategoryIDList = CategoryDropDownList;
+			return View();
         }
 
         // POST: Contests/Create
@@ -48,17 +62,18 @@ namespace 專題.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,SupplierID,CreateDateTime,ContestDate,RegistrationDeadline,Area,Location,MapURL,RegistrationURL,Detail,Review")] Contest contest)
-        {
+        public ActionResult Create(ContestCreateVM contestCreateRow)
+        {  
             if (ModelState.IsValid)
             {
-                db.Contests.Add(contest);
+                db.Contests.Add(contestCreateRow.ToContest());
+                db.Contest_Category.Add(contestCreateRow.ToContest_Category());
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierId", "SupplierName", contest.SupplierID);
-            return View(contest);
+            ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierId", "SupplierName", contestCreateRow.SupplierID);
+            return View(contestCreateRow);
         }
 
         // GET: Contests/Edit/5

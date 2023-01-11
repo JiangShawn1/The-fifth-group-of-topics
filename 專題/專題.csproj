@@ -175,6 +175,8 @@
     <Compile Include="Models\EFModels\Subscription.cs" />
     <Compile Include="Models\EFModels\Supplier.cs" />
     <Compile Include="Models\EFModels\TransactionRecord.cs" />
+    <Compile Include="Models\Infrastructures\Extensions\ContestExts.cs" />
+    <Compile Include="Models\ViewModels\ContestCreateVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
