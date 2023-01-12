@@ -10,15 +10,12 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    <tr >
+    <tr>
         <th>
-            品牌
-        </th>
-        <th class="">
-            顏色
+            @Html.DisplayNameFor(model => model.Brand.Brand1)
         </th>
         <th>
-            圖片
+            @Html.DisplayNameFor(model => model.Color.Color1)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ProductName)
@@ -30,7 +27,7 @@
             @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
-            操作
+            @Html.DisplayNameFor(model => model.ImageUrl)
         </th>
         <th></th>
     </tr>
@@ -44,9 +41,6 @@
             @Html.DisplayFor(modelItem => item.Color.Color1)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ProductsImage.ImageUrl)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.ProductName)
         </td>
         <td>
@@ -54,6 +48,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImageUrl)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

@@ -18,7 +18,7 @@ namespace 專題.Controllers
         // GET: Products
         public async Task<ActionResult> Index()
         {
-            var products = db.Products.Include(p => p.Brand).Include(p => p.Color).Include(p => p.ProductsImage);
+            var products = db.Products.Include(p => p.Brand).Include(p => p.Color);
             return View(await products.ToListAsync());
         }
 
@@ -42,7 +42,6 @@ namespace 專題.Controllers
         {
             ViewBag.Brand_Id = new SelectList(db.Brands, "Id", "Brand1");
             ViewBag.Color_Id = new SelectList(db.Colors, "Id", "Color1");
-            ViewBag.ProductsImages_Id = new SelectList(db.ProductsImages, "Id", "ImageUrl");
             return View();
         }
 
@@ -51,7 +50,7 @@ namespace 專題.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Brand_Id,ProductName,ProductIntroduce,Color_Id,Price,ProductsImages_Id")] Product product)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Brand_Id,ProductName,ProductIntroduce,Color_Id,Price,ImageUrl")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -62,7 +61,6 @@ namespace 專題.Controllers
 
             ViewBag.Brand_Id = new SelectList(db.Brands, "Id", "Brand1", product.Brand_Id);
             ViewBag.Color_Id = new SelectList(db.Colors, "Id", "Color1", product.Color_Id);
-            ViewBag.ProductsImages_Id = new SelectList(db.ProductsImages, "Id", "ImageUrl", product.ProductsImages_Id);
             return View(product);
         }
 
@@ -80,7 +78,6 @@ namespace 專題.Controllers
             }
             ViewBag.Brand_Id = new SelectList(db.Brands, "Id", "Brand1", product.Brand_Id);
             ViewBag.Color_Id = new SelectList(db.Colors, "Id", "Color1", product.Color_Id);
-            ViewBag.ProductsImages_Id = new SelectList(db.ProductsImages, "Id", "ImageUrl", product.ProductsImages_Id);
             return View(product);
         }
 
@@ -89,7 +86,7 @@ namespace 專題.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Brand_Id,ProductName,ProductIntroduce,Color_Id,Price,ProductsImages_Id")] Product product)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Brand_Id,ProductName,ProductIntroduce,Color_Id,Price,ImageUrl")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +96,6 @@ namespace 專題.Controllers
             }
             ViewBag.Brand_Id = new SelectList(db.Brands, "Id", "Brand1", product.Brand_Id);
             ViewBag.Color_Id = new SelectList(db.Colors, "Id", "Color1", product.Color_Id);
-            ViewBag.ProductsImages_Id = new SelectList(db.ProductsImages, "Id", "ImageUrl", product.ProductsImages_Id);
             return View(product);
         }
 

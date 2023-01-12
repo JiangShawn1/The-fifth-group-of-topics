@@ -18,7 +18,6 @@ namespace 專題.Models.EFModels
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<OnSale> OnSales { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<ProductsImage> ProductsImages { get; set; }
         public virtual DbSet<ProductSize> ProductSizes { get; set; }
         public virtual DbSet<Stock> Stocks { get; set; }
 
@@ -75,12 +74,6 @@ namespace 專題.Models.EFModels
                 .HasMany(e => e.Stocks)
                 .WithRequired(e => e.Product)
                 .HasForeignKey(e => e.Product_Id)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<ProductsImage>()
-                .HasMany(e => e.Products)
-                .WithRequired(e => e.ProductsImage)
-                .HasForeignKey(e => e.ProductsImages_Id)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ProductSize>()
