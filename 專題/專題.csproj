@@ -131,6 +131,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ProductsImagesController.cs" />
     <Compile Include="Controllers\ProductSizesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -375,6 +376,11 @@
     <Content Include="Views\ProductSizes\Details.cshtml" />
     <Content Include="Views\ProductSizes\Edit.cshtml" />
     <Content Include="Views\ProductSizes\Index.cshtml" />
+    <Content Include="Views\ProductsImages\Create.cshtml" />
+    <Content Include="Views\ProductsImages\Delete.cshtml" />
+    <Content Include="Views\ProductsImages\Details.cshtml" />
+    <Content Include="Views\ProductsImages\Edit.cshtml" />
+    <Content Include="Views\ProductsImages\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
