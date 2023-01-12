@@ -1,0 +1,101 @@
+﻿@model 專題.Models.EFModels.CustomerFeedback
+
+@{
+    ViewBag.Title = "Reply";
+
+
+    var email = ViewBag.email;
+    var FeedbackContent = ViewBag.FeedbackContent;
+    var CreateTime = ViewBag.CreateTime;
+    var CustomerName = ViewBag.CustomerName;
+    string defaultReply = $"{CustomerName}您好，您於{CreateTime}來信提到，{FeedbackContent}";
+}
+
+<h2>Reply</h2>
+
+<div>
+    <h4>CustomerFeedback</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.QuestionType.QuestionType1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuestionType.QuestionType1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FeedbackContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FeedbackContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateTime)
+        </dd>
+
+    </dl>
+    <div>
+        <form method="post">
+            <lable>信箱</lable><input type="text" id="emailTo" value="@email" />
+            <br />
+            <lable>主旨</lable><input type="text" id="emailSubject" />
+            <br />
+            <lable>內容</lable><textarea rows="4" cols="50" id="emailBody" value="FeedbackContent">@defaultReply</textarea>
+            <button class="btn btn-primary" id="buttonclick">寄出</button>
+        </form>
+    </div>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script type="text/javascript" >
+        $('#buttonclick').on("click", function () {
+            //alert($("#emailTo").val())
+            //alert($("#emailSubject").val())
+            //alert($("#emailBody").html())
+            $.ajax({
+                method: "POST",
+                url: "https://localhost:44392/CustomerFeedbacks/SentEmail",
+                contentType: "text/html",
+                dataType: "html",
+                data: {
+                    emailTo: $("#emailTo").val(),
+                    emailSubject: $("#emailSubject").val(),
+                    emailBody: $("#emailBody").html()
+                },
+            })
+        });          
+    </script>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

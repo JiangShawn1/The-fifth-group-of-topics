@@ -7,15 +7,19 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using 專題.Models.EFModels;
+using 專題.Models.Services;
+using 專題.Models.ViewModels;
 
 namespace 專題.Controllers
 {
+
     public class CustomerFeedbacksController : Controller
     {
         private AppDbContext db = new AppDbContext();
+		
 
-        // GET: CustomerFeedbacks
-        public ActionResult Index()
+		// GET: CustomerFeedbacks
+		public ActionResult Index()
         {
             var customerFeedbacks = db.CustomerFeedbacks.Include(c => c.QuestionType);
             return View(customerFeedbacks.ToList());
@@ -128,5 +132,51 @@ namespace 專題.Controllers
             }
             base.Dispose(disposing);
         }
-    }
+
+		
+		
+		public ActionResult Reply(int? id)
+		{
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			CustomerFeedback customerFeedback = db.CustomerFeedbacks.Find(id);
+			if (customerFeedback == null)
+			{
+				return HttpNotFound();
+			}
+			ViewBag.email = customerFeedback.Email;
+			ViewBag.feedbackcontent = customerFeedback.FeedbackContent;
+			ViewBag.createtime = customerFeedback.CreateTime;
+			ViewBag.customername = customerFeedback.CustomerName;
+			return View(customerFeedback);
+		}
+		public static string _emailTo ;
+		public static string _subject ;
+		public static string _body ;
+		
+		public ActionResult SentEmail(HttpContext context)
+		{
+            _emailTo = context.Request.QueryString["emailTo"];
+            _subject = context.Request.QueryString["emailSubject"];
+            _body = context.Request.QueryString["body"];
+
+			//_emailTo = Request.Form["emailTo"];
+			//_subject = Request.Form["emailSubject"];
+			//_body = Request.Form["body"];
+
+
+			var emailService = new EmailService();
+			if (_body != null && _subject != null && _emailTo != null)
+			{
+				emailService.SendEmail(_emailTo, _subject, _body);
+				return View("SentEmail");
+			}
+			else
+			{
+				return View("FailEmail");
+			}			
+		}
+	}
 }

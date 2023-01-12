@@ -151,6 +151,8 @@
     <Compile Include="Models\EFModels\QuickReply.cs" />
     <Compile Include="Models\EFModels\QuickReplyKeyWord.cs" />
     <Compile Include="Models\EFModels\sysdiagram.cs" />
+    <Compile Include="Models\Services\EmailService.cs" />
+    <Compile Include="Models\ViewModels\SendEmailVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +212,10 @@
     <Content Include="Views\CustomerFeedbacks\Edit.cshtml" />
     <Content Include="Views\CustomerFeedbacks\Index.cshtml" />
     <Content Include="Views\Home\CustomerService.cshtml" />
+    <Content Include="Views\CustomerFeedbacks\SentEmail.cshtml" />
+    <Content Include="Views\CustomerFeedbacks\123.cshtml" />
+    <Content Include="Views\CustomerFeedbacks\Reply.cshtml" />
+    <Content Include="Views\CustomerFeedbacks\FailEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
