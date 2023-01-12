@@ -1,7 +1,7 @@
 ﻿@model 專題.Models.ViewModels.ContestEditVM
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit";   
 }
 
 <h2>Edit</h2>
@@ -10,6 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+
     
 <div class="form-horizontal">
     <h4>Contest</h4>
@@ -65,14 +66,14 @@
             @Html.ValidationMessageFor(model => model.MapURL, "", new { @class = "text-danger" })
         </div>
     </div>
-
+    
     @for (int i = 0; i < Model.QuotaList.Count(); i++)
     {
         <input name="Contest_CategoryIDList" value="@Model.Contest_CategoryIDList[i]" hidden />
         <div class="form-group">
             @Html.LabelFor(model => model.CategoryIDList, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("CategoryIDList", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.CategoryIDList[i], null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CategoryIDList[i], "", new { @class = "text-danger" })
             </div>
         </div>

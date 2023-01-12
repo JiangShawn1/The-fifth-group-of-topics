@@ -118,12 +118,12 @@ namespace 專題.Controllers
 				var categoriesRow = new SelectListItem
 				{
 					Value = item.Id.ToString(),
-					Text = item.Category1 + " " + item.Distance + "K",	
-									
+					Text = item.Category1 + " " + item.Distance + "K",				
+								
 				};
-				CategoryDropDownList.Add(categoriesRow);
+			   CategoryDropDownList.Add(categoriesRow);
 			}
-			ViewBag.CategoryIDList = CategoryDropDownList;
+			ViewBag.CategoryIDList = CategoryDropDownList;					
 			if (contest == null)
 			{
 				return HttpNotFound();

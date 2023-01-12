@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using 專題.Models.EFModels;
@@ -81,7 +82,6 @@ namespace 專題.Models.Infrastructures.Extensions
 			}
 			return list;
 		}
-
 		public static ContestDetailVM ToContestDetailVM(this Contest contest, List<Contest_Category> cc)
 		{
 			var EnterFeeList = new List<int>();
@@ -112,6 +112,83 @@ namespace 專題.Models.Infrastructures.Extensions
 				RegistrationURL=contest.RegistrationURL,
 				Detail=contest.Detail,
 				Review=contest.Review,
+			};
+		}
+
+		public static Registration_Information ToRI(this Registration_InformationCreateVM VM)
+		{
+			return new Registration_Information
+			{
+				InformationID = VM.InformationID,
+				RegistrationID = VM.RegistrationID,
+			};
+		}
+
+		public static Registration ToRe(this Registration_InformationCreateVM VM)
+		{
+			return new Registration
+			{
+				MemberID= VM.MemberID,
+				Contest_CategoryID= VM.Contest_CategoryID,
+			};
+		}
+
+		public static Information ToIn(this Registration_InformationCreateVM VM)
+		{
+			return new Information
+			{
+				Name= VM.Name,
+				Phone= VM.Phone,
+				Gender= VM.Gender,
+				Address= VM.Address,
+			};
+		}
+
+		public static Registration_InformationEditVM ToRIEditVM(this Registration_Information RI,Registration registration, Information information)
+		{
+			return new Registration_InformationEditVM
+			{
+				Id = RI.Id,
+				InformationID = information.Id,
+				RegistrationID = registration.Id,
+				MemberID = registration.MemberID,
+				Contest_CategoryID = registration.Contest_CategoryID,
+				PaymentStatus = registration.PaymentStatus,
+				Name = information.Name,
+				Phone = information.Phone,
+				Gender = information.Gender,
+				Address = information.Address,
+			};
+		}
+
+		public static Registration_Information ToRIE(this Registration_InformationEditVM VM) 
+		{
+			return new Registration_Information
+			{
+				Id = VM.Id,
+				InformationID = VM.InformationID,
+				RegistrationID = VM.RegistrationID,
+			};
+		}
+		public static Registration ToReE(this Registration_InformationEditVM VM)
+		{
+			return new Registration
+			{
+				Id= VM.RegistrationID,
+				MemberID = VM.MemberID,
+				Contest_CategoryID = VM.Contest_CategoryID,
+			};
+		}
+
+		public static Information ToInE(this Registration_InformationEditVM VM)
+		{
+			return new Information
+			{
+				Id = VM.InformationID,
+				Name = VM.Name,
+				Phone = VM.Phone,
+				Gender = VM.Gender,
+				Address = VM.Address,
 			};
 		}
 	}

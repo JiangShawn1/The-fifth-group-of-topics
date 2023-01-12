@@ -1,0 +1,74 @@
+﻿@model IEnumerable<專題.Models.EFModels.Registration_Information>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            報名人
+        </th>
+        <th>
+            報名賽事
+        </th>
+        <th>
+            組別
+        </th>
+        <th>
+            參賽人
+        </th>
+        <th>
+            性別
+        </th>
+        <th>
+            繳費狀況
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Registration.Member.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Registration.Contest_Category.Contest.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Registration.Contest_Category.Category.Category1)
+                @Html.DisplayFor(modelItem => item.Registration.Contest_Category.Category.Distance)K
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Information.Name)
+            </td>
+            <td>
+                @{var value = item.Information.Gender;
+                    var source = "";
+                    source = value == true ? "男" : "女";
+                }
+                @source
+            </td>
+            <td>
+                @{var pay = item.Registration.PaymentStatus;
+                    var status = "";
+                    status = pay == true ? "已繳費" : "未繳費";
+                }
+                @status
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

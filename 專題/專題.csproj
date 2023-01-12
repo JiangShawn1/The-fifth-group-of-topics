@@ -131,6 +131,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ContestsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RegistrationsController.cs" />
+    <Compile Include="Controllers\Registration_InformationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -179,6 +181,8 @@
     <Compile Include="Models\ViewModels\ContestCreateVM.cs" />
     <Compile Include="Models\ViewModels\ContestDetailVM.cs" />
     <Compile Include="Models\ViewModels\ContestEditVM.cs" />
+    <Compile Include="Models\ViewModels\Registration_InformationCreateVM.cs" />
+    <Compile Include="Models\ViewModels\Registration_InformationEditVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -222,6 +226,16 @@
     <Content Include="Views\Contests\Details.cshtml" />
     <Content Include="Views\Contests\Edit.cshtml" />
     <Content Include="Views\Contests\Index.cshtml" />
+    <Content Include="Views\Registrations\Create.cshtml" />
+    <Content Include="Views\Registrations\Delete.cshtml" />
+    <Content Include="Views\Registrations\Details.cshtml" />
+    <Content Include="Views\Registrations\Edit.cshtml" />
+    <Content Include="Views\Registrations\Index.cshtml" />
+    <Content Include="Views\Registration_Information\Create.cshtml" />
+    <Content Include="Views\Registration_Information\Delete.cshtml" />
+    <Content Include="Views\Registration_Information\Details.cshtml" />
+    <Content Include="Views\Registration_Information\Edit.cshtml" />
+    <Content Include="Views\Registration_Information\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
