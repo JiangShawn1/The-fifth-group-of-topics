@@ -31,11 +31,15 @@ namespace 專題.Controllers
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
 			Contest contest = db.Contests.Find(id);
-			if (contest == null)
+			List<Contest_Category> contest_Category=db.Contest_Category.Where(x=>x.ContestID==id).ToList();
+			ContestDetailVM editVM = contest.ToContestDetailVM(contest_Category);
+
+
+			if (editVM == null)
 			{
 				return HttpNotFound();
 			}
-			return View(contest);
+			return View(editVM);
 		}
 
 		// GET: Contests/Create

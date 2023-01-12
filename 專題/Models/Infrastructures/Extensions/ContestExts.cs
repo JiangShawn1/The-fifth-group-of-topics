@@ -31,7 +31,8 @@ namespace 專題.Models.Infrastructures.Extensions
 			List<Contest_Category> list = new List<Contest_Category>();
 
 			for (int i = 0; i < contestCreateRow.QuotaList.Count; i++)
-			{if (contestCreateRow.EnterFeeList[i] == 0) break;
+			{
+				if (contestCreateRow.EnterFeeList[i] == 0) break;
 				list.Add(
 					new Contest_Category
 					{
@@ -47,7 +48,7 @@ namespace 專題.Models.Infrastructures.Extensions
 		{
 			return new Contest
 			{
-				Id=contestEditRow.Id,
+				Id = contestEditRow.Id,
 				Name = contestEditRow.Name,
 				SupplierID = contestEditRow.SupplierID,
 				CreateDateTime = contestEditRow.CreateDateTime,
@@ -58,7 +59,7 @@ namespace 專題.Models.Infrastructures.Extensions
 				MapURL = contestEditRow.MapURL,
 				RegistrationURL = contestEditRow.RegistrationURL,
 				Detail = contestEditRow.Detail,
-				Review= contestEditRow.Review,
+				Review = contestEditRow.Review,
 
 			};
 		}
@@ -71,7 +72,7 @@ namespace 專題.Models.Infrastructures.Extensions
 				list.Add(
 					new Contest_Category
 					{
-						ContestID = contestEditRow.Id,						
+						ContestID = contestEditRow.Id,
 						Id = contestEditRow.Contest_CategoryIDList[i],
 						CategoryID = contestEditRow.CategoryIDList[i],
 						Quota = contestEditRow.QuotaList[i],
@@ -79,6 +80,39 @@ namespace 專題.Models.Infrastructures.Extensions
 					});
 			}
 			return list;
+		}
+
+		public static ContestDetailVM ToContestDetailVM(this Contest contest, List<Contest_Category> cc)
+		{
+			var EnterFeeList = new List<int>();
+			var QuotaList = new List<int>();
+			var CategoryList = new List<string>();
+
+			foreach (var item in cc)
+			{
+				EnterFeeList.Add(item.EnterFee);
+				QuotaList.Add(item.Quota);
+				CategoryList.Add(item.Category.Category1);
+			}
+
+			return new ContestDetailVM
+			{
+				Id = contest.Id,
+				Name = contest.Name,
+				SupplierName = contest.Supplier.SupplierName,
+				CreateDateTime=contest.CreateDateTime,
+				ContestDate=contest.ContestDate,
+				RegistrationDeadline=contest.RegistrationDeadline,
+				Area=contest.Area,
+				Location=contest.Location,
+				MapURL=contest.MapURL,
+				CategoryList = CategoryList,
+				EnterFeeList = EnterFeeList,
+				QuotaList = QuotaList,
+				RegistrationURL=contest.RegistrationURL,
+				Detail=contest.Detail,
+				Review=contest.Review,
+			};
 		}
 	}
 }

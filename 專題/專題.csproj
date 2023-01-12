@@ -177,6 +177,7 @@
     <Compile Include="Models\EFModels\TransactionRecord.cs" />
     <Compile Include="Models\Infrastructures\Extensions\ContestExts.cs" />
     <Compile Include="Models\ViewModels\ContestCreateVM.cs" />
+    <Compile Include="Models\ViewModels\ContestDetailVM.cs" />
     <Compile Include="Models\ViewModels\ContestEditVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
