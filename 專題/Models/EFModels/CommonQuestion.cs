@@ -16,6 +16,7 @@ namespace 專題.Models.EFModels
 
         public int Id { get; set; }
 
+        
         [Required]
         [StringLength(1000)]
         public string Question { get; set; }

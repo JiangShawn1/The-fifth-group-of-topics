@@ -7,6 +7,7 @@ namespace 專題.Models.EFModels
     using System.Data.Entity.Spatial;
 	using System.Net.Mail;
 	using System.Net;
+    using System.ComponentModel;
 
 	public partial class CustomerFeedback
     {
@@ -14,21 +15,30 @@ namespace 專題.Models.EFModels
 
         [Required]
         [StringLength(1000)]
-        public string FeedbackContent { get; set; }
+		[DisplayName("回覆內容")]
+		public string FeedbackContent { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string CustomerName { get; set; }
+		[DisplayName("客戶名稱")]
+		public string CustomerName { get; set; }
 
         [Required]
         [StringLength(256)]
-        public string Email { get; set; }
+		[DisplayName("聯絡信箱")]
+		public string Email { get; set; }
 
-        public int QuestionTypeId { get; set; }
 
-        public int Status { get; set; }
+		[DisplayName("問題類型")]
+		public int QuestionTypeId { get; set; }
 
-        public DateTime CreateTime { get; set; }
+
+		[DisplayName("狀態")]
+		public int Status { get; set; }
+
+		[DisplayName("留言時間")]
+
+		public DateTime CreateTime { get; set; }
 
         public virtual QuestionType QuestionType { get; set; }
 

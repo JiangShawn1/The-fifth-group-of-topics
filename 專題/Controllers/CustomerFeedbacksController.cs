@@ -155,13 +155,18 @@ namespace 專題.Controllers
 		public static string _emailTo ;
 		public static string _subject ;
 		public static string _body ;
-		
-		public ActionResult SentEmail(HttpContext context)
-		{
-            _emailTo = context.Request.QueryString["emailTo"];
-            _subject = context.Request.QueryString["emailSubject"];
-            _body = context.Request.QueryString["body"];
 
+		[HttpPost]
+		public ActionResult SentEmail()
+		{
+   //         string _emailTo = post["emailTo"];
+			//string _subject = post["emailSubject"];
+			//string _body = post["emailBody"];
+
+			string _emailTo = Request.Form["emailTo"];
+			string _subject = Request.Form["emailSubject"];
+			string _body = Request.Form["emailBody"];
+			
 			//_emailTo = Request.Form["emailTo"];
 			//_subject = Request.Form["emailSubject"];
 			//_body = Request.Form["body"];

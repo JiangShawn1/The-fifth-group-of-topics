@@ -213,12 +213,13 @@
     <Content Include="Views\CustomerFeedbacks\Index.cshtml" />
     <Content Include="Views\Home\CustomerService.cshtml" />
     <Content Include="Views\CustomerFeedbacks\SentEmail.cshtml" />
-    <Content Include="Views\CustomerFeedbacks\123.cshtml" />
     <Content Include="Views\CustomerFeedbacks\Reply.cshtml" />
     <Content Include="Views\CustomerFeedbacks\FailEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\DTOs\" />
+    <Folder Include="Models\Services\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
