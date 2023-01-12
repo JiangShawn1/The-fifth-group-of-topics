@@ -1,38 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using 專題.Models.EFModels;
+using 專題.Models.Infrastructures.Repositories;
+using 專題.Models.Services;
+using 專題.Models.ViewModels;
 
 namespace 專題.Controllers
 {
     public class CouponsController : Controller
     {
-        private AppDbContext db = new AppDbContext();
 
-        // GET: Coupons
-        public ActionResult Index()
+        private CouponRepository repository;
+		private CouponService couponService;
+
+		public CouponsController()
+		{
+			var db = new AppDbContext();
+			var repo = new CouponRepository(db);
+			this.couponService = new CouponService(repo);
+		}
+		// GET: Coupons
+		public ActionResult Index()
         {
-            return View(db.Coupons.ToList());
-        }
+			var data = couponService.Search(null, null)
+				.Select(x => x.ToVM());
+
+			return View(data);
+		}
 
         // GET: Coupons/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Coupon coupon = db.Coupons.Find(id);
-            if (coupon == null)
-            {
-                return HttpNotFound();
-            }
-            return View(coupon);
+            return View();
         }
 
         // GET: Coupons/Create
@@ -42,86 +44,72 @@ namespace 專題.Controllers
         }
 
         // POST: Coupons/Create
-        // 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
-        // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CouponName,CouponNumber,CouponType,CouponDiscount,CouponQuantity,AccountQuantity,MinSpend,IsCombine,CouponImage,CouponContent,StartAt,EndAt,CorrespondProduct,CreateAt,SoftDelete")] Coupon coupon)
+        public ActionResult Create(CouponVM model)
         {
-            if (ModelState.IsValid)
-            {
-                db.Coupons.Add(coupon);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
+			var service = new CouponService(repository);
 
-            return View(coupon);
-        }
+			(bool IsSuccess, string ErrorMessage) response =
+				service.CreateCoupon(model);
+
+			if (response.IsSuccess)
+			{
+				// 建檔成功 redirect to confirm page
+				return View("Index");
+			}
+			else
+			{
+				ModelState.AddModelError(string.Empty, response.ErrorMessage);
+				return View(model);
+			}
+		}
 
         // GET: Coupons/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Coupon coupon = db.Coupons.Find(id);
-            if (coupon == null)
-            {
-                return HttpNotFound();
-            }
-            return View(coupon);
+            return View();
         }
 
         // POST: Coupons/Edit/5
-        // 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
-        // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CouponName,CouponNumber,CouponType,CouponDiscount,CouponQuantity,AccountQuantity,MinSpend,IsCombine,CouponImage,CouponContent,StartAt,EndAt,CorrespondProduct,CreateAt,SoftDelete")] Coupon coupon)
+        public ActionResult Edit(int id, FormCollection collection)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(coupon).State = EntityState.Modified;
-                db.SaveChanges();
+                // TODO: Add update logic here
+
                 return RedirectToAction("Index");
             }
-            return View(coupon);
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: Coupons/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Coupon coupon = db.Coupons.Find(id);
-            if (coupon == null)
-            {
-                return HttpNotFound();
-            }
-            return View(coupon);
+            return View();
         }
 
         // POST: Coupons/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
         {
-            Coupon coupon = db.Coupons.Find(id);
-            db.Coupons.Remove(coupon);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            try
             {
-                db.Dispose();
+                // TODO: Add delete logic here
+
+                return RedirectToAction("Index");
             }
-            base.Dispose(disposing);
+            catch
+            {
+                return View();
+            }
         }
     }
 }

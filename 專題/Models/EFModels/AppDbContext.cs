@@ -30,5 +30,7 @@ namespace 專題.Models.EFModels
 				.Property(e => e.OrderNumber)
 				.IsUnicode(false);
 		}
+
+		public System.Data.Entity.DbSet<專題.Models.ViewModels.CouponVM> CouponVMs { get; set; }
 	}
 }

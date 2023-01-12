@@ -1,4 +1,4 @@
-﻿@model IEnumerable<專題.Models.EFModels.Coupon>
+﻿@model IEnumerable<專題.Models.ViewModels.CouponVM>
 
 @{
     ViewBag.Title = "Index";
@@ -33,9 +33,6 @@
             @Html.DisplayNameFor(model => model.MinSpend)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsCombine)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.CouponImage)
         </th>
         <th>
@@ -46,15 +43,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.EndAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CorrespondProduct)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SoftDelete)
         </th>
         <th></th>
     </tr>
@@ -83,9 +71,6 @@
             @Html.DisplayFor(modelItem => item.MinSpend)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IsCombine)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.CouponImage)
         </td>
         <td>
@@ -96,15 +81,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.EndAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CorrespondProduct)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreateAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoftDelete)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
