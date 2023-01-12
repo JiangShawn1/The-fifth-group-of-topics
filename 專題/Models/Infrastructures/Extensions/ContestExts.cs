@@ -177,6 +177,7 @@ namespace 專題.Models.Infrastructures.Extensions
 				Id= VM.RegistrationID,
 				MemberID = VM.MemberID,
 				Contest_CategoryID = VM.Contest_CategoryID,
+				PaymentStatus = VM.PaymentStatus,
 			};
 		}
 
