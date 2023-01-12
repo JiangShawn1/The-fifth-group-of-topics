@@ -1,4 +1,4 @@
-namespace 專題.Models.EFModels
+namespace �M�D.Models.EFModels
 {
     using System;
     using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace 專題.Models.EFModels
 
         public int Id { get; set; }
 
-        public int Brand_Id { get; set; }
+        public int? Brand_Id { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -31,7 +31,6 @@ namespace 專題.Models.EFModels
 
         public int Price { get; set; }
 
-        [Required]
         [StringLength(300)]
         public string ImageUrl { get; set; }
 

@@ -8,6 +8,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using 專題.Models.EFModels;
+using 專題.Models.EFModels.ViewModels;
+using System.IO;
 
 namespace 專題.Controllers
 {
@@ -50,14 +52,30 @@ namespace 專題.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Brand_Id,ProductName,ProductIntroduce,Color_Id,Price,ImageUrl")] Product product)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Brand_Id,ProductName,ProductIntroduce,Color_Id,Price,ImageUrl")] Product product, HttpPostedFileBase ImageUrl)
         {
+            //todo 將圖存到資料夾中
+
+            //todo 將資料寫進資料庫中
+            string path = Server.MapPath("/Images/ProductImages");
+            string fileName = System.IO.Path.GetFileName(ImageUrl.FileName);
+            string fullPath = System.IO.Path.Combine(path, fileName);
+            product.ImageUrl = Path.Combine("Images/ProductImages/", ImageUrl.FileName);
+
             if (ModelState.IsValid)
             {
                 db.Products.Add(product);
                 await db.SaveChangesAsync();
+                ImageUrl.SaveAs(fullPath);
                 return RedirectToAction("Index");
             }
+            //product.ImageUrl = Path.Combine("Images/ProductImages/", ImageUrl.FileName);
+            //if (ModelState.IsValid)
+            //{
+            //    db.Products.Add(product);
+            //    await db.SaveChangesAsync();
+            //    return RedirectToAction("Index");
+            //}
 
             ViewBag.Brand_Id = new SelectList(db.Brands, "Id", "Brand1", product.Brand_Id);
             ViewBag.Color_Id = new SelectList(db.Colors, "Id", "Color1", product.Color_Id);

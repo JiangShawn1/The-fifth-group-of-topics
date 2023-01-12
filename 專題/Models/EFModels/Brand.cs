@@ -1,4 +1,4 @@
-namespace å°ˆé¡Œ.Models.EFModels
+namespace ±MÃD.Models.EFModels
 {
     using System;
     using System.Collections.Generic;
