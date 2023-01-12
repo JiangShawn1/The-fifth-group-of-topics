@@ -12,22 +12,25 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Brand.Brand1)
+            品牌
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Color.Color1)
+            顏色
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProductName)
+            商品名稱
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProductIntroduce)
+            商品介紹
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            價錢
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ImageUrl)
+            圖片
+        </th>
+        <th>
+            操作
         </th>
         <th></th>
     </tr>
@@ -50,7 +53,7 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            <img src="@item.ImageUrl" alt="Product Image" id="imgSize">
+            <img src="@item.ImageUrl" alt="Product Image" id="imgSize" width="200" height="200">
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
@@ -62,6 +65,26 @@
 
 </table>
 
+@*<script>
+    $(document).ready(function () {
+        $("#imgSize").bind("load", function () {
+            var width = 220;
+            var height = 200;
+            var image = $(this);
+            if (image.width() > image.height()) {
+                if (image.width() > width) {
+                    image.width(width);
+                    image.height(width / image.width() * image.height());
+                }
+            } else {
+                if (image.height() > height) {
+                    image.height(height);
+                    image.width(height / image.height() * image.width());
+                }
+            }
+        });
+    });
+</script>*@
 @*<script>
     function checkSize() {
         var maxWidth = 800;

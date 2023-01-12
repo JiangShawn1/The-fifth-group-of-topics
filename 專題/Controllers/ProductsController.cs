@@ -60,7 +60,7 @@ namespace 專題.Controllers
             string path = Server.MapPath("/Images/ProductImages");
             string fileName = System.IO.Path.GetFileName(ImageUrl.FileName);
             string fullPath = System.IO.Path.Combine(path, fileName);
-            product.ImageUrl = Path.Combine("Images/ProductImages/", ImageUrl.FileName);
+            product.ImageUrl = Path.Combine("/Images/ProductImages/", ImageUrl.FileName);
 
             if (ModelState.IsValid)
             {
