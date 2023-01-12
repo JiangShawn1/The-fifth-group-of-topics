@@ -17,6 +17,7 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Id)
     <input name="SupplierID" value="@Model.SupplierID" hidden />
+    <input name="CreateDateTime" value="@Model.CreateDateTime" hidden />
     <div class="form-group">
         @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -67,7 +68,7 @@
 
     @for (int i = 0; i < Model.QuotaList.Count(); i++)
     {
-        <input name="Contest_CategoryIDList" value="@Model.Contest_CategoryIDList[i]" hidden/>
+        <input name="Contest_CategoryIDList" value="@Model.Contest_CategoryIDList[i]" hidden />
         <div class="form-group">
             @Html.LabelFor(model => model.CategoryIDList, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

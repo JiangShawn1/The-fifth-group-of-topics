@@ -93,6 +93,7 @@ namespace 專題.Controllers
 					Id = x.Id,
 					Name = x.Name,
 					SupplierID = x.SupplierID,
+					CreateDateTime= x.CreateDateTime,
 					ContestDate = x.ContestDate,
 					RegistrationDeadline = x.RegistrationDeadline,
 					Area = x.Area,

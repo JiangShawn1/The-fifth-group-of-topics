@@ -50,7 +50,7 @@ namespace 專題.Models.Infrastructures.Extensions
 				Id=contestEditRow.Id,
 				Name = contestEditRow.Name,
 				SupplierID = contestEditRow.SupplierID,
-				CreateDateTime = DateTime.Now,
+				CreateDateTime = contestEditRow.CreateDateTime,
 				ContestDate = contestEditRow.ContestDate,
 				RegistrationDeadline = contestEditRow.RegistrationDeadline,
 				Area = contestEditRow.Area,
