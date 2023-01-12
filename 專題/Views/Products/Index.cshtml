@@ -50,7 +50,7 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ImageUrl)
+            <img src="@item.ImageUrl" alt="Product Image" id="imgSize">
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
@@ -61,3 +61,18 @@
 }
 
 </table>
+
+@*<script>
+    function checkSize() {
+        var maxWidth = 800;
+        var maxHeight = 600;
+        var file = $("#imgSize")[0].files[0];
+
+        if (file.size > maxSize) {
+            $("#error").html("圖片不能超過 2MB");
+            $("#fileInput").val("");
+        } else {
+            $("#error").html("");
+        }
+    }
+</script>*@
