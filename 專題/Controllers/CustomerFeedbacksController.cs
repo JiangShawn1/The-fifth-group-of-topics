@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using 專題.Models.EFModels;
 using 專題.Models.Services;
 using 專題.Models.ViewModels;
@@ -19,9 +21,8 @@ namespace 專題.Controllers
 		
 
 		// GET: CustomerFeedbacks
-		public ActionResult Index(int? questionTypeId, string feedbackContent, string customerName, string email)
+		public ActionResult Index(int? questionTypeId, string feedbackContent, string customerName, string email, int pageNumber=1)
         {
-
 			ViewBag.QuestionTypes = GetFeedbackContent(questionTypeId);
 			ViewBag.FeedbackContent = feedbackContent;
 			ViewBag.CustomerName = customerName;
@@ -31,7 +32,12 @@ namespace 專題.Controllers
 			if (string.IsNullOrEmpty(feedbackContent) == false) data = data.Where(p => p.FeedbackContent.Contains(feedbackContent));
 			if (string.IsNullOrEmpty(customerName) == false) data = data.Where(p => p.CustomerName.Contains(customerName));
 			if (string.IsNullOrEmpty(email) == false) data = data.Where(p => p.Email.Contains(email));
-			return View(data.ToList());
+
+			pageNumber = pageNumber > 0 ? pageNumber : 1;
+			int pageSize = 10;
+			var query = data.OrderBy(x => x.QuestionType.Id).ToPagedList(pageNumber, pageSize);
+
+			return View(query);
 		}
 		private IEnumerable<SelectListItem> GetFeedbackContent(int? questionTypeId)
 		{

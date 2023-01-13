@@ -1,4 +1,6 @@
-﻿@model IEnumerable<專題.Models.EFModels.CustomerFeedback>
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model IEnumerable<專題.Models.EFModels.CustomerFeedback>
 
 @{
     ViewBag.Title = "Index";
@@ -31,8 +33,9 @@
         </div>
     </div>
     <div class="row" style="margin-top: 10px; margin-bottom: 20px; padding-left: 15px;">
-        <input type="submit" class="btn btn-primary" value="Search" />
-        <button type="reset" id="resetbtn">Reset</button>
+        <input type="submit" class="btn btn-primary" value="搜尋" />
+        <button type="reset" id="resetbtn" >清空當前輸入</button>
+        @Html.ActionLink("全部清空", "Index")
     </div>
 </form>
 <table class="table">
@@ -90,10 +93,12 @@
 
 </table>
 
+@*@Html.PagedListPager((IPagedList)Model, x => Url.Action("Index", new { pageNumber = x }))*@
+@Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new { pageNumber, questionTypeId = ViewBag.QuestionTypes, feedbackContent = ViewBag.FeedbackContent, customerName = ViewBag.CustomerName, email = ViewBag.Email, pageSize = ViewBag.pageSize }))
 <script>
-    
+
     $("#resetbtn").on("click", function () {
         $("#searchForm input").val("");
     })
-    
+
 </script>
