@@ -1,10 +1,12 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using 專題.Models.EFModels;
 
@@ -15,14 +17,33 @@ namespace 專題.Controllers
         private AppDbContext db = new AppDbContext();
 
         // GET: CommonQuestions
-        public ActionResult Index()
+        public ActionResult Index(int? questionTypeId, string question, int pageNumber = 1)
         {
-            var commonQuestions = db.CommonQuestions.Include(c => c.QuestionType);
-            return View(commonQuestions.ToList());
-        }
 
-        // GET: CommonQuestions/Details/5
-        public ActionResult Details(int? id)
+			ViewBag.QuestionTypes = GetFeedbackContent(questionTypeId);
+			ViewBag.Question = question;
+			var data = db.CommonQuestions.Include(x => x.QuestionType);
+			if (questionTypeId.HasValue) data = data.Where(p => p.QuestionType.Id == questionTypeId.Value);
+			if (string.IsNullOrEmpty(question) == false) data = data.Where(p => p.Question.Contains(question));
+            pageNumber = pageNumber > 0 ? pageNumber : 1;
+			int pageSize = 10;
+			var query = data.OrderBy(x => x.QuestionType.Id).ToPagedList(pageNumber, pageSize);
+
+			return View(query);
+		}
+		private IEnumerable<SelectListItem> GetFeedbackContent(int? questionTypeId)
+		{
+			var items = db.QuestionTypes
+				.Select(c => new SelectListItem
+				{ Value = c.Id.ToString(), Text = c.QuestionType1, Selected = (questionTypeId.HasValue && c.Id == questionTypeId.Value) })
+				.ToList()
+				.Prepend(new SelectListItem { Value = string.Empty, Text = "請選擇" });
+
+			return items;
+		}
+
+		// GET: CommonQuestions/Details/5
+		public ActionResult Details(int? id)
         {
             if (id == null)
             {
