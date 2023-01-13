@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<專題.Models.EFModels.ForumSection>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("新增區塊", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.sectionName)
+           區塊名稱
         </th>
         <th></th>
     </tr>
@@ -17,9 +17,8 @@
             @Html.DisplayFor(modelItem => item.sectionName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("修改區塊名稱", "Edit", new { id=item.id }) |
+            @Html.ActionLink("刪除區塊", "Delete", new { id=item.id })
         </td>
     </tr>
 }

@@ -1,23 +1,16 @@
 ﻿@model IEnumerable<專題.Models.EFModels.ForumSectionBranch>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("新增討論版", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ForumSection.sectionName)
+          區塊名稱
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Member.Name)
+           討論版名稱
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.branchName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.sectionAdministrator)
-        </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -26,18 +19,13 @@
             @Html.DisplayFor(modelItem => item.ForumSection.sectionName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Member.Name)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.branchName)
         </td>
+    
         <td>
-            @Html.DisplayFor(modelItem => item.sectionAdministrator)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("修改討論版", "Edit", new { id=item.id }) |
+            @Html.ActionLink("討論版詳情", "Details", new { id=item.id }) |
+            @Html.ActionLink("刪除討論版", "Delete", new { id=item.id })
         </td>
     </tr>
 }
