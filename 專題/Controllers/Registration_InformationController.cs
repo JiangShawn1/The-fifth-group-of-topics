@@ -94,7 +94,17 @@ namespace 專題.Controllers
             {
                 return HttpNotFound();
             }
-			ViewBag.MemberID = new SelectList(db.Members, "Members_Id", "Name");
+			
+			List<SelectListItem> MemberDropDownList = new List<SelectListItem>();
+			foreach (var item in db.Members)
+			{
+				var MemberRow = new SelectListItem
+				{
+					Value = item.Members_Id.ToString(),
+					Text = item.Name,
+				};
+				MemberDropDownList.Add(MemberRow);
+			}
 			List<SelectListItem> CategoryDropDownList = new List<SelectListItem>();
 			foreach (var item in db.Contest_Category)
 			{
@@ -105,6 +115,7 @@ namespace 專題.Controllers
 				};
 				CategoryDropDownList.Add(categoriesRow);
 			}
+			ViewBag.MemberID = MemberDropDownList;
 			ViewBag.Contest_CategoryID = CategoryDropDownList;
 			ViewBag.InformationID = new SelectList(db.Information, "Id", "Name", registration_Information.InformationID);
             ViewBag.RegistrationID = new SelectList(db.Registrations, "Id", "Id", registration_Information.RegistrationID);
