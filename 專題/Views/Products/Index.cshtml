@@ -13,7 +13,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<form method="get">
+<form method="get" class="ml-5">
     <div class="row">
         <div class="col-xs-12">
             <div class="caption">
@@ -21,13 +21,14 @@
                 <div class="row">
                     <div class="col-md-4">分類:@Html.DropDownList("Brand_Id", Brands, new { @class = "form-control" })</div>
                     <div class="col-md-4">商品名稱:<input type="text" name="productName" class="form-control" value="@ProductName"></div>
+                    <div class="row mt-md-4" style="margin-top: 10px; margin-bottom: 20px; padding-left: 15px;">
+                        <input type="submit" class="btn btn-primary" value="Search" />
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row" style="margin-top: 10px; margin-bottom: 20px; padding-left: 15px;">
-        <input type="submit" class="btn btn-primary" value="Search" />
-    </div>
+    
 </form>
 <table class="table">
     <tr>
