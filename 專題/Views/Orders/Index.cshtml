@@ -1,4 +1,4 @@
-﻿@model IEnumerable<專題.Models.EFModels.Order>
+﻿@model IEnumerable<專題.Models.ViewModels.OrderVM>
 
 @{
     ViewBag.Title = "Index";
@@ -12,16 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Coupon.CouponName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MemberId)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.OrderNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateAt)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.OrderType)
@@ -31,6 +22,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TradeStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UseCoupon)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Amount)
@@ -50,16 +44,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Coupon.CouponName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MemberId)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.OrderNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreateAt)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.OrderType)
@@ -69,6 +54,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TradeStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UseCoupon)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Amount)

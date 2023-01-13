@@ -32,5 +32,7 @@ namespace 專題.Models.EFModels
 		}
 
 		public System.Data.Entity.DbSet<專題.Models.ViewModels.CouponVM> CouponVMs { get; set; }
+
+		public System.Data.Entity.DbSet<專題.Models.ViewModels.OrderVM> OrderVMs { get; set; }
 	}
 }

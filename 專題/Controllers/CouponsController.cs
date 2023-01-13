@@ -16,7 +16,6 @@ namespace 專題.Controllers
 {
     public class CouponsController : Controller
     {
-
         private ICouponRepository repository;
 		private CouponService service;
 
@@ -87,8 +86,6 @@ namespace 專題.Controllers
 				return View(model);
 			}
 
-			var service = new CouponService(repository);
-
 			(bool IsSuccess, string ErrorMessage) response =
 				service.EditCoupon(id, model.ToRequestDto());
 
@@ -111,7 +108,7 @@ namespace 專題.Controllers
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
-			var coupon = new CouponRepository().Find((int)id);
+			var coupon = repository.Find((int)id);
 
 			return View(coupon.ToVM());
 		}
@@ -121,7 +118,7 @@ namespace 專題.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult DeleteConfirmed(int id)
 		{
-			new CouponRepository().Delete(id);
+			repository.Delete(id);
 			return RedirectToAction("Index");
 		}
 	}

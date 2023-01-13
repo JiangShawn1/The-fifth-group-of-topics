@@ -7,19 +7,36 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using 專題.Models.EFModels;
+using 專題.Models.Infrastructures.Repositories;
+using 專題.Models.Services.Interfaces;
+using 專題.Models.Services;
+using 專題.Models.ViewModels;
 
 namespace 專題.Controllers
 {
     public class OrdersController : Controller
     {
-        private AppDbContext db = new AppDbContext();
+		private IOrderRepository repository;
+		private OrderService service;
+
+		public OrdersController()
+		{
+			repository = new OrderRepository();
+			service = new OrderService(repository);
+		}
+		private AppDbContext db = new AppDbContext();
 
         // GET: Orders
         public ActionResult Index()
         {
-            var orders = db.Orders.Include(o => o.Coupon);
-            return View(orders.ToList());
-        }
+			//var orders = db.Orders.Include(o => o.Coupon);
+			//return View(orders.ToList());
+
+			var data = service.Search(null, null)
+				.Select(x => x.ToVM());
+
+			return View(data);
+		}
 
         // GET: Orders/Details/5
         public ActionResult Details(int? id)

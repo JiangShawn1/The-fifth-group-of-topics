@@ -63,5 +63,22 @@ namespace 專題.Models.ViewModels
 				TradeStatus= source.TradeStatus,
 			};
 		}
+		public static OrderDto ToRequestDto(this OrderVM source)
+		{
+			return new OrderDto
+			{
+				Id = source.Id,
+				OrderAddress= source.OrderAddress,
+				OrderContent= source.OrderContent,
+				OrderNumber= source.OrderNumber,
+				OrderStatus= source.OrderStatus,
+				OrderType= source.OrderType,
+				ShippingMethod= source.ShippingMethod,
+				Amount= source.Amount,
+				UseCoupon= source.UseCoupon,
+				TradeStatus= source.TradeStatus,
+
+			};
+		}
 	}
 }

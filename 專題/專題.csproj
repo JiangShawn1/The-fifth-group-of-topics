@@ -141,8 +141,11 @@
     <Compile Include="Models\EFModels\Coupon.cs" />
     <Compile Include="Models\EFModels\Order.cs" />
     <Compile Include="Models\Infrastructures\Repositories\CouponRepository.cs" />
+    <Compile Include="Models\Infrastructures\Repositories\OrderRepository.cs" />
     <Compile Include="Models\Services\Interfaces\ICouponRepository.cs" />
     <Compile Include="Models\Services\CouponService.cs" />
+    <Compile Include="Models\Services\Interfaces\IOrderRepository.cs" />
+    <Compile Include="Models\Services\OrderService.cs" />
     <Compile Include="Models\ViewModels\CouponVM.cs" />
     <Compile Include="Models\ViewModels\OrderVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
