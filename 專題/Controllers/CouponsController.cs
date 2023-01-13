@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
+using 專題.Models.DTOs;
 using 專題.Models.EFModels;
 using 專題.Models.Infrastructures.Repositories;
 using 專題.Models.Services;
+using 專題.Models.Services.Interfaces;
 using 專題.Models.ViewModels;
 
 namespace 專題.Controllers
@@ -13,29 +17,22 @@ namespace 專題.Controllers
     public class CouponsController : Controller
     {
 
-        private CouponRepository repository;
-		private CouponService couponService;
+        private ICouponRepository repository;
+		private CouponService service;
 
 		public CouponsController()
 		{
-			var db = new AppDbContext();
-			var repo = new CouponRepository(db);
-			this.couponService = new CouponService(repo);
+            repository = new CouponRepository();
+			service = new CouponService(repository);
 		}
 		// GET: Coupons
 		public ActionResult Index()
         {
-			var data = couponService.Search(null, null)
+			var data = service.Search(null, null, null)
 				.Select(x => x.ToVM());
 
 			return View(data);
 		}
-
-        // GET: Coupons/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
         // GET: Coupons/Create
         public ActionResult Create()
@@ -51,15 +48,16 @@ namespace 專題.Controllers
 			{
 				return View(model);
 			}
+
 			var service = new CouponService(repository);
 
 			(bool IsSuccess, string ErrorMessage) response =
-				service.CreateCoupon(model);
+				service.CreateCoupon(model.ToRequestDto());
 
 			if (response.IsSuccess)
 			{
-				// 建檔成功 redirect to confirm page
-				return View("Index");
+				// 建檔成功
+				return RedirectToAction("Index");
 			}
 			else
 			{
@@ -69,47 +67,62 @@ namespace 專題.Controllers
 		}
 
         // GET: Coupons/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
-        }
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+            var coupon = new CouponRepository().Find((int)id);
+
+			return View(coupon.ToVM());
+		}
 
         // POST: Coupons/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, CouponVM model)
         {
-            try
-            {
-                // TODO: Add update logic here
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+			var service = new CouponService(repository);
+
+			(bool IsSuccess, string ErrorMessage) response =
+				service.EditCoupon(id, model.ToRequestDto());
+
+			if (response.IsSuccess)
+			{
+				// 修改成功
+				return RedirectToAction("Index");
+			}
+			else
+			{
+				ModelState.AddModelError(string.Empty, response.ErrorMessage);
+				return View(model);
+			}
+		}
 
         // GET: Coupons/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
-        }
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			var coupon = new CouponRepository().Find((int)id);
+
+			return View(coupon.ToVM());
+		}
 
         // POST: Coupons/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-    }
+		[HttpPost, ActionName("Delete")]
+		[ValidateAntiForgeryToken]
+		public ActionResult DeleteConfirmed(int id)
+		{
+			new CouponRepository().Delete(id);
+			return RedirectToAction("Index");
+		}
+	}
 }

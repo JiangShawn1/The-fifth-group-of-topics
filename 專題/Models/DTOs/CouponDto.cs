@@ -15,9 +15,6 @@ namespace 專題.Models.DTOs
 		public string CouponNumber { get; set; }
 		public int CouponType { get; set; }
 		public int CouponDiscount { get; set; }
-		public int? CouponQuantity { get; set; }
-		public int? AccountQuantity { get; set; }
-		public int? MinSpend { get; set; }
 		public string CouponImage { get; set; }
 		public string CouponContent { get; set; }
 		public DateTime StartAt { get; set; }
@@ -34,11 +31,10 @@ namespace 專題.Models.DTOs
 				CouponNumber = source.CouponNumber,
 				CouponType = source.CouponType,
 				CouponDiscount = source.CouponDiscount,
-				CouponQuantity = source.CouponQuantity,
-				AccountQuantity = source.AccountQuantity,
-				MinSpend = source.MinSpend,
 				CouponImage = source.CouponImage,
 				CouponContent = source.CouponContent,
+				StartAt = source.StartAt,
+				EndAt = source.EndAt,
 			};
 	}
 }

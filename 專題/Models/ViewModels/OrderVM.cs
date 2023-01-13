@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using 專題.Models.DTOs;
 using 專題.Models.EFModels;
 
 namespace 專題.Models.ViewModels
@@ -43,5 +44,24 @@ namespace 專題.Models.ViewModels
 		[Required]
 		[StringLength(500)]
 		public string OrderContent { get; set; }
+	}
+	public static partial class OrderDtoExts
+	{
+		public static OrderVM ToVM(this OrderDto source)
+		{
+			return new OrderVM
+			{
+				Id = source.Id,
+				OrderAddress= source.OrderAddress,
+				OrderContent= source.OrderContent,
+				OrderNumber= source.OrderNumber,
+				OrderStatus= source.OrderStatus,
+				OrderType= source.OrderType,
+				ShippingMethod= source.ShippingMethod,
+				Amount= source.Amount,
+				UseCoupon= source.UseCoupon,
+				TradeStatus= source.TradeStatus,
+			};
+		}
 	}
 }

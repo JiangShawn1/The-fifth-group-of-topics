@@ -24,15 +24,6 @@
             @Html.DisplayNameFor(model => model.CouponDiscount)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CouponQuantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AccountQuantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MinSpend)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.CouponImage)
         </th>
         <th>
@@ -62,15 +53,6 @@
             @Html.DisplayFor(modelItem => item.CouponDiscount)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CouponQuantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AccountQuantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MinSpend)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.CouponImage)
         </td>
         <td>
@@ -84,7 +66,6 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>

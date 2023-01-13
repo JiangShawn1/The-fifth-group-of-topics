@@ -48,7 +48,7 @@ namespace 專題.Models.EFModels
 
         public int? CorrespondProduct { get; set; }
 
-        public DateTime CreateAt { get; set; }
+        public DateTime? CreateAt { get; set; }
 
         public bool SoftDelete { get; set; }
 
