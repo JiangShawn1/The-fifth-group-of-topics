@@ -19,14 +19,34 @@ namespace 專題.Controllers
 		
 
 		// GET: CustomerFeedbacks
-		public ActionResult Index()
+		public ActionResult Index(int? questionTypeId, string feedbackContent, string customerName, string email)
         {
-            var customerFeedbacks = db.CustomerFeedbacks.Include(c => c.QuestionType);
-            return View(customerFeedbacks.ToList());
-        }
 
-        // GET: CustomerFeedbacks/Details/5
-        public ActionResult Details(int? id)
+			ViewBag.QuestionTypes = GetFeedbackContent(questionTypeId);
+			ViewBag.FeedbackContent = feedbackContent;
+			ViewBag.CustomerName = customerName;
+			ViewBag.Email = email;
+			var data = db.CustomerFeedbacks.Include(x => x.QuestionType);
+			if (questionTypeId.HasValue) data = data.Where(p => p.QuestionType.Id == questionTypeId.Value);
+			if (string.IsNullOrEmpty(feedbackContent) == false) data = data.Where(p => p.FeedbackContent.Contains(feedbackContent));
+			if (string.IsNullOrEmpty(customerName) == false) data = data.Where(p => p.CustomerName.Contains(customerName));
+			if (string.IsNullOrEmpty(email) == false) data = data.Where(p => p.Email.Contains(email));
+			return View(data.ToList());
+		}
+		private IEnumerable<SelectListItem> GetFeedbackContent(int? questionTypeId)
+		{
+			var items = db.QuestionTypes
+				.Select(c => new SelectListItem
+				{ Value = c.Id.ToString(), Text = c.QuestionType1, Selected = (questionTypeId.HasValue && c.Id == questionTypeId.Value) })
+				.ToList()
+				.Prepend(new SelectListItem { Value = string.Empty, Text = "請選擇" });
+
+			return items;
+		}
+
+
+		// GET: CustomerFeedbacks/Details/5
+		public ActionResult Details(int? id)
         {
             if (id == null)
             {
