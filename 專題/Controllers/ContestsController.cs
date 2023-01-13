@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using X.PagedList;
 using 專題.Models.EFModels;
 using 專題.Models.Infrastructures.Extensions;
 using 專題.Models.ViewModels;
@@ -17,10 +18,43 @@ namespace 專題.Controllers
 		private AppDbContext db = new AppDbContext();
 
 		// GET: Contests
-		public ActionResult Index()
+		public ActionResult Index(int? supplierId, string productName, int pageNumber = 1)
 		{
-			var contests = db.Contests.Include(c => c.Supplier);
-			return View(contests.ToList());
+			pageNumber = pageNumber > 0 ? pageNumber : 1;
+			
+			ViewBag.Supplier = GetCategories(supplierId);
+			ViewBag.ProductName = productName;			
+
+			IPagedList<Contest> pagedData = GetPagedProducts(supplierId, productName, pageNumber);
+
+			return View(pagedData);
+		}
+		private IEnumerable<SelectListItem> GetCategories(int? categoryId)
+		{
+			var items = db.Suppliers
+				.Select(c => new SelectListItem
+				{ Value = c.SupplierId.ToString(), Text = c.SupplierName, Selected = (categoryId.HasValue && c.SupplierId == categoryId.Value) })
+				.ToList()
+				.Prepend(new SelectListItem { Value = string.Empty, Text = "請選擇" });
+
+			return items;
+		}
+
+		private IPagedList<Contest> GetPagedProducts(int? categoryId, string productName, int pageNumber)
+		{
+			int pageSize = 3;
+
+			var query = db.Contests.Include(x => x.Supplier);
+
+			// 若有篩選categoryid
+			if (categoryId.HasValue) query = query.Where(p => p.Supplier.SupplierId == categoryId.Value);
+
+			// 若有篩選 productName
+			if (string.IsNullOrEmpty(productName) == false) query = query.Where(p => p.Name.Contains(productName));
+
+			query = query.OrderBy(x => x.Supplier.SupplierId);
+
+			return query.ToPagedList(pageNumber, pageSize);
 		}
 
 		// GET: Contests/Details/5
