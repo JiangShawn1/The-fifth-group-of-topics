@@ -6,25 +6,21 @@ namespace 專題.Models.EFModels
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class CommonQuestion
+    [Table("OnSale")]
+    public partial class OnSale
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CommonQuestion()
+        public OnSale()
         {
-            CommonAnswers = new HashSet<CommonAnswer>();
+            Brands = new HashSet<Brand>();
         }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(1000)]
-        public string Question { get; set; }
-
-        public int QuestionTypeId { get; set; }
+        public double Discount { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CommonAnswer> CommonAnswers { get; set; }
-
-        public virtual QuestionType QuestionType { get; set; }
+        public virtual ICollection<Brand> Brands { get; set; }
     }
 }

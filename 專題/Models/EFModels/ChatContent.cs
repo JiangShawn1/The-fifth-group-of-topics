@@ -26,5 +26,7 @@ namespace 專題.Models.EFModels
         public virtual ChatRoom ChatRoom { get; set; }
 
         public virtual Employee Employee { get; set; }
+
+        public virtual Member Member { get; set; }
     }
 }

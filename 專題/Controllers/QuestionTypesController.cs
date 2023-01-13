@@ -21,19 +21,7 @@ namespace 專題.Controllers
         }
 
         // GET: QuestionTypes/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            QuestionType questionType = db.QuestionTypes.Find(id);
-            if (questionType == null)
-            {
-                return HttpNotFound();
-            }
-            return View(questionType);
-        }
+       
 
         // GET: QuestionTypes/Create
         public ActionResult Create()
