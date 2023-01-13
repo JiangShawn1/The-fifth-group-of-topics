@@ -1,15 +1,13 @@
 ﻿@model IEnumerable<專題.Models.EFModels.ForumSectionBranch>
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ForumSection.sectionName)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Member.Name)
         </th>
