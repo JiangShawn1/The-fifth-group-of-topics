@@ -12,27 +12,31 @@ namespace 專題.Models.EFModels
 		{
 		}
 
-		public virtual DbSet<Forum_S1MainTopicBranch1> Forum_S1MainTopicBranch1 { get; set; }
-		public virtual DbSet<Forum_S1MainTopicsBranch1Thread> Forum_S1MainTopicsBranch1Thread { get; set; }
-		public virtual DbSet<Forum_S1MainTopic> Forum_S1MainTopic { get; set; }
-		public virtual DbSet<ForumSection1> ForumSection1 { get; set; }
+		public virtual DbSet<Forum_SectionBranch1Topics> Forum_SectionBranch1Topics { get; set; }
+		public virtual DbSet<Forum_SectionBranch1TopicsThread> Forum_SectionBranch1TopicsThread { get; set; }
+		public virtual DbSet<ForumSection> ForumSections { get; set; }
+		public virtual DbSet<ForumSectionBranch> ForumSectionBranches { get; set; }
 		public virtual DbSet<Member> Members { get; set; }
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<Forum_S1MainTopicsBranch1Thread>()
-				.HasMany(e => e.Forum_S1MainTopicBranch1)
-				.WithRequired(e => e.Forum_S1MainTopicsBranch1Thread)
-				.HasForeignKey(e => e.essayId)
+			modelBuilder.Entity<Forum_SectionBranch1Topics>()
+				.HasMany(e => e.Forum_SectionBranch1TopicsThread)
+				.WithRequired(e => e.Forum_SectionBranch1Topics)
+				.HasForeignKey(e => e.topicId)
 				.WillCascadeOnDelete(false);
 
-			modelBuilder.Entity<Forum_S1MainTopic>()
-				.Property(e => e.boardAdministrator)
-				.IsUnicode(false);
+			modelBuilder.Entity<ForumSection>()
+				.HasMany(e => e.ForumSectionBranches)
+				.WithRequired(e => e.ForumSection)
+				.HasForeignKey(e => e.sectionNameId)
+				.WillCascadeOnDelete(false);
 
-			modelBuilder.Entity<ForumSection1>()
-				.Property(e => e.mainBoardAdministrator)
-				.IsUnicode(false);
+			modelBuilder.Entity<ForumSectionBranch>()
+				.HasMany(e => e.Forum_SectionBranch1Topics)
+				.WithRequired(e => e.ForumSectionBranch)
+				.HasForeignKey(e => e.BranchId)
+				.WillCascadeOnDelete(false);
 
 			modelBuilder.Entity<Member>()
 				.Property(e => e.Account)
@@ -52,18 +56,7 @@ namespace 專題.Models.EFModels
 				.IsUnicode(false);
 
 			modelBuilder.Entity<Member>()
-				.HasMany(e => e.Forum_S1MainTopicsBranch1Thread)
-				.WithOptional(e => e.Member)
-				.HasForeignKey(e => e.replyMemberId);
-
-			modelBuilder.Entity<Member>()
-				.HasMany(e => e.Forum_S1MainTopic)
-				.WithRequired(e => e.Member)
-				.HasForeignKey(e => e.boardAdministratorId)
-				.WillCascadeOnDelete(false);
-
-			modelBuilder.Entity<Member>()
-				.HasMany(e => e.ForumSection1)
+				.HasMany(e => e.ForumSectionBranches)
 				.WithRequired(e => e.Member)
 				.HasForeignKey(e => e.administratorId)
 				.WillCascadeOnDelete(false);

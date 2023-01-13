@@ -1,0 +1,74 @@
+﻿@model 專題.Models.EFModels.Forum_SectionBranch1TopicsThread
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Forum_SectionBranch1TopicsThread</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Forum_SectionBranch1Topics.Topic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Forum_SectionBranch1Topics.Topic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.topicState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.topicState)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.replyNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.replyNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.replyContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.replyContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.replyTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.replyTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.replyState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.replyState)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.replyMemberId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.replyMemberId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

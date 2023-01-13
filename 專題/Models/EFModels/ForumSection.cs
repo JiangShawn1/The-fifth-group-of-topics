@@ -6,40 +6,20 @@ namespace 專題.Models.EFModels
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Member
+    [Table("ForumSection")]
+    public partial class ForumSection
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Member()
+        public ForumSection()
         {
             ForumSectionBranches = new HashSet<ForumSectionBranch>();
         }
 
-        [Key]
-        public int Members_Id { get; set; }
+        public int id { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Name { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string Account { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string Password { get; set; }
-
-        [Required]
-        [StringLength(10)]
-        public string Phone { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string Mail { get; set; }
-
-        public int State { get; set; }
-
-        public bool Subscription { get; set; }
+        public string sectionName { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ForumSectionBranch> ForumSectionBranches { get; set; }

@@ -129,31 +129,20 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\ForumSection1Controller.cs" />
-    <Compile Include="Controllers\Forum_S1MainTopicBranch11Controller.cs" />
-    <Compile Include="Controllers\Forum_S1MainTopicController.cs" />
-    <Compile Include="Controllers\Forum_S1MainTopicsBranch1ThreadController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ForumSectionBranchesController.cs" />
+    <Compile Include="Controllers\ForumSectionsController.cs" />
+    <Compile Include="Controllers\Forum_SectionBranch1TopicsController.cs" />
+    <Compile Include="Controllers\Forum_SectionBranch1TopicsThreadController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DTOs\ForumSection1DTO.cs" />
-    <Compile Include="Models\DTOs\Forum_S1MainTopicBranch1DTO.cs" />
-    <Compile Include="Models\DTOs\Forum_S1MainTopicsBranch1ThreadDTO.cs" />
-    <Compile Include="Models\DTOs\Forum_S1MainTopicDTO.cs" />
-    <Compile Include="Models\DTOs\MembersDTO.cs" />
     <Compile Include="Models\EFModels\AppDbContext.cs" />
-    <Compile Include="Models\EFModels\ForumSection1.cs" />
-    <Compile Include="Models\EFModels\Forum_S1MainTopic.cs" />
-    <Compile Include="Models\EFModels\Forum_S1MainTopicBranch1.cs" />
-    <Compile Include="Models\EFModels\Forum_S1MainTopicsBranch1Thread.cs" />
+    <Compile Include="Models\EFModels\ForumSection.cs" />
+    <Compile Include="Models\EFModels\ForumSectionBranch.cs" />
+    <Compile Include="Models\EFModels\Forum_SectionBranch1Topics.cs" />
+    <Compile Include="Models\EFModels\Forum_SectionBranch1TopicsThread.cs" />
     <Compile Include="Models\EFModels\Member.cs" />
-    <Compile Include="Models\ViewModels\ForumSection1VM.cs" />
-    <Compile Include="Models\ViewModels\Forum_S1MainTopicBranch1VM.cs" />
-    <Compile Include="Models\ViewModels\Forum_S1MainTopicsBranch1ThreadVM.cs" />
-    <Compile Include="Models\ViewModels\Forum_S1MainTopicVM.cs" />
-    <Compile Include="Models\ViewModels\MembersVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -197,29 +186,31 @@
     <Content Include="Views\Members\Details.cshtml" />
     <Content Include="Views\Members\Edit.cshtml" />
     <Content Include="Views\Members\Index.cshtml" />
-    <Content Include="Views\ForumSection1\Create.cshtml" />
-    <Content Include="Views\ForumSection1\Delete.cshtml" />
-    <Content Include="Views\ForumSection1\Details.cshtml" />
-    <Content Include="Views\ForumSection1\Edit.cshtml" />
-    <Content Include="Views\ForumSection1\Index.cshtml" />
-    <Content Include="Views\Forum_S1MainTopic\Create.cshtml" />
-    <Content Include="Views\Forum_S1MainTopic\Delete.cshtml" />
-    <Content Include="Views\Forum_S1MainTopic\Details.cshtml" />
-    <Content Include="Views\Forum_S1MainTopic\Edit.cshtml" />
-    <Content Include="Views\Forum_S1MainTopic\Index.cshtml" />
-    <Content Include="Views\Forum_S1MainTopicBranch11\Create.cshtml" />
-    <Content Include="Views\Forum_S1MainTopicBranch11\Delete.cshtml" />
-    <Content Include="Views\Forum_S1MainTopicBranch11\Details.cshtml" />
-    <Content Include="Views\Forum_S1MainTopicBranch11\Edit.cshtml" />
-    <Content Include="Views\Forum_S1MainTopicBranch11\Index.cshtml" />
-    <Content Include="Views\Forum_S1MainTopicsBranch1Thread\Create.cshtml" />
-    <Content Include="Views\Forum_S1MainTopicsBranch1Thread\Delete.cshtml" />
-    <Content Include="Views\Forum_S1MainTopicsBranch1Thread\Details.cshtml" />
-    <Content Include="Views\Forum_S1MainTopicsBranch1Thread\Edit.cshtml" />
-    <Content Include="Views\Forum_S1MainTopicsBranch1Thread\Index.cshtml" />
+    <Content Include="Views\ForumSections\Create.cshtml" />
+    <Content Include="Views\ForumSections\Delete.cshtml" />
+    <Content Include="Views\ForumSections\Details.cshtml" />
+    <Content Include="Views\ForumSections\Edit.cshtml" />
+    <Content Include="Views\ForumSections\Index.cshtml" />
+    <Content Include="Views\ForumSectionBranches\Create.cshtml" />
+    <Content Include="Views\ForumSectionBranches\Delete.cshtml" />
+    <Content Include="Views\ForumSectionBranches\Details.cshtml" />
+    <Content Include="Views\ForumSectionBranches\Edit.cshtml" />
+    <Content Include="Views\ForumSectionBranches\Index.cshtml" />
+    <Content Include="Views\Forum_SectionBranch1Topics\Create.cshtml" />
+    <Content Include="Views\Forum_SectionBranch1Topics\Delete.cshtml" />
+    <Content Include="Views\Forum_SectionBranch1Topics\Details.cshtml" />
+    <Content Include="Views\Forum_SectionBranch1Topics\Edit.cshtml" />
+    <Content Include="Views\Forum_SectionBranch1Topics\Index.cshtml" />
+    <Content Include="Views\Forum_SectionBranch1TopicsThread\Create.cshtml" />
+    <Content Include="Views\Forum_SectionBranch1TopicsThread\Delete.cshtml" />
+    <Content Include="Views\Forum_SectionBranch1TopicsThread\Details.cshtml" />
+    <Content Include="Views\Forum_SectionBranch1TopicsThread\Edit.cshtml" />
+    <Content Include="Views\Forum_SectionBranch1TopicsThread\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\DTOs\" />
+    <Folder Include="Models\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<專題.Models.EFModels.Forum_SectionBranch1TopicsThread>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Forum_SectionBranch1Topics.Topic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.topicState)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.replyNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.replyContent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.replyTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.replyState)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.replyMemberId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Forum_SectionBranch1Topics.Topic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.topicState)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.replyNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.replyContent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.replyTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.replyState)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.replyMemberId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

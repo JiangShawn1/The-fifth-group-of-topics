@@ -1,0 +1,42 @@
+﻿@model 專題.Models.EFModels.Forum_SectionBranch1Topics
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Forum_SectionBranch1Topics</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ForumSectionBranch.branchName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ForumSectionBranch.branchName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Topic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Topic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
