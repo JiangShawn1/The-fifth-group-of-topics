@@ -1,7 +1,11 @@
-﻿@model IEnumerable<專題.Models.EFModels.Product>
+﻿@using X.PagedList.Mvc.Fluent
+
+@model X.PagedList.IPagedList<專題.Models.EFModels.Product>
 
 @{
     ViewBag.Title = "Index";
+    var Brands = ViewBag.Brands as IEnumerable<SelectListItem>;
+    var ProductName = ViewBag.ProductName as string;
 }
 
 <h2>Index</h2>
@@ -9,6 +13,22 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<form method="get">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="caption">
+                <h3>Search</h3>
+                <div class="row">
+                    <div class="col-md-4">分類:@Html.DropDownList("Brand_Id", Brands, new { @class = "form-control" })</div>
+                    <div class="col-md-4">商品名稱:<input type="text" name="productName" class="form-control" value="@ProductName"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px; margin-bottom: 20px; padding-left: 15px;">
+        <input type="submit" class="btn btn-primary" value="Search" />
+    </div>
+</form>
 <table class="table">
     <tr>
         <th>
@@ -35,67 +55,37 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Brand.Brand1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Color.Color1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductIntroduce)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            <img src="@item.ImageUrl" alt="Product Image" id="imgSize" width="200" height="200">
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand.Brand1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color.Color1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductIntroduce)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <img src="@item.ImageUrl" alt="Product Image" id="imgSize" width="200" height="200">
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
 
-@*<script>
-    $(document).ready(function () {
-        $("#imgSize").bind("load", function () {
-            var width = 220;
-            var height = 200;
-            var image = $(this);
-            if (image.width() > image.height()) {
-                if (image.width() > width) {
-                    image.width(width);
-                    image.height(width / image.width() * image.height());
-                }
-            } else {
-                if (image.height() > height) {
-                    image.height(height);
-                    image.width(height / image.height() * image.width());
-                }
-            }
-        });
-    });
-</script>*@
-@*<script>
-    function checkSize() {
-        var maxWidth = 800;
-        var maxHeight = 600;
-        var file = $("#imgSize")[0].files[0];
-
-        if (file.size > maxSize) {
-            $("#error").html("圖片不能超過 2MB");
-            $("#fileInput").val("");
-        } else {
-            $("#error").html("");
-        }
-    }
-</script>*@
+@(Html.Pager(Model)
+    .Url(page => Url.Action("Index", new { pageNumber=page, Brand_Id = ViewBag.Brand_Id, ProductName = ViewBag.ProductName }))
+    .ClassicPlusFirstAndLast())

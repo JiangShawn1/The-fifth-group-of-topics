@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using 專題.Models.EFModels;
 using 專題.Models.EFModels.ViewModels;
 using System.IO;
+using X.PagedList;
 
 namespace 專題.Controllers
 {
@@ -18,10 +19,46 @@ namespace 專題.Controllers
         private AppDbContext db = new AppDbContext();
 
         // GET: Products
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? Brand_Id, string ProductName, int pageNumber = 1)
         {
+            pageNumber = pageNumber > 0 ? pageNumber : 1;
+            ViewBag.Brands = GetBrands(Brand_Id);
+            ViewBag.ProductName = ProductName;
+            ViewBag.Brand_Id = Brand_Id;
+
+            IPagedList<Product> pagedData = GetPagedProducts(Brand_Id, ProductName, pageNumber);
+
             var products = db.Products.Include(p => p.Brand).Include(p => p.Color);
-            return View(await products.ToListAsync());
+            return View(pagedData);
+        }
+
+        private IEnumerable<SelectListItem> GetBrands(int? Brand_Id)
+        {
+            var items = db.Brands
+                .Select(c => new SelectListItem
+                { Value = c.Id.ToString(), Text = c.Brand1, Selected = (Brand_Id.HasValue && c.Id == Brand_Id.Value) })
+                .ToList()
+                .Prepend(new SelectListItem { Value = string.Empty, Text = "請選擇" });
+
+            return items;
+        }
+
+        private IPagedList<Product> GetPagedProducts(int? Brand_Id, string ProductName, int pageNumber)
+        {
+            int pageSize = 10;
+
+            var query = db.Products.Include(x => x.Brand);
+
+            // 若有篩選categoryid
+            if (Brand_Id.HasValue) query = query.Where(p => p.Brand.Id == Brand_Id.Value);
+
+            // 若有篩選 productName
+            if (string.IsNullOrEmpty(ProductName) == false) query = query.Where(p => p.ProductName.Contains(ProductName));
+
+            query = query.OrderBy(x => x.Brand.Id)
+                ;
+
+            return query.ToPagedList(pageNumber, pageSize);
         }
 
         // GET: Products/Details/5
