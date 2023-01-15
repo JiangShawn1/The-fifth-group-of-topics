@@ -12,22 +12,23 @@
     var customerName = ViewBag.CustomerName;
     var email = ViewBag.Email;
 }
+<script src="~/Scripts/jquery-3.4.1.js"></script>
 
 <h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<form method="get">
+<form method="get" >
     <div class="row">
         <div class="col-xs-12">
             <div class="caption">
                 <h3>Search</h3>
-                <div class="row">
+                <div class="row" id="searchForm">
                     <div class="col-md-4">問題類型:@Html.DropDownList("questionTypeId", questionTypes, new { @class = "form-control"})</div>
-                    <div class="col-md-4">問題內容:<input type="text" name="feedbackContent" class="form-control" value="@feedbackContent"></div>
-                    <div class="col-md-4">客戶名稱:<input type="text" name="customerName" class="form-control" value="@customerName"></div>
-                    <div class="col-md-4">信箱:<input type="text" name="email" class="form-control" value="@email"></div>
+                    <div class="col-md-4">問題內容:<input type="text" name="feedbackContent" class="form-control" value="@feedbackContent"  ></div>
+                    <div class="col-md-4">客戶名稱:<input type="text" name="customerName" class="form-control" value="@customerName" ></div>
+                    <div class="col-md-4">信箱:<input type="text" name="email" class="form-control" value="@email" ></div>
                 </div>
             </div>
         </div>
@@ -92,11 +93,18 @@
     }
 
 </table>
-@Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new { pageNumber, questionTypeId = ViewBag.QuestionTypes as IEnumerable<SelectListItem>, feedbackContent = ViewBag.FeedbackContent, customerName = ViewBag.CustomerName, email = ViewBag.Email, pageSize = ViewBag.pageSize }))
+@Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new{ 
+    pageNumber, 
+    questionTypeId = questionTypes, 
+    feedbackContent = ViewBag.FeedbackContent, 
+    customerName = ViewBag.CustomerName, 
+    email = ViewBag.Email, pageSize = ViewBag.pageSize 
+}))
 <script>
 
     $("#resetbtn").on("click", function () {
         $("#searchForm input").val("");
+        alert("123")
     })
 
 </script>
