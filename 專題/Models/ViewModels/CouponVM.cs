@@ -28,7 +28,7 @@ namespace 專題.Models.ViewModels
 		public int CouponDiscount { get; set; }
 
 		[Display(Name = "圖片")]
-		[StringLength(50)]
+		[StringLength(100)]
 		public string CouponImage { get; set; }
 
 		[Display(Name = "內容")]
@@ -36,9 +36,13 @@ namespace 專題.Models.ViewModels
 		public string CouponContent { get; set; }
 
 		[Display(Name = "開始時間")]
+		[DataType(DataType.Date)]
+		[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
 		public DateTime StartAt { get; set; }
 
 		[Display(Name = "結束時間")]
+		[DataType(DataType.Date)]
+		[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
 		public DateTime? EndAt { get; set; }
 	}
 	public static partial class CouponDtoExts

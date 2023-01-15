@@ -7,7 +7,7 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Coupons", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -20,14 +20,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.CouponName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CouponName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CouponNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CouponNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CouponNumber, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -50,7 +42,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CouponImage, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CouponImage, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="file" name="file" class="form-control" />
                 @Html.ValidationMessageFor(model => model.CouponImage, "", new { @class = "text-danger" })
             </div>
         </div>

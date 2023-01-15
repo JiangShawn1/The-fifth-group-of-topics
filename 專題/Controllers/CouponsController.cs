@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -11,6 +12,7 @@ using 專題.Models.Infrastructures.Repositories;
 using 專題.Models.Services;
 using 專題.Models.Services.Interfaces;
 using 專題.Models.ViewModels;
+using static System.Net.WebRequestMethods;
 
 namespace 專題.Controllers
 {
@@ -41,14 +43,48 @@ namespace 專題.Controllers
 
         // POST: Coupons/Create
         [HttpPost]
-        public ActionResult Create(CouponVM model)
+        public ActionResult Create(CouponVM model, HttpPostedFileBase file)
         {
+
 			if (!ModelState.IsValid)
 			{
 				return View(model);
 			}
 
-			var service = new CouponService(repository);
+
+			if (file == null || file.ContentLength == 0)
+			{
+				model.CouponImage = string.Empty;
+			}
+			else
+			{
+
+				// 儲存圖片到伺服器上
+				string path = Server.MapPath("~/Uploads");
+				string fileName = Path.GetFileName(file.FileName);
+
+				string newFileName = GetNewFileName(path, fileName);
+				
+				string fullPath = Path.Combine(path, newFileName);
+				try
+				{
+					file.SaveAs(fullPath);
+					model.CouponImage = newFileName;
+				}
+				catch(Exception ex)
+				{
+					ModelState.AddModelError(string.Empty, "上傳檔案失敗: " + ex.Message);
+					return View(model);
+				}
+
+
+				//var fileName = Path.GetFileName(file.FileName);
+				//var path = Path.Combine(Server.MapPath("~/Uploads"), fileName);
+				//file.SaveAs(path);
+				//model.CouponImage = path;
+			}
+
+			
 
 			(bool IsSuccess, string ErrorMessage) response =
 				service.CreateCoupon(model.ToRequestDto());
@@ -65,8 +101,23 @@ namespace 專題.Controllers
 			}
 		}
 
-        // GET: Coupons/Edit/5
-        public ActionResult Edit(int? id)
+		private string GetNewFileName(string path, string fileName)
+		{
+			string ext = Path.GetExtension(fileName);
+			string newFileName = string.Empty;
+			string fullPath = string.Empty;
+
+			do
+			{
+				newFileName = Guid.NewGuid().ToString("N") + ext;
+				fullPath = Path.Combine(path, newFileName);
+
+			} while (System.IO.File.Exists(fullPath)==true);
+			return newFileName;
+		}
+
+		// GET: Coupons/Edit/5
+		public ActionResult Edit(int? id)
         {
 			if (id == null)
 			{
@@ -79,11 +130,32 @@ namespace 專題.Controllers
 
         // POST: Coupons/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, CouponVM model)
+        public ActionResult Edit(int id, CouponVM model, HttpPostedFileBase file)
         {
 			if (!ModelState.IsValid)
 			{
 				return View(model);
+			}
+
+			if (file != null || file.ContentLength > 0)
+			{
+				// 儲存圖片到伺服器上
+				string path = Server.MapPath("~/Uploads");
+				string fileName = Path.GetFileName(file.FileName);
+
+				string newFileName = GetNewFileName(path, fileName);
+
+				string fullPath = Path.Combine(path, newFileName);
+				try
+				{
+					file.SaveAs(fullPath);
+					model.CouponImage = newFileName;
+				}
+				catch (Exception ex)
+				{
+					ModelState.AddModelError(string.Empty, "上傳檔案失敗: " + ex.Message);
+					return View(model);
+				}
 			}
 
 			(bool IsSuccess, string ErrorMessage) response =

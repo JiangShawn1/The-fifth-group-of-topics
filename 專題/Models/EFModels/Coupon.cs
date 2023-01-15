@@ -36,7 +36,7 @@ namespace 專題.Models.EFModels
 
         public bool IsCombine { get; set; }
 
-        [StringLength(50)]
+        [StringLength(100)]
         public string CouponImage { get; set; }
 
         [StringLength(500)]
