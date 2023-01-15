@@ -12,8 +12,11 @@ namespace 專題.Models.ViewModels
 	{
 		public int Id { get; set; }
 
-		[Display(Name = "訂單編號")]
+		[Display(Name = "會員")]
 		[Required]
+		public int MemberId { get; set; }
+
+		[Display(Name = "訂單編號")]
 		[StringLength(50)]
 		public string OrderNumber { get; set; }
 
@@ -44,6 +47,9 @@ namespace 專題.Models.ViewModels
 		[Required]
 		[StringLength(500)]
 		public string OrderContent { get; set; }
+
+		[Display(Name = "優惠券")]
+		public string CouponName { get; set; }
 	}
 	public static partial class OrderDtoExts
 	{
@@ -52,7 +58,8 @@ namespace 專題.Models.ViewModels
 			return new OrderVM
 			{
 				Id = source.Id,
-				OrderAddress= source.OrderAddress,
+				MemberId = source.MemberId,
+				OrderAddress = source.OrderAddress,
 				OrderContent= source.OrderContent,
 				OrderNumber= source.OrderNumber,
 				OrderStatus= source.OrderStatus,
@@ -61,6 +68,7 @@ namespace 專題.Models.ViewModels
 				Amount= source.Amount,
 				UseCoupon= source.UseCoupon,
 				TradeStatus= source.TradeStatus,
+				CouponName = source.CouponName,
 			};
 		}
 		public static OrderDto ToRequestDto(this OrderVM source)
@@ -68,7 +76,8 @@ namespace 專題.Models.ViewModels
 			return new OrderDto
 			{
 				Id = source.Id,
-				OrderAddress= source.OrderAddress,
+				MemberId = source.MemberId,
+				OrderAddress = source.OrderAddress,
 				OrderContent= source.OrderContent,
 				OrderNumber= source.OrderNumber,
 				OrderStatus= source.OrderStatus,
@@ -77,7 +86,7 @@ namespace 專題.Models.ViewModels
 				Amount= source.Amount,
 				UseCoupon= source.UseCoupon,
 				TradeStatus= source.TradeStatus,
-
+				CouponName = source.CouponName,
 			};
 		}
 	}

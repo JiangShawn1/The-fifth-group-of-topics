@@ -29,17 +29,17 @@ namespace 專題.Controllers
         // GET: Orders
         public ActionResult Index()
         {
-			//var orders = db.Orders.Include(o => o.Coupon);
-			//return View(orders.ToList());
+            //var orders = db.Orders.Include(o => o.Coupon);
+            //return View(orders.ToList());
+             
+            var data = service.Search(null, null)
+                .Select(x => x.ToVM());
 
-			var data = service.Search(null, null)
-				.Select(x => x.ToVM());
+            return View(data);
+        }
 
-			return View(data);
-		}
-
-        // GET: Orders/Details/5
-        public ActionResult Details(int? id)
+		// GET: Orders/Details/5
+		public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -56,27 +56,38 @@ namespace 專題.Controllers
         // GET: Orders/Create
         public ActionResult Create()
         {
-            ViewBag.UseCoupon = new SelectList(db.Coupons, "Id", "CouponName");
-            return View();
+            ViewBag.UseCoupon = repository.BindCouponSelectList();
+
+			return View();
         }
 
         // POST: Orders/Create
         // 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,MemberId,OrderNumber,CreateAt,OrderType,OrderStatus,TradeStatus,UseCoupon,Amount,ShippingMethod,OrderAddress,OrderContent")] Order order)
+        public ActionResult Create(OrderVM model)
         {
-            if (ModelState.IsValid)
-            {
-                db.Orders.Add(order);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+			if (!ModelState.IsValid)
+			{
+				ViewBag.UseCoupon = repository.BindCouponSelectList(model.UseCoupon);
+				return View(model);
+			}
 
-            ViewBag.UseCoupon = new SelectList(db.Coupons, "Id", "CouponName", order.UseCoupon);
-            return View(order);
-        }
+			(bool IsSuccess, string ErrorMessage) response =
+				service.CreateOrder(model.ToRequestDto());
+
+			if (response.IsSuccess)
+			{
+				// 建檔成功
+				return RedirectToAction("Index");
+			}
+			else
+			{
+				ModelState.AddModelError(string.Empty, response.ErrorMessage);
+				ViewBag.UseCoupon = repository.BindCouponSelectList(model.UseCoupon);
+				return View(model);
+			}
+		}
 
         // GET: Orders/Edit/5
         public ActionResult Edit(int? id)
@@ -85,13 +96,9 @@ namespace 專題.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
-            if (order == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.UseCoupon = new SelectList(db.Coupons, "Id", "CouponName", order.UseCoupon);
-            return View(order);
+			var order = repository.Find((int)id);
+			ViewBag.UseCoupon = repository.BindCouponSelectList(order.UseCoupon);
+			return View(order.ToVM());
         }
 
         // POST: Orders/Edit/5
@@ -99,17 +106,30 @@ namespace 專題.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,MemberId,OrderNumber,CreateAt,OrderType,OrderStatus,TradeStatus,UseCoupon,Amount,ShippingMethod,OrderAddress,OrderContent")] Order order)
+        public ActionResult Edit([Bind(Include = "Id,MemberId,OrderStatus,TradeStatus,UseCoupon,Amount,ShippingMethod,OrderAddress,OrderContent")] int id, OrderVM model)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(order).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.UseCoupon = new SelectList(db.Coupons, "Id", "CouponName", order.UseCoupon);
-            return View(order);
-        }
+				(bool IsSuccess, string ErrorMessage) response =
+				service.EditOrder(id, model.ToRequestDto());
+
+				if (response.IsSuccess)
+				{
+					// 修改成功
+					return RedirectToAction("Index");
+				}
+				else
+				{
+					ModelState.AddModelError(string.Empty, response.ErrorMessage);
+				}
+
+				//db.Entry(model).State = EntityState.Modified;
+				//db.SaveChanges();
+				//return RedirectToAction("Index");
+			}
+            ViewBag.UseCoupon = repository.BindCouponSelectList(model.UseCoupon);
+			return View(model);
+		}
 
         // GET: Orders/Delete/5
         public ActionResult Delete(int? id)
@@ -118,12 +138,12 @@ namespace 專題.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
-            if (order == null)
+			var order = repository.Find((int)id);
+			if (order == null)
             {
                 return HttpNotFound();
             }
-            return View(order);
+			return View(order.ToVM());
         }
 
         // POST: Orders/Delete/5
@@ -131,13 +151,10 @@ namespace 專題.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Order order = db.Orders.Find(id);
-            db.Orders.Remove(order);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
+			repository.Delete(id);
+			return RedirectToAction("Index");
+		}
+		protected override void Dispose(bool disposing)
         {
             if (disposing)
             {

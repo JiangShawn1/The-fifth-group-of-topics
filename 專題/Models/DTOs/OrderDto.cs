@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace 專題.Models.DTOs
 	public class OrderDto
 	{
 		public int Id { get; set; }
+		public int MemberId { get; set; }
 		public string OrderNumber { get; set; }
 		public int OrderType { get; set; }
 		public int OrderStatus { get; set; }
@@ -20,6 +22,7 @@ namespace 專題.Models.DTOs
 		public string ShippingMethod { get; set; }
 		public string OrderAddress { get; set; }
 		public string OrderContent { get; set; }
+		public string CouponName { get; set; }
 	}
 	public static partial class OrderExts
 	{
@@ -36,6 +39,8 @@ namespace 專題.Models.DTOs
 				ShippingMethod = source.ShippingMethod,
 				OrderAddress = source.OrderAddress,
 				OrderContent = source.OrderContent,
+				CouponName = source.Coupon.CouponName,
+				MemberId = source.MemberId,
 			};
 	}
 }

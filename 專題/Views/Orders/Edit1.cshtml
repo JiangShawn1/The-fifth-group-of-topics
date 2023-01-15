@@ -1,4 +1,4 @@
-﻿@model 專題.Models.ViewModels.OrderVM
+﻿@model 專題.Models.EFModels.Order
 
 @{
     ViewBag.Title = "Edit";
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>OrderVM</h4>
+        <h4>Order</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -30,6 +30,14 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.OrderNumber, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.OrderNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreateAt, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreateAt, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreateAt, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -58,9 +66,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.UseCoupon, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.UseCoupon, "UseCoupon", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.UseCoupon, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("UseCoupon", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.UseCoupon, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -98,14 +106,6 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CouponName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CouponName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CouponName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
@@ -116,3 +116,4 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+

@@ -16,7 +16,7 @@ namespace 專題.Models.EFModels
         [StringLength(50)]
         public string OrderNumber { get; set; }
 
-        public DateTime CreateAt { get; set; }
+        public DateTime? CreateAt { get; set; }
 
         public int OrderType { get; set; }
 

@@ -72,7 +72,7 @@ namespace 專題.Controllers
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
-            var coupon = new CouponRepository().Find((int)id);
+            var coupon = repository.Find((int)id);
 
 			return View(coupon.ToVM());
 		}
