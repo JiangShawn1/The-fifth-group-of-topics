@@ -95,7 +95,7 @@
 </table>
 @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new{ 
     pageNumber, 
-    questionTypeId = questionTypes, 
+    questionTypeId = ViewBag.QuestionTypes as IEnumerable<SelectListItem>, 
     feedbackContent = ViewBag.FeedbackContent, 
     customerName = ViewBag.CustomerName, 
     email = ViewBag.Email, pageSize = ViewBag.pageSize 
