@@ -1,0 +1,40 @@
+﻿@model 專題.Models.EFModels.QuickReplyKeyWord
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>刪除</h2>
+
+
+<div>
+    <h4>QuickReplyKeyWord</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.QuickReply.QuickReplyContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuickReply.QuickReplyContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KeyWord)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KeyWord)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="刪除" class="btn btn-default" /> |
+            @Html.ActionLink("回到清單", "Index")
+        </div>
+    }
+</div>

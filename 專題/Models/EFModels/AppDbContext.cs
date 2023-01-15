@@ -302,5 +302,7 @@ namespace 專題.Models.EFModels
 				.WithRequired(e => e.Supplier)
 				.WillCascadeOnDelete(false);
 		}
-	}
+
+        public System.Data.Entity.DbSet<專題.Models.ViewModels.EditEmployeeProfileVM> EditEmployeeProfileVMs { get; set; }
+    }
 }

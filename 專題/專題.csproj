@@ -154,14 +154,26 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="chatHub.cs" />
+    <Compile Include="Controllers\AutoRepliesController.cs" />
+    <Compile Include="Controllers\AutoReplyKeyWordsController.cs" />
+    <Compile Include="Controllers\ChatContentsController.cs" />
+    <Compile Include="Controllers\ChatRoomAutoRepliesController.cs" />
+    <Compile Include="Controllers\ChatRoomsController.cs" />
     <Compile Include="Controllers\CommonAnswersController.cs" />
     <Compile Include="Controllers\CommonQuestionsController.cs" />
     <Compile Include="Controllers\CustomerFeedbacksController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QuestionTypesController.cs" />
+    <Compile Include="Controllers\QuickRepliesController.cs" />
+    <Compile Include="Controllers\QuickReplyKeyWordsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DTOs\EmployeeChangePasswordRequest.cs" />
+    <Compile Include="Models\DTOs\EmployeeDto.cs" />
+    <Compile Include="Models\DTOs\EmployeeRegisterDto.cs" />
+    <Compile Include="Models\DTOs\EmployeeUpdateProfileDto.cs" />
     <Compile Include="Models\EFModels\AccountBalance.cs" />
     <Compile Include="Models\EFModels\AppDbContext.cs" />
     <Compile Include="Models\EFModels\AutoReply.cs" />
@@ -204,7 +216,17 @@
     <Compile Include="Models\EFModels\Supplier.cs" />
     <Compile Include="Models\EFModels\sysdiagram.cs" />
     <Compile Include="Models\EFModels\TransactionRecord.cs" />
+    <Compile Include="Models\Infrastructures\EmployeeHashUtility.cs" />
+    <Compile Include="Models\Infrastructures\ExtensionMethods\EmployeeExts.cs" />
     <Compile Include="Models\Services\EmailService.cs" />
+    <Compile Include="Models\Services\EmployeeService.cs" />
+    <Compile Include="Models\Services\Interfaces\IEmployeeRepository.cs" />
+    <Compile Include="Models\Services\Interfaces\Repositories\EmployeeRepository.cs" />
+    <Compile Include="Models\ViewModels\EditEmployeeProfileVM.cs" />
+    <Compile Include="Models\ViewModels\EmployeeEditPasswordVM.cs" />
+    <Compile Include="Models\ViewModels\EmployeeLoginVM.cs" />
+    <Compile Include="Models\ViewModels\EmployeeRegisterVM.cs" />
+    <Compile Include="Models\ViewModels\EmployeeResetPasswordVM.cs" />
     <Compile Include="Models\ViewModels\SendEmailVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="startup.cs" />
@@ -272,11 +294,50 @@
     <Content Include="Views\CustomerFeedbacks\Reply.cshtml" />
     <Content Include="Views\CustomerFeedbacks\FailEmail.cshtml" />
     <Content Include="Views\Home\Chat.cshtml" />
+    <Content Include="Views\AutoReplies\Create.cshtml" />
+    <Content Include="Views\AutoReplies\Delete.cshtml" />
+    <Content Include="Views\AutoReplies\Details.cshtml" />
+    <Content Include="Views\AutoReplies\Edit.cshtml" />
+    <Content Include="Views\AutoReplies\Index.cshtml" />
+    <Content Include="Views\AutoReplyKeyWords\Create.cshtml" />
+    <Content Include="Views\AutoReplyKeyWords\Delete.cshtml" />
+    <Content Include="Views\AutoReplyKeyWords\Details.cshtml" />
+    <Content Include="Views\AutoReplyKeyWords\Edit.cshtml" />
+    <Content Include="Views\AutoReplyKeyWords\Index.cshtml" />
+    <Content Include="Views\ChatContents\Create.cshtml" />
+    <Content Include="Views\ChatContents\Delete.cshtml" />
+    <Content Include="Views\ChatContents\Details.cshtml" />
+    <Content Include="Views\ChatContents\Edit.cshtml" />
+    <Content Include="Views\ChatContents\Index.cshtml" />
+    <Content Include="Views\QuickReplies\Create.cshtml" />
+    <Content Include="Views\QuickReplies\Delete.cshtml" />
+    <Content Include="Views\QuickReplies\Details.cshtml" />
+    <Content Include="Views\QuickReplies\Edit.cshtml" />
+    <Content Include="Views\QuickReplies\Index.cshtml" />
+    <Content Include="Views\QuickReplyKeyWords\Create.cshtml" />
+    <Content Include="Views\QuickReplyKeyWords\Delete.cshtml" />
+    <Content Include="Views\QuickReplyKeyWords\Details.cshtml" />
+    <Content Include="Views\QuickReplyKeyWords\Edit.cshtml" />
+    <Content Include="Views\QuickReplyKeyWords\Index.cshtml" />
+    <Content Include="Views\ChatRooms\Create.cshtml" />
+    <Content Include="Views\ChatRooms\Delete.cshtml" />
+    <Content Include="Views\ChatRooms\Details.cshtml" />
+    <Content Include="Views\ChatRooms\Edit.cshtml" />
+    <Content Include="Views\ChatRooms\Index.cshtml" />
+    <Content Include="Views\ChatRoomAutoReplies\Create.cshtml" />
+    <Content Include="Views\ChatRoomAutoReplies\Delete.cshtml" />
+    <Content Include="Views\ChatRoomAutoReplies\Details.cshtml" />
+    <Content Include="Views\ChatRoomAutoReplies\Edit.cshtml" />
+    <Content Include="Views\ChatRoomAutoReplies\Index.cshtml" />
+    <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\Employees\Register.cshtml" />
+    <Content Include="Views\Employees\RegisterConfirm.cshtml" />
+    <Content Include="Views\Employees\Login.cshtml" />
+    <Content Include="Views\Employees\EditProfile.cshtml" />
+    <Content Include="Views\Employees\EditPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\DTOs\" />
-    <Folder Include="Models\Services\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

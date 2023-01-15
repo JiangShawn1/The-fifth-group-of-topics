@@ -11,16 +11,16 @@
     var question = ViewBag.Question;
 }
 
-<h2>Index</h2>
+<h2>常見問題</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("新增", "Create")
 </p>
 <form method="get">
     <div class="row">
         <div class="col-xs-12">
             <div class="caption">
-                <h3>Search</h3>
+                <h3>搜尋</h3>
                 <div class="row">
                     <div class="col-md-4">問題類型:@Html.DropDownList("questionTypeId", questionTypes, new { @class = "form-control" })</div>
                     <div class="col-md-4">問題內容:<input type="text" name="question" class="form-control" value="@question"></div>
@@ -55,9 +55,9 @@
                 @Html.DisplayFor(modelItem => item.Question)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink("編輯", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("詳細內容", "Details", new { id = item.Id }) |
+                @Html.ActionLink("刪除", "Delete", new { id = item.Id })
             </td>
         </tr>
     }
