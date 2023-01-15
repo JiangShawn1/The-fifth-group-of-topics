@@ -1,7 +1,14 @@
-﻿@model IEnumerable<專題.Models.EFModels.CommonAnswer>
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model IEnumerable<專題.Models.EFModels.CommonAnswer>
 
 @{
     ViewBag.Title = "Index";
+}
+@{
+
+    var commonQuestion = ViewBag.CommonQuestion as IEnumerable<SelectListItem>;
+    var answer = ViewBag.Answer;
 }
 
 <h2>Index</h2>
@@ -9,6 +16,24 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<form method="get">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="caption">
+                <h3>Search</h3>
+                <div class="row">
+                    <div class="col-md-4">問題類型:@Html.DropDownList("CommonQuestionId", commonQuestion, new { @class = "form-control" })</div>
+                    <div class="col-md-4">問題內容:<input type="text" name="answer" class="form-control" value="@answer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px; margin-bottom: 20px; padding-left: 15px;">
+        <input type="submit" class="btn btn-primary" value="搜尋" />
+        <button type="reset" id="resetbtn">清空當前輸入</button>
+        @Html.ActionLink("全部清空", "Index")
+    </div>
+</form>
 <table class="table">
     <tr>
         <th>
@@ -20,20 +45,22 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CommonQuestion.Question)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Answer)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CommonQuestion.Question)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Answer)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
+@Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new { pageNumber, commonQuestionId = ViewBag.CommonQuestion, answer = ViewBag.Answer, pageSize = ViewBag.pageSize }))

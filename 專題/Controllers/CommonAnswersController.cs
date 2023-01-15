@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -15,10 +16,32 @@ namespace 專題.Controllers
         private AppDbContext db = new AppDbContext();
 
         // GET: CommonAnswers
-        public ActionResult Index()
+        public ActionResult Index(int? commonQuestionId, string answer, int pageNumber = 1)
         {
-            var commonAnswers = db.CommonAnswers.Include(c => c.CommonQuestion);
-            return View(commonAnswers.ToList());
+            ViewBag.CommonQuestion = GetCommonQuestion(commonQuestionId);
+            ViewBag.Answer = answer;
+
+            var data = db.CommonAnswers.Include(x => x.CommonQuestion);
+            if (commonQuestionId.HasValue) data = data.Where(p => p.CommonQuestion.Id == commonQuestionId.Value);
+            if (string.IsNullOrEmpty(answer) == false) data = data.Where(p => p.Answer.Contains(answer));
+            pageNumber = pageNumber > 0 ? pageNumber : 1;
+            int pageSize = 10;
+            var query = data.OrderBy(x => x.CommonQuestion.Id).ToPagedList(pageNumber, pageSize);
+
+            return View(query);
+
+            //var commonAnswers = db.CommonAnswers.Include(c => c.CommonQuestion);
+            //return View(commonAnswers.ToList());
+        }
+        private IEnumerable<SelectListItem> GetCommonQuestion(int? commonQuestionId)
+        {
+            var items = db.CommonQuestions
+                .Select(c => new SelectListItem
+                { Value = c.Id.ToString(), Text = c.Question, Selected = (commonQuestionId.HasValue && c.Id == commonQuestionId.Value) })
+                .ToList()
+                .Prepend(new SelectListItem { Value = string.Empty, Text = "請選擇" });
+
+            return items;
         }
 
         // GET: CommonAnswers/Details/5
