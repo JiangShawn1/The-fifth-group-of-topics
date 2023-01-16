@@ -141,12 +141,18 @@ namespace 專題.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Brand_Id,ProductName,ProductIntroduce,Color_Id,Price,ImageUrl")] Product product)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Brand_Id,ProductName,ProductIntroduce,Color_Id,Price,ImageUrl")] Product product, HttpPostedFileBase ImageUrl)
         {
+            string path = Server.MapPath("/Images/ProductImages");
+            string fileName = System.IO.Path.GetFileName(ImageUrl.FileName);
+            string fullPath = System.IO.Path.Combine(path, fileName);
+            product.ImageUrl = Path.Combine("/Images/ProductImages/", ImageUrl.FileName);
+
             if (ModelState.IsValid)
             {
                 db.Entry(product).State = EntityState.Modified;
                 await db.SaveChangesAsync();
+                ImageUrl.SaveAs(fullPath);
                 return RedirectToAction("Index");
             }
             ViewBag.Brand_Id = new SelectList(db.Brands, "Id", "Brand1", product.Brand_Id);

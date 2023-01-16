@@ -4,20 +4,20 @@
     ViewBag.Title = "Create";
 }
 
-<h2>建立</h2>
+<h2 class="ml-2">建立</h2>
 
 
 @using (Html.BeginForm("Create", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
+    <div class="form-horizontal ml-4">
         <h4>商品</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             <div class="control-label col-md-2">品牌</div>
-            <div class="col-md-10">
+            <div class="col-md-4">
                 @Html.DropDownList("Brand_Id", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Brand_Id, "", new { @class = "text-danger" })
             </div>
@@ -25,7 +25,7 @@
 
         <div class="form-group">
             <div class="control-label col-md-2">商品名稱</div>
-            <div class="col-md-10">
+            <div class="col-md-4">
                 @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
             </div>
@@ -33,15 +33,15 @@
 
         <div class="form-group">
             <div class="control-label col-md-2">商品介紹</div>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ProductIntroduce, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-4">
+                @Html.TextAreaFor(model => model.ProductIntroduce, new { @class = "form-control" })                
                 @Html.ValidationMessageFor(model => model.ProductIntroduce, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="control-label col-md-2">顏色</div>
-            <div class="col-md-10">
+            <div class="col-md-4">
                 @Html.DropDownList("Color_Id", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Color_Id, "", new { @class = "text-danger" })
             </div>
@@ -49,7 +49,7 @@
 
         <div class="form-group">
             <div class="control-label col-md-2">價錢</div>
-            <div class="col-md-10">
+            <div class="col-md-4">
                 @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
             </div>
@@ -57,15 +57,17 @@
 
         <div class="form-group">
            <div class="control-label col-md-2">圖片</div>
-            <div class="col-md-10">
-                <input type="file" name="ImageUrl" clss="" />          
-                @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
-            </div>
+           <div class="col-md-10">
+               <input type="file" name="ImageUrl" id="fileInput" onchange="showPreview()" />
+               <img id="preview" style="display:none;" />
+               <p id="error"></p>
+               @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
+           </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="建立" class="btn btn-default" />
+                <input type="submit" value="建立" class="btn btn-primary" onclick="return checkImageSize()" />
             </div>
         </div>
     </div>
@@ -74,4 +76,35 @@
 <div>
     @Html.ActionLink("回去列表", "Index")
 </div>
+
+
+<script>
+    function showPreview() {
+        var file = $("#fileInput")[0].files[0];
+
+        var img = new Image();
+        var url = URL.createObjectURL(file);
+        img.src = url;
+
+        img.onload = function () {
+            $("#preview").attr("src", url);
+            $("#preview").show();
+        }
+    }
+
+    function checkImageSize() {
+        var maxWidth = 800;
+        var maxHeight = 600;
+        var img = document.getElementById("preview");
+
+        if (img.naturalWidth > maxWidth || img.naturalHeight > maxHeight) {
+            $("#error").html("圖片尺寸不能超過 " + maxWidth + " x " + maxHeight);
+            $("#fileInput").val("");
+            return false;
+        } else {
+            $("#error").html("");
+            return true;
+        }
+    }
+</script>
 
