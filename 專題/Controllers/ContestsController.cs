@@ -97,9 +97,7 @@ namespace 專題.Controllers
 			return View();
 		}
 
-		// POST: Contests/Create
-		// 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
-		// 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
+		// POST: Contests/Create		
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult Create(ContestCreateVM contestCreateRow)
@@ -167,9 +165,7 @@ namespace 專題.Controllers
 			return View(contest);
 		}
 
-		// POST: Contests/Edit/5
-		// 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
-		// 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
+		// POST: Contests/Edit/5		
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult Edit(ContestEditVM contestEditRow)

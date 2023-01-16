@@ -35,7 +35,7 @@
         }
 
 
-        <div class="form-group">
+        <div class="form-group" hidden>
             @Html.LabelFor(model => model.MemberID, "報名人", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">             
                 @Html.DropDownList("MemberID", null, htmlAttributes: new { @class = "form-control" })
