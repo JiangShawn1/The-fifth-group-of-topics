@@ -12,7 +12,7 @@ namespace 專題.Models.ViewModels
 	{
 		public int Id { get; set; }
 
-		[Display(Name = "會員")]
+		[Display(Name = "會員ID")]
 		[Required]
 		public int MemberId { get; set; }
 

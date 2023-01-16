@@ -1,4 +1,4 @@
-﻿@model 專題.Models.EFModels.Order
+﻿@model 專題.Models.ViewModels.OrderVM
 
 @{
     ViewBag.Title = "Delete";
@@ -8,17 +8,9 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Order</h4>
+    <h4>OrderVM</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Coupon.CouponName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Coupon.CouponName)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.MemberId)
         </dt>
@@ -33,14 +25,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.OrderNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreateAt)
         </dd>
 
         <dt>
@@ -65,6 +49,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.TradeStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UseCoupon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UseCoupon)
         </dd>
 
         <dt>
@@ -97,6 +89,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.OrderContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CouponName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CouponName)
         </dd>
 
     </dl>
