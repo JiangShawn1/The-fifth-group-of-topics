@@ -25,9 +25,19 @@
                     <li>@Html.ActionLink("關於", "About", "Home")</li>
                     <li>@Html.ActionLink("連絡人", "Contact", "Home")</li>
                     <li>@Html.ActionLink("客服", "CustomerService", "Home")</li>
-                    <li>@Html.ActionLink("員工", "Index", "Employees")</li>
 
-
+                    @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <li><a href="/Employees/Index/">@(User.Identity.Name)</a></li>
+                            <li>@Html.ActionLink("即時客服", "Chat", "Home")</li>
+                            <li>@Html.ActionLink("登出", "Logout", "Employees")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("登入", "Login", "Employees")</li>
+                        }
+                    }
                 </ul>
             </div>
         </div>

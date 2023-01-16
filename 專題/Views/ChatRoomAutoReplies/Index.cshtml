@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>聊天室自動回覆</h2>
 
 <p>
     @Html.ActionLink("新增", "Create")
@@ -35,9 +35,7 @@
             @Html.DisplayFor(modelItem => item.SentTime)
         </td>
         <td>
-            @Html.ActionLink("編輯", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("詳細內容", "Details", new { id=item.Id }) |
-            @Html.ActionLink("刪除", "Delete", new { id=item.Id })
+            @Html.ActionLink("詳細內容", "Details", new { id=item.Id })
         </td>
     </tr>
 }
