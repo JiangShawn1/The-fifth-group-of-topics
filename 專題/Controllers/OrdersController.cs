@@ -106,7 +106,7 @@ namespace 專題.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,MemberId,OrderStatus,TradeStatus,UseCoupon,Amount,ShippingMethod,OrderAddress,OrderContent")] int id, OrderVM model)
+        public ActionResult Edit([Bind(Include = "Id,MemberId,OrderType,OrderStatus,TradeStatus,UseCoupon,Amount,ShippingMethod,OrderAddress,OrderContent")] int id, OrderVM model)
         {
             if (ModelState.IsValid)
             {

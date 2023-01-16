@@ -55,11 +55,41 @@
         <td>
             @Html.DisplayFor(modelItem => item.OrderType)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderStatus)
+        <td class="orderStatus">
+            @if (item.OrderStatus == 0)
+            {
+                <text>未處理</text>
+            }
+            else if (item.OrderStatus == 1)
+            {
+                <text>作業中</text>
+            }
+            else if (item.OrderStatus == 2)
+            {
+                <text>已出貨</text>
+            }
+            else if (item.OrderStatus == 3)
+            {
+                <text>已完成</text>
+            }
+            else
+            {
+                <text>其他</text>
+            }
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TradeStatus)
+        <td class="tradeStatus">
+            @if (item.TradeStatus == 0)
+            {
+                <text>未付款</text>
+            }
+            else if (item.TradeStatus == 1)
+            {
+                <text>已付款</text>
+            }
+            else
+            {
+                <text>其他</text>
+            }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CouponName)
