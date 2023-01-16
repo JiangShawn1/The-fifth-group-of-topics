@@ -8,18 +8,22 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using 專題.Models.EFModels;
+using 專題.Models.ViewModels;
+using 專題.Models.CreatViews;
+using 專題.Models.Extensions;
 
 namespace 專題.Controllers
 {
     public class Forum_SectionBranch1TopicsThreadController : Controller
-    {
-        private AppDbContext db = new AppDbContext();
+	{
+		private AppDbContext db = new AppDbContext();
 
         // GET: Forum_SectionBranch1TopicsThread
         public async Task<ActionResult> Index()
         {
             var forum_SectionBranch1TopicsThread = db.Forum_SectionBranch1TopicsThread.Include(f => f.Forum_SectionBranch1Topics);
-            return View(await forum_SectionBranch1TopicsThread.ToListAsync());
+			return View(await forum_SectionBranch1TopicsThread.ToListAsync());
+
         }
 
         // GET: Forum_SectionBranch1TopicsThread/Details/5
@@ -41,25 +45,27 @@ namespace 專題.Controllers
         public ActionResult Create()
         {
             ViewBag.topicId = new SelectList(db.Forum_SectionBranch1Topics, "id", "Topic");
+      
             return View();
         }
 
-        // POST: Forum_SectionBranch1TopicsThread/Create
-        // 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
-        // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
-        [HttpPost]
+		// POST: Forum_SectionBranch1TopicsThread/Create
+		// 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
+		// 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
+		[Authorize]
+		[HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "id,topicId,topicState,replyNumber,replyContent,replyTime,replyState,replyMemberId")] Forum_SectionBranch1TopicsThread forum_SectionBranch1TopicsThread)
+        public async Task<ActionResult> Create(Forum_SectionBranchTopicsThread_MembersVM cFM_VM)
         {
             if (ModelState.IsValid)
             {
-                db.Forum_SectionBranch1TopicsThread.Add(forum_SectionBranch1TopicsThread);
-                await db.SaveChangesAsync();
+                db.Forum_SectionBranch1TopicsThread.Add(cFM_VM.ToFM());
+				await db.SaveChangesAsync();             
                 return RedirectToAction("Index");
             }
 
-            ViewBag.topicId = new SelectList(db.Forum_SectionBranch1Topics, "id", "Topic", forum_SectionBranch1TopicsThread.topicId);
-            return View(forum_SectionBranch1TopicsThread);
+            ViewBag.topicId = new SelectList(db.Forum_SectionBranch1Topics, "id", "Topic", cFM_VM.topicId);
+			return View(cFM_VM);
         }
 
         // GET: Forum_SectionBranch1TopicsThread/Edit/5
@@ -75,13 +81,14 @@ namespace 專題.Controllers
                 return HttpNotFound();
             }
             ViewBag.topicId = new SelectList(db.Forum_SectionBranch1Topics, "id", "Topic", forum_SectionBranch1TopicsThread.topicId);
-            return View(forum_SectionBranch1TopicsThread);
+			return View(forum_SectionBranch1TopicsThread);
         }
 
-        // POST: Forum_SectionBranch1TopicsThread/Edit/5
-        // 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
-        // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
-        [HttpPost]
+		// POST: Forum_SectionBranch1TopicsThread/Edit/5
+		// 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
+		// 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
+		[Authorize]
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "id,topicId,topicState,replyNumber,replyContent,replyTime,replyState,replyMemberId")] Forum_SectionBranch1TopicsThread forum_SectionBranch1TopicsThread)
         {
@@ -92,7 +99,7 @@ namespace 專題.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.topicId = new SelectList(db.Forum_SectionBranch1Topics, "id", "Topic", forum_SectionBranch1TopicsThread.topicId);
-            return View(forum_SectionBranch1TopicsThread);
+			return View(forum_SectionBranch1TopicsThread);
         }
 
         // GET: Forum_SectionBranch1TopicsThread/Delete/5
@@ -110,8 +117,9 @@ namespace 專題.Controllers
             return View(forum_SectionBranch1TopicsThread);
         }
 
-        // POST: Forum_SectionBranch1TopicsThread/Delete/5
-        [HttpPost, ActionName("Delete")]
+		// POST: Forum_SectionBranch1TopicsThread/Delete/5
+		[Authorize]
+		[HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {

@@ -47,6 +47,7 @@ namespace 專題.Controllers
         // POST: Forum_SectionBranch1Topics/Create
         // 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "id,BranchId,Topic,State")] Forum_SectionBranch1Topics forum_SectionBranch1Topics)
@@ -78,10 +79,11 @@ namespace 專題.Controllers
             return View(forum_SectionBranch1Topics);
         }
 
-        // POST: Forum_SectionBranch1Topics/Edit/5
-        // 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
-        // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
-        [HttpPost]
+		// POST: Forum_SectionBranch1Topics/Edit/5
+		// 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
+		// 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
+		[Authorize]
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "id,BranchId,Topic,State")] Forum_SectionBranch1Topics forum_SectionBranch1Topics)
         {
@@ -110,8 +112,9 @@ namespace 專題.Controllers
             return View(forum_SectionBranch1Topics);
         }
 
-        // POST: Forum_SectionBranch1Topics/Delete/5
-        [HttpPost, ActionName("Delete")]
+		// POST: Forum_SectionBranch1Topics/Delete/5
+		[Authorize]
+		[HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {

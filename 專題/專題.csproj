@@ -138,12 +138,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CreatViews\CreateForumSectionBranch1TopicsThread_MemberVM.cs" />
     <Compile Include="Models\EFModels\AppDbContext.cs" />
     <Compile Include="Models\EFModels\ForumSection.cs" />
     <Compile Include="Models\EFModels\ForumSectionBranch.cs" />
     <Compile Include="Models\EFModels\Forum_SectionBranch1Topics.cs" />
     <Compile Include="Models\EFModels\Forum_SectionBranch1TopicsThread.cs" />
     <Compile Include="Models\EFModels\Member.cs" />
+    <Compile Include="Models\Extensions\Forum_SectionBranch1TopicsThreadExt.cs" />
+    <Compile Include="Models\ViewModels\Forum_SectionBranchTopicsThread_MembersVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

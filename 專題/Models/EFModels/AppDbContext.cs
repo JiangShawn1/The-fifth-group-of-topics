@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
+using 專題.Models.ViewModels;
 
 namespace 專題.Models.EFModels
 {
@@ -17,6 +18,7 @@ namespace 專題.Models.EFModels
 		public virtual DbSet<ForumSection> ForumSections { get; set; }
 		public virtual DbSet<ForumSectionBranch> ForumSectionBranches { get; set; }
 		public virtual DbSet<Member> Members { get; set; }
+		public virtual DbSet<Forum_SectionBranchTopicsThread_MembersVM> forum_SectionBranchTopicsThread_MembersVM { get; set; }
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
