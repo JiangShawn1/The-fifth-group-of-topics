@@ -125,6 +125,7 @@ namespace 專題.Controllers
 			}
             var coupon = repository.Find((int)id);
 
+			ViewBag.ImageUrl = coupon.CouponImage;
 			return View(coupon.ToVM());
 		}
 
@@ -142,9 +143,7 @@ namespace 專題.Controllers
 				// 儲存圖片到伺服器上
 				string path = Server.MapPath("~/Uploads");
 				string fileName = Path.GetFileName(file.FileName);
-
 				string newFileName = GetNewFileName(path, fileName);
-
 				string fullPath = Path.Combine(path, newFileName);
 				try
 				{

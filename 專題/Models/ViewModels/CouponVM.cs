@@ -24,7 +24,7 @@ namespace 專題.Models.ViewModels
 		[Display(Name = "類型")]
 		public int CouponType { get; set; }
 
-		[Display(Name = "折扣")]
+		[Display(Name = "金額輸入100即為折抵100元 / 折扣輸入90即為打九折優惠")]
 		public int CouponDiscount { get; set; }
 
 		[Display(Name = "圖片")]

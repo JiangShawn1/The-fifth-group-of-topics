@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>優惠券列表</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -21,7 +21,7 @@
             @Html.DisplayNameFor(model => model.CouponType)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CouponDiscount)
+			<text>折扣</text>
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CouponImage)
@@ -46,9 +46,20 @@
         <td>
             @Html.DisplayFor(modelItem => item.CouponNumber)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CouponType)
-        </td>
+		<td class="couponType">
+			@if (item.CouponType == 1)
+			{
+				<text>金額</text>
+			}
+			else if (item.CouponType == 2)
+			{
+				<text>折扣</text>
+			}
+			else
+			{
+				<text>其他</text>
+			}
+		</td>
         <td>
             @Html.DisplayFor(modelItem => item.CouponDiscount)
         </td>
@@ -75,3 +86,15 @@
 }
 
 </table>
+
+<script>
+	$(function () {
+		$(".couponType").each(function () {
+			if ($(this).text() == 1) {
+				$(this).text("金額")
+			} else if ($(this).text() == 2) {
+				$(this).text("折扣")
+			}
+		});
+	});
+</script>
