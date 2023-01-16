@@ -18,39 +18,41 @@ namespace 專題.Controllers
 		private AppDbContext db = new AppDbContext();
 
 		// GET: Contests
-		public ActionResult Index(int? supplierId, string productName, int pageNumber = 1)
+		public ActionResult Index(int? supplierId, string contestName, int pageNumber = 1)
 		{
 			pageNumber = pageNumber > 0 ? pageNumber : 1;
 			
 			ViewBag.Supplier = GetCategories(supplierId);
-			ViewBag.ProductName = productName;			
+			ViewBag.ContestName = contestName;
 
-			IPagedList<Contest> pagedData = GetPagedProducts(supplierId, productName, pageNumber);
+			ViewBag.Supplier2 = supplierId;
+
+			IPagedList<Contest> pagedData = GetPagedContests(supplierId, contestName, pageNumber);
 
 			return View(pagedData);
 		}
-		private IEnumerable<SelectListItem> GetCategories(int? categoryId)
+		private IEnumerable<SelectListItem> GetCategories(int? supplierId)
 		{
 			var items = db.Suppliers
 				.Select(c => new SelectListItem
-				{ Value = c.SupplierId.ToString(), Text = c.SupplierName, Selected = (categoryId.HasValue && c.SupplierId == categoryId.Value) })
+				{ Value = c.SupplierId.ToString(), Text = c.SupplierName, Selected = (supplierId.HasValue && c.SupplierId == supplierId.Value) })
 				.ToList()
 				.Prepend(new SelectListItem { Value = string.Empty, Text = "請選擇" });
 
 			return items;
 		}
 
-		private IPagedList<Contest> GetPagedProducts(int? categoryId, string productName, int pageNumber)
+		private IPagedList<Contest> GetPagedContests(int? supplierId, string contestName, int pageNumber)
 		{
-			int pageSize = 3;
+			int pageSize = 5;
 
 			var query = db.Contests.Include(x => x.Supplier);
 
-			// 若有篩選categoryid
-			if (categoryId.HasValue) query = query.Where(p => p.Supplier.SupplierId == categoryId.Value);
+			// 若有篩選supplierId
+			if (supplierId.HasValue) query = query.Where(p => p.Supplier.SupplierId == supplierId.Value);
 
 			// 若有篩選 productName
-			if (string.IsNullOrEmpty(productName) == false) query = query.Where(p => p.Name.Contains(productName));
+			if (string.IsNullOrEmpty(contestName) == false) query = query.Where(p => p.Name.Contains(contestName));
 
 			query = query.OrderBy(x => x.Supplier.SupplierId);
 

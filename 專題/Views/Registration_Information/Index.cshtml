@@ -1,10 +1,32 @@
-﻿@model IEnumerable<專題.Models.EFModels.Registration_Information>
+﻿@using X.PagedList.Mvc.Fluent
+@using 專題.Models.EFModels
+
+@model X.PagedList.IPagedList<Registration_Information>
 
 @{
     ViewBag.Title = "Index";
+    var contests = ViewBag.Contest as IEnumerable<SelectListItem>;
+    var informationName = ViewBag.InformationName as string;
 }
 
 <h2>Index</h2>
+
+<form method="get">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="caption">
+                <h3>Search</h3>
+                <div class="row">
+                    <div class="col-md-4">活動名稱:@Html.DropDownList("contestId", contests, new { @class = "form-control" })</div>
+                    <div class="col-md-4">參賽人姓名:<input type="text" name="informationName" class="form-control" value="@informationName"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px; margin-bottom: 20px; padding-left: 15px;">
+        <input type="submit" class="btn btn-primary" value="Search" />
+    </div>
+</form>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -38,7 +60,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Registration.Member.Name)
             </td>
-            <td>
+            <td>                
                 @Html.DisplayFor(modelItem => item.Registration.Contest_Category.Contest.Name)
             </td>
             <td>
@@ -72,3 +94,6 @@
     }
 
 </table>
+@(Html.Pager(Model)
+    .Url(page => Url.Action("Index", new { pageNumber=page, contestId = ViewBag.Contest2, informationName = ViewBag.InformationName }))
+    .ClassicPlusFirstAndLast())

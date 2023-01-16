@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using X.PagedList;
 using 專題.Models.EFModels;
 using 專題.Models.Infrastructures.Extensions;
 using 專題.Models.ViewModels;
@@ -18,14 +19,53 @@ namespace 專題.Controllers
         private AppDbContext db = new AppDbContext();
 
         // GET: Registration_Information
-        public ActionResult Index()
-        {
-            var registration_Information = db.Registration_Information.Include(r => r.Information).Include(r => r.Registration);
-            return View(registration_Information.ToList());
-        }
+        public ActionResult Index(int? contestId, string informationName, int pageNumber = 1)
+		{
+			pageNumber = pageNumber > 0 ? pageNumber : 1;
 
-        // GET: Registration_Information/Details/5
-        public ActionResult Details(int? id)
+			ViewBag.Contest = GetContests(contestId);
+			ViewBag.InformationName = informationName;
+
+			ViewBag.Contest2 = contestId;
+
+			IPagedList<Registration_Information> pagedData = GetPagedRegistration_Information(contestId, informationName, pageNumber);
+
+			return View(pagedData);
+		}
+		private IEnumerable<SelectListItem> GetContests(int? contestId)
+		{
+			var items = db.Contests
+				.Select(c => new SelectListItem
+				{ Value = c.Id.ToString(), Text = c.Name, Selected = (contestId.HasValue && c.Id == contestId.Value) })
+				.ToList()
+				.Prepend(new SelectListItem { Value = string.Empty, Text = "請選擇" });
+
+			return items;
+		}
+
+		private IPagedList<Registration_Information> GetPagedRegistration_Information(int? contestId, string informationName, int pageNumber)
+		{
+			int pageSize = 5;
+
+			var query = db.Registration_Information.Include(r => r.Information).Include(r => r.Registration);
+
+			// 若有篩選categoryid
+			if (contestId.HasValue) query = query.Where(p => p.Registration.Contest_Category.ContestID == contestId.Value);
+
+			// 若有篩選 productName
+			if (string.IsNullOrEmpty(informationName) == false) query = query.Where(p => p.Information.Name.Contains(informationName));
+
+			query = query.OrderBy(x => x.Registration.Contest_Category.ContestID);
+
+			return query.ToPagedList(pageNumber, pageSize);
+		}
+		//{
+		//    var registration_Information = db.Registration_Information.Include(r => r.Information).Include(r => r.Registration);
+		//    return View(registration_Information.ToList());
+		//}
+
+		// GET: Registration_Information/Details/5
+		public ActionResult Details(int? id)
         {
             if (id == null)
             {
