@@ -8,8 +8,10 @@ namespace 專題.Models.EFModels
 	public partial class AppDbContext : DbContext
 	{
 		public AppDbContext()
-			: base("name=AppDbcontext")
+			: base("name=AppDbContext")
 		{
+
+
 		}
 
 		public virtual DbSet<AccountBalance> AccountBalances { get; set; }
@@ -216,6 +218,8 @@ namespace 專題.Models.EFModels
 				.WithRequired(e => e.Member)
 				.HasForeignKey(e => e.MemberId)
 				.WillCascadeOnDelete(false);
+
+		
 
 			modelBuilder.Entity<Member>()
 				.HasMany(e => e.Members_Subscriptions)

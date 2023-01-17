@@ -26,37 +26,34 @@ namespace 專題.Models.EFModels
 
         [Key]
         public int Member_Id { get; set; }
-		[Display(Name = "名字")]
-		[Required]
+
+        [Required]
         [StringLength(50)]
         public string Name { get; set; }
-		[Display(Name = "帳號")]
-		[Required]
+
+        [Required]
         [StringLength(50)]
         public string Account { get; set; }
-		
-        [Display(Name = "密碼")]
-		[Required]
-		[DataType(DataType.Password)]
-		[StringLength(50)]
+
+        [Required]
+        [StringLength(50)]
         public string Password { get; set; }
-		
-        [Display(Name = "電話")]
-		[Required]
+
+        [Required]
         [StringLength(10)]
         public string Phone { get; set; }
-		[Display(Name = "信箱")]
-		[Required]
+
+        [Required]
         [StringLength(50)]
         public string Mail { get; set; }
-		[Display(Name = "權限")]
-		public int State { get; set; }
-		[Display(Name = "訂閱")]
-		public bool Subscription { get; set; }
+
+        public bool Subscription { get; set; }
 
         public bool IsConfirmed { get; set; }
 
+        public bool Freeze { get; set; }
 
+        public int State { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountBalance> AccountBalances { get; set; }
@@ -81,6 +78,8 @@ namespace 專題.Models.EFModels
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Members_Coupons> Members_Coupons { get; set; }
+
+       
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Members_Subscriptions> Members_Subscriptions { get; set; }
