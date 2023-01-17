@@ -6,22 +6,22 @@ namespace 專題.Models.EFModels
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Color
+    [Table("ForumSection")]
+    public partial class ForumSection
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Color()
+        public ForumSection()
         {
-            Products = new HashSet<Product>();
+            ForumSectionBranches = new HashSet<ForumSectionBranch>();
         }
 
-        public int Id { get; set; }
+        public int id { get; set; }
 
-        [Column("Color")]
         [Required]
         [StringLength(50)]
-        public string Color1 { get; set; }
+        public string sectionName { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<ForumSectionBranch> ForumSectionBranches { get; set; }
     }
 }

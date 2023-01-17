@@ -94,17 +94,20 @@ namespace 專題.Controllers
             //todo 將圖存到資料夾中
 
             //todo 將資料寫進資料庫中
-            string path = Server.MapPath("/Images/ProductImages");
-            string fileName = System.IO.Path.GetFileName(ImageUrl.FileName);
-            string fullPath = System.IO.Path.Combine(path, fileName);
-            product.ImageUrl = Path.Combine("/Images/ProductImages/", ImageUrl.FileName);
-
-            if (ModelState.IsValid)
+            if (ImageUrl != null)
             {
-                db.Products.Add(product);
-                await db.SaveChangesAsync();
-                ImageUrl.SaveAs(fullPath);
-                return RedirectToAction("Index");
+                string path = Server.MapPath("/Images/ProductImages");
+                string fileName = System.IO.Path.GetFileName(ImageUrl.FileName);
+                string fullPath = System.IO.Path.Combine(path, fileName);
+                product.ImageUrl = Path.Combine("/Images/ProductImages/", ImageUrl.FileName);
+
+                if (ModelState.IsValid)
+                {
+                    db.Products.Add(product);
+                    await db.SaveChangesAsync();
+                    ImageUrl.SaveAs(fullPath);
+                    return RedirectToAction("Index");
+                }
             }
             //product.ImageUrl = Path.Combine("Images/ProductImages/", ImageUrl.FileName);
             //if (ModelState.IsValid)

@@ -11,21 +11,17 @@ namespace 專題.Models.EFModels
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Member()
         {
-            AccountBalances = new HashSet<AccountBalance>();
             CartItems = new HashSet<CartItem>();
             ChatContents = new HashSet<ChatContent>();
-            Forum_Reply = new HashSet<Forum_Reply>();
-            Forum_S1MainTopicsBranch1Thread = new HashSet<Forum_S1MainTopicsBranch1Thread>();
-            Forum_S1MainTopic = new HashSet<Forum_S1MainTopic>();
-            ForumSection1 = new HashSet<ForumSection1>();
+            Forum_SectionBranch1TopicsThread = new HashSet<Forum_SectionBranch1TopicsThread>();
+            ForumSectionBranches = new HashSet<ForumSectionBranch>();
             Members_Coupons = new HashSet<Members_Coupons>();
-            Members_Subscriptions = new HashSet<Members_Subscriptions>();
             Orders = new HashSet<Order>();
             Registrations = new HashSet<Registration>();
         }
 
         [Key]
-        public int Members_Id { get; set; }
+        public int Member_Id { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -47,12 +43,13 @@ namespace 專題.Models.EFModels
         [StringLength(50)]
         public string Mail { get; set; }
 
-        public int State { get; set; }
-
         public bool Subscription { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AccountBalance> AccountBalances { get; set; }
+        public bool IsConfirmed { get; set; }
+
+        public bool Freeze { get; set; }
+
+        public int State { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CartItem> CartItems { get; set; }
@@ -61,22 +58,17 @@ namespace 專題.Models.EFModels
         public virtual ICollection<ChatContent> ChatContents { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Forum_Reply> Forum_Reply { get; set; }
+        public virtual ICollection<Forum_SectionBranch1TopicsThread> Forum_SectionBranch1TopicsThread { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Forum_S1MainTopicsBranch1Thread> Forum_S1MainTopicsBranch1Thread { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Forum_S1MainTopic> Forum_S1MainTopic { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ForumSection1> ForumSection1 { get; set; }
+        public virtual ICollection<ForumSectionBranch> ForumSectionBranches { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Members_Coupons> Members_Coupons { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Members_Subscriptions> Members_Subscriptions { get; set; }
+        public virtual Member Members1 { get; set; }
+
+        public virtual Member Member1 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }

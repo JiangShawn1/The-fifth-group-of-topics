@@ -18,7 +18,7 @@ namespace 專題.Models.EFModels
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int CouponId { get; set; }
 
-        public int HowMuchCoupons { get; set; }
+        public int CouponsQuantity { get; set; }
 
         public virtual Coupon Coupon { get; set; }
 

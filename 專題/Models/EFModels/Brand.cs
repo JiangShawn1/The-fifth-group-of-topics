@@ -1,4 +1,4 @@
-namespace 專�?.Models.EFModels
+namespace 專題.Models.EFModels
 {
     using System;
     using System.Collections.Generic;

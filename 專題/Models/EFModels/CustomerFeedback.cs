@@ -24,6 +24,10 @@ namespace 專題.Models.EFModels
 
         public int QuestionTypeId { get; set; }
 
+        public int Status { get; set; }
+
+        public DateTime CreateTime { get; set; }
+
         public virtual QuestionType QuestionType { get; set; }
     }
 }
