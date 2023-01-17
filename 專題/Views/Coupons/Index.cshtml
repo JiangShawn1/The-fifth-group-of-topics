@@ -8,12 +8,28 @@
 }
 
 
+
 <link href="~/Content/PagedList.css" rel="stylesheet" />
+<style>
+	.fas {
+		font-size: 25px;
+	}
+</style>
 
 
 <h2>優惠券列表</h2>
+<div class="container mb-2">
+	<div class="row">
+		<div class="col-10">
+			<input type="text" id="search-input" placeholder="Search">
 
-<a class="btn btn-primary" href="/Coupons/Create" role="button">新增優惠券</a>
+			<button class="btn btn-info mr-auto" id="search-btn">搜尋</button>
+		</div>
+		<div class="col-2">
+			<a class="btn btn-primary" href="/Coupons/Create" role="button">新增優惠券</a>
+		</div>
+	</div>
+</div>
 
 <table class="table">
 	<tr>
@@ -86,8 +102,8 @@
 				@Html.DisplayFor(modelItem => item.EndAt)
 			</td>
 			<td>
-				@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-				@Html.ActionLink("Delete", "Delete", new { id = item.Id })
+				<a href="@Url.Action("Edit", new { id = item.Id })" title="Edit" class="fas fa-edit"></a>
+				<a href="@Url.Action("Delete", new { id = item.Id })" title="Delete" class="fas fa-trash-alt"></a>
 			</td>
 		</tr>
 	}

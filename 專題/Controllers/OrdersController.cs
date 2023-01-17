@@ -51,17 +51,13 @@ namespace 專題.Controllers
 		// GET: Orders/Details/5
 		public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Order order = db.Orders.Find(id);
-            if (order == null)
-            {
-                return HttpNotFound();
-            }
-            return View(order);
-        }
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			var order = repository.Find((int)id);
+			return View(order.ToVM());
+		}
 
         // GET: Orders/Create
         public ActionResult Create()

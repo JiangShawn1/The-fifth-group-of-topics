@@ -8,11 +8,26 @@
 }
 
 <link href="~/Content/PagedList.css" rel="stylesheet" />
+<style>
+	.fas {
+		font-size: 25px;
+	}
+</style>
 
 <h2>訂單列表</h2>
-<input type="text" id="search-input" placeholder="Search">
-<button id="search-btn">Search</button>
-<a class="btn btn-primary" href="/Orders/Create" role="button">新增訂單</a>
+<div class="container mb-2">
+	<div class="row">
+		<div class="col-10">
+			<input type="text" id="search-input" placeholder="Search">
+
+			<button class="btn btn-info mr-auto" id="search-btn">搜尋</button>
+		</div>
+		<div class="col-2">
+			<a class="btn btn-primary" href="/Orders/Create" role="button">新增訂單</a>
+		</div>
+	</div>
+</div>
+
 <table class="table">
 	<tr>
 		<th>
@@ -123,9 +138,9 @@
 				@Html.DisplayFor(modelItem => item.CreateAt)
 			</td>
 			<td>
-				@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-				@Html.ActionLink("Details", "Details", new { id = item.Id }) |
-				@Html.ActionLink("Delete", "Delete", new { id = item.Id })
+				<a href="@Url.Action("Edit", new { id = item.Id })" title="Edit" class="fas fa-edit"></a>
+				<a href="@Url.Action("Details", new { id = item.Id })" title="Details" class="fas fa-info-circle"></a>
+				<a href="@Url.Action("Delete", new { id = item.Id })" title="Delete" class="fas fa-trash-alt"></a>
 			</td>
 		</tr>
 	}
@@ -135,3 +150,5 @@
 @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+</script>
