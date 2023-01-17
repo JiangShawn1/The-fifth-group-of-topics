@@ -39,7 +39,7 @@
             商品介紹
         </dt>
 
-        <dd>
+        <dd style="width:400px">
             @Html.DisplayFor(model => model.ProductIntroduce)
         </dd>
 
@@ -52,21 +52,24 @@
         </dd>
 
         <dt>
-            圖片連結
+            圖片
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ImageUrl)
+            <img src="@Url.Content(Model.ImageUrl)" alt="image" width="200" height="200">
         </dd>
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
+        
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-danger" /> 
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+<div class="form-actions no-color">
+    @Html.ActionLink("back", "Index", null, new { @class = "btn btn-secondary" })
+    <input type="submit" value="Delete" class="btn btn-danger" />
+
+</div>
     }
 </div>

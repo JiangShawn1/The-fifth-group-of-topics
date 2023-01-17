@@ -20,18 +20,23 @@ namespace 專題.Models.EFModels
         public int? Brand_Id { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(50, ErrorMessage = "{0} 不得大於 {1}")]
+        [Display(Name ="商品名稱")]
         public string ProductName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "價錢必須填寫")]
         [StringLength(500)]
+        [Display(Name = "商品介紹")]
         public string ProductIntroduce { get; set; }
 
         public int Color_Id { get; set; }
 
+        [Required(ErrorMessage ="價錢必須填寫")]
+        [Display(Name = "價錢")]
+
         public int Price { get; set; }
 
-        [StringLength(300)]
+        [Required(ErrorMessage ="商品圖片必須上傳")]
         public string ImageUrl { get; set; }
 
         public virtual Brand Brand { get; set; }

@@ -11,67 +11,61 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+    <div class="form-horizontal col-md-4">
         <h4>Product</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Brand_Id, "Brand_Id", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
+           品牌
+            <div>
                 @Html.DropDownList("Brand_Id", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Brand_Id, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
+            商品名稱
+            <div>
                 @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ProductIntroduce, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
+            商品介紹
+            <div>
                 @Html.TextAreaFor(model => model.ProductIntroduce, new { @class = "form-control h", style = "height: 100px" })
                 @Html.ValidationMessageFor(model => model.ProductIntroduce, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Color_Id, "Color_Id", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
+            顏色
+            <div>
                 @Html.DropDownList("Color_Id", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Color_Id, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
+            價錢
+            <div>
                 @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             <div class="control-label col-md-2">原圖片</div>
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <img src="@Url.Content(Model.ImageUrl)" alt="image" width="200" height="200">
-                <input type="file" name="ImageUrl" id="fileInput" onchange="showPreview()" required />
+                <input type="file" name="ImageUrl" id="fileInput" onchange="showPreview()" required class="btn btn-primary" />
                 <div class="control-label col-md-2">新圖片</div>
                 <img id="preview" style="display:none; " width="200" height="200" />
                 <p id="error"></p>
                 @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
             </div>
-            <div class="control-label col-md-2">新圖片</div>
-            <div class="col-md-10">
-                
-            </div>
-
-
         </div>
         <div class="form-group">
            
