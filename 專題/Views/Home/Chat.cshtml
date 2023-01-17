@@ -1,4 +1,4 @@
-﻿
+﻿<script src="~/Scripts/vendor/jquery/jquery.js"></script>
 @{
     ViewBag.Title = "Chat";
 }
@@ -13,15 +13,16 @@
     <ul id="discussion"></ul>
 </div>
 @section scripts {
+    
     <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
     <script src="~/signalr/hubs"></script>
     @if (User.Identity.IsAuthenticated == true)
     {
         <div style="display: none" id="123">
-         @(User.Identity.Name)
+            @(User.Identity.Name)
         </div>
     }
-<script>
+    <script>
         if ($("#123").length > 0) {
             $(function () {
                 var chat = $.connection.chatHub;
@@ -63,5 +64,5 @@
                 var encodedValue = $('<div />').text(value).html();
                 return encodedValue;
             }
-</script>
+    </script>
 }
