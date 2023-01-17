@@ -15,17 +15,19 @@
 </style>
 
 <h2>訂單列表</h2>
-<div class="container mb-2">
-	<div class="row">
-		<div class="col-10">
-			<input type="text" id="search-input" placeholder="Search">
 
-			<button class="btn btn-info mr-auto" id="search-btn">搜尋</button>
-		</div>
-		<div class="col-2">
-			<a class="btn btn-primary" href="/Orders/Create" role="button">新增訂單</a>
-		</div>
-	</div>
+<div class="container mb-2">
+    <div class="row">
+        <div class="col-3">
+            <input class="form-control" type="text" id="search-input" placeholder="編號">
+        </div>
+        <div class="col-7">
+            <button class="btn btn-info" id="search-btn">搜尋</button>
+        </div>
+        <div class="col-2">
+            <a class="btn btn-primary float-right" href="/Orders/Create" role="button">新增訂單</a>
+        </div>
+    </div>
 </div>
 
 <table class="table">
@@ -69,15 +71,15 @@
 			<td>
 				@Html.DisplayFor(modelItem => item.MemberId)
 			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.OrderNumber)
-			</td>
+            <td>
+                <span class="orderNumber" id="orderNumber">@item.OrderNumber</span>
+            </td>
 			<td class="orderType">
 				@if (item.OrderType == 1)
 				{
 					<text>商品訂單</text>
 				}
-				else if (item.OrderStatus == 2)
+				else if (item.OrderType == 2)
 				{
 					<text>賽事報名</text>
 				}
@@ -89,19 +91,19 @@
 			<td class="orderStatus">
 				@if (item.OrderStatus == 0)
 				{
-					<text>未處理</text>
+					<text><span class="text-danger">未處理</span></text>
 				}
 				else if (item.OrderStatus == 1)
 				{
-					<text>作業中</text>
+					<text><span class="text-secondary">作業中</span></text>
 				}
 				else if (item.OrderStatus == 2)
 				{
-					<text>已出貨</text>
+					<text><span class="text-warning">已出貨</span></text>
 				}
 				else if (item.OrderStatus == 3)
 				{
-					<text>已完成</text>
+					<text><span class="text-success">已完成</span></text>
 				}
 				else
 				{
@@ -111,11 +113,11 @@
 			<td class="tradeStatus">
 				@if (item.TradeStatus == 0)
 				{
-					<text>未付款</text>
+					<text><span class="text-danger">未付款</span></text>
 				}
 				else if (item.TradeStatus == 1)
 				{
-					<text>已付款</text>
+					<text><span class="text-success">已付款</span></text>
 				}
 				else
 				{
@@ -151,4 +153,13 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+	$(function () {
+        $(".orderNumber").each(function () {
+            var orderNumber = $(this).text();
+            if (orderNumber.length > 8) {
+                var shortCode = orderNumber.substring(0, 8) + "...";
+                $(this).text(shortCode);
+            }
+        });
+    })
 </script>

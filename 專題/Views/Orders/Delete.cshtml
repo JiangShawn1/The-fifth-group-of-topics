@@ -4,11 +4,10 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
+<h3>您確定要刪除此訂單?</h3>
 <div>
-    <h4>OrderVM</h4>
+    <h4>訂單</h4>
+    @Html.DisplayFor(model => model.OrderNumber)
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -20,18 +19,10 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.OrderNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.OrderNumber)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.OrderType)
         </dt>
 
-        <dd>
+        <dd class="orderType">
             @Html.DisplayFor(model => model.OrderType)
         </dd>
 
@@ -39,7 +30,7 @@
             @Html.DisplayNameFor(model => model.OrderStatus)
         </dt>
 
-        <dd>
+        <dd class="orderStatus">
             @Html.DisplayFor(model => model.OrderStatus)
         </dd>
 
@@ -47,7 +38,7 @@
             @Html.DisplayNameFor(model => model.TradeStatus)
         </dt>
 
-        <dd>
+        <dd class="tradeStatus">
             @Html.DisplayFor(model => model.TradeStatus)
         </dd>
 
@@ -56,7 +47,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UseCoupon)
+            @Html.DisplayFor(model => model.CouponName)
         </dd>
 
         <dt>
@@ -91,22 +82,59 @@
             @Html.DisplayFor(model => model.OrderContent)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CouponName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CouponName)
-        </dd>
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Delete" class="btn btn-danger" /> 
+            @Html.ActionLink("返回", "Index", null, new { @class = "btn btn-outline-dark" })
         </div>
     }
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    $(function () {
+        $(".orderType").each(function () {
+            var orderType = $(this).text();
+            if (orderType == 1) {
+                $(this).text("商品訂單");
+            } else if (orderType == 2) {
+                $(this).text("賽事報名");
+            } else {
+                $(this).text("其他");
+            }
+        })
+        $(".orderStatus").each(function () {
+            var orderStatus = $(this).text();
+            if (orderStatus == 0) {
+                $(this).text("未處理");
+            } else if (orderStatus == 1) {
+                $(this).text("作業中");
+            } else if (orderStatus == 2) {
+                $(this).text("已出貨");
+            } else if (orderStatus == 3) {
+                $(this).text("已完成");
+            } else {
+                $(this).text("其他");
+            }
+        })
+
+        $(".tradeStatus").each(function () {
+            var tradeStatus = $(this).text();
+            if (tradeStatus == 0) {
+                $(this).text("未付款");
+            } else if (tradeStatus == 1) {
+                $(this).text("已付款");
+            } else {
+                $(this).text("其他");
+            }
+        })
+    })
+</script>

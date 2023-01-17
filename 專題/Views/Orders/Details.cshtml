@@ -7,7 +7,7 @@
 <h2>訂單</h2>
 
 <div>
-	<h4>@Html.DisplayFor(model => model.OrderNumber)</h4>
+    <h4>@Html.DisplayFor(model => model.OrderNumber)</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -23,7 +23,7 @@
             @Html.DisplayNameFor(model => model.OrderType)
         </dt>
 
-        <dd>
+        <dd class="orderType">
             @Html.DisplayFor(model => model.OrderType)
         </dd>
 
@@ -31,7 +31,7 @@
             @Html.DisplayNameFor(model => model.OrderStatus)
         </dt>
 
-        <dd>
+        <dd class="orderStatus">
             @Html.DisplayFor(model => model.OrderStatus)
         </dd>
 
@@ -39,7 +39,7 @@
             @Html.DisplayNameFor(model => model.TradeStatus)
         </dt>
 
-        <dd>
+        <dd class="tradeStatus">
             @Html.DisplayFor(model => model.TradeStatus)
         </dd>
 
@@ -47,9 +47,9 @@
             @Html.DisplayNameFor(model => model.UseCoupon)
         </dt>
 
-		<dd>
-			@Html.DisplayFor(model => model.CouponName)
-		</dd>
+        <dd>
+            @Html.DisplayFor(model => model.CouponName)
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Amount)
@@ -95,6 +95,49 @@
     </dl>
 </div>
 <p>
-	@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-	@Html.ActionLink("Back to List", "Index")
+    @*todo帶入ID*@
+    @Html.ActionLink("修改", "Edit", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("返回", "Index", null, new { @class = "btn btn-outline-dark" })
 </p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    $(function () {
+        $(".orderType").each(function () {
+            var orderType = $(this).text();
+            if (orderType == 1) {
+                $(this).text("商品訂單");
+            } else if (orderType == 2) {
+                $(this).text("賽事報名");
+            } else {
+                $(this).text("其他");
+            }
+        })
+        $(".orderStatus").each(function () {
+            var orderStatus = $(this).text();
+            if (orderStatus == 0) {
+                $(this).text("未處理");
+            } else if (orderStatus == 1) {
+                $(this).text("作業中");
+            } else if (orderStatus == 2) {
+                $(this).text("已出貨");
+            } else if (orderStatus == 3) {
+                $(this).text("已完成");
+            } else {
+                $(this).text("其他");
+            }
+        })
+        
+        $(".tradeStatus").each(function () {
+            var tradeStatus = $(this).text();
+            if (tradeStatus == 0) {
+                $(this).text("未付款");
+            } else if (tradeStatus == 1) {
+                $(this).text("已付款");
+            } else {
+                $(this).text("其他");
+            }
+        })
+    })
+</script>

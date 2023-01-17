@@ -38,7 +38,7 @@ namespace 專題.Models.Infrastructures.Repositories
 
 		public IEnumerable<OrderDto> Search(int? orderId, string orderNumber)
 		{
-			IEnumerable<Order> query = _db.Orders.OrderBy(x => x.Id);
+			IEnumerable<Order> query = _db.Orders.OrderByDescending(x => x.Id);
 			if (orderId.HasValue) query = query.Where(x => x.Id == orderId);
 			if (!string.IsNullOrEmpty(orderNumber)) query = query.Where(x => x.OrderNumber.Contains(orderNumber));
 
@@ -61,12 +61,9 @@ namespace 專題.Models.Infrastructures.Repositories
 		{
 			Order order = _db.Orders.Find(dto.Id);
 
-			order.Id = dto.Id;
-			order.MemberId = dto.MemberId;
 			order.OrderAddress = dto.OrderAddress;
 			order.OrderStatus = dto.OrderStatus;
 			order.OrderContent = dto.OrderContent;
-			order.OrderNumber = dto.OrderNumber;
 			order.OrderType = dto.OrderType;
 			order.TradeStatus = dto.TradeStatus;
 			order.Amount = dto.Amount;

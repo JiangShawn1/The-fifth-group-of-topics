@@ -4,122 +4,135 @@
 @model IEnumerable<專題.Models.ViewModels.CouponVM>
 
 @{
-	ViewBag.Title = "Index";
+    ViewBag.Title = "Index";
 }
 
-
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link href="~/Content/PagedList.css" rel="stylesheet" />
+
 <style>
-	.fas {
-		font-size: 25px;
-	}
+    .fas {
+        font-size: 25px;
+    }
 </style>
 
 
 <h2>優惠券列表</h2>
-<div class="container mb-2">
-	<div class="row">
-		<div class="col-10">
-			<input type="text" id="search-input" placeholder="Search">
 
-			<button class="btn btn-info mr-auto" id="search-btn">搜尋</button>
-		</div>
-		<div class="col-2">
-			<a class="btn btn-primary" href="/Coupons/Create" role="button">新增優惠券</a>
-		</div>
-	</div>
+<div class="container mb-2">
+    <div class="row">
+        <div class="col-3">
+            <input class="form-control" type="text" id="search-input" placeholder="序號">
+        </div>
+        <div class="col-7">
+            <button class="btn btn-info" id="search-btn">搜尋</button>
+        </div>
+        <div class="col-2">
+            <a class="btn btn-primary float-right" href="/Coupons/Create" role="button">新增優惠券</a>
+        </div>
+    </div>
 </div>
 
-<table class="table">
-	<tr>
-		<th>
-			@Html.DisplayNameFor(model => model.CouponName)
-		</th>
-		<th>
-			@Html.DisplayNameFor(model => model.CouponNumber)
-		</th>
-		<th>
-			@Html.DisplayNameFor(model => model.CouponType)
-		</th>
-		<th>
-			<text>折扣</text>
-		</th>
-		<th>
-			@Html.DisplayNameFor(model => model.CouponImage)
-		</th>
-		<th>
-			@Html.DisplayNameFor(model => model.CouponContent)
-		</th>
-		<th>
-			@Html.DisplayNameFor(model => model.StartAt)
-		</th>
-		<th>
-			@Html.DisplayNameFor(model => model.EndAt)
-		</th>
-		<th></th>
-	</tr>
 
-	@foreach (var item in Model)
-	{
-		<tr>
-			<td>
-				@Html.DisplayFor(modelItem => item.CouponName)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.CouponNumber)
-			</td>
-			<td class="couponType">
-				@if (item.CouponType == 1)
-				{
-					<text>金額</text>
-				}
-				else if (item.CouponType == 2)
-				{
-					<text>折扣</text>
-				}
-				else
-				{
-					<text>其他</text>
-				}
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.CouponDiscount)
-			</td>
-			<td>
-				@if (!string.IsNullOrEmpty(item.CouponImage))
-				{
-					<img src="~/Uploads/@item.CouponImage" alt="Uploaded Image" width="200" height="200" />
-				}
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.CouponContent)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.StartAt)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.EndAt)
-			</td>
-			<td>
-				<a href="@Url.Action("Edit", new { id = item.Id })" title="Edit" class="fas fa-edit"></a>
-				<a href="@Url.Action("Delete", new { id = item.Id })" title="Delete" class="fas fa-trash-alt"></a>
-			</td>
-		</tr>
-	}
+
+<table class="table">
+    <tr>
+        <th>
+            <label for="CouponName">名稱</label>
+        </th>
+        <th class="col-md-1">
+            @Html.DisplayNameFor(model => model.CouponNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CouponType)
+        </th>
+        <th>
+            <text>折扣</text>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CouponImage)
+        </th>
+        <th class="col-md-3">
+            @Html.DisplayNameFor(model => model.CouponContent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndAt)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CouponName)
+            </td>
+            <td>
+                <span class="couponNumber" id="CouponNumber">@item.CouponNumber</span>
+            </td>
+            <td class="couponType">
+                @if (item.CouponType == 1)
+                {
+                    <text>金額</text>
+                }
+                else if (item.CouponType == 2)
+                {
+                    <text>折扣</text>
+                }
+                else
+                {
+                    <text>其他</text>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CouponDiscount)
+            </td>
+            <td>
+                @if (!string.IsNullOrEmpty(item.CouponImage))
+                {
+                    <img src="~/Uploads/@item.CouponImage" alt="Uploaded Image" width="200" height="200" />
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CouponContent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndAt)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new { id = item.Id })" title="Edit" class="fas fa-edit"></a>
+                <a href="@Url.Action("Delete", new { id = item.Id })" title="Delete" class="fas fa-trash-alt"></a>
+            </td>
+        </tr>
+    }
 
 </table>
 
 @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 <script>
-	$(function () {
-		$(".couponType").each(function () {
-			if ($(this).text() == 1) {
-				$(this).text("金額")
-			} else if ($(this).text() == 2) {
-				$(this).text("折扣")
-			}
-		});
-	});
+    $(function () {
+        $(".couponType").each(function () {
+            if ($(this).text() == 1) {
+                $(this).text("金額")
+            } else if ($(this).text() == 2) {
+                $(this).text("折扣")
+            }
+        });
+        $(".couponNumber").each(function () {
+            var couponNumber = $(this).text();
+            if (couponNumber.length > 8) {
+                var shortCode = couponNumber.substring(0, 8) + "...";
+                $(this).text(shortCode);
+            }
+        });
+    });
 </script>

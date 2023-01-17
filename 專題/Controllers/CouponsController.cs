@@ -143,6 +143,8 @@ namespace 專題.Controllers
 				return View(model);
 			}
 
+			//todo 驗證若沒選擇圖片會直接報錯
+
 			if (file != null || file.ContentLength > 0)
 			{
 				// 儲存圖片到伺服器上

@@ -15,7 +15,7 @@ namespace 專題.Models.Infrastructures.Repositories
 
 		public IEnumerable<CouponDto> Search(int? couponId, string couponName, string couponNumber)
 		{
-			IEnumerable<Coupon> query = _db.Coupons.OrderBy(x=>x.Id);
+			IEnumerable<Coupon> query = _db.Coupons.OrderByDescending(x=>x.Id);
 			if (couponId.HasValue) query = query.Where(x => x.Id == couponId);
 			if (!string.IsNullOrEmpty(couponName)) query = query.Where(x => x.CouponName.Contains(couponName));
 			if (!string.IsNullOrEmpty(couponNumber)) query = query.Where(x => x.CouponNumber.Contains(couponNumber));
