@@ -40,6 +40,14 @@ namespace 專題.Controllers
             return View(result);
         }
 
+        public IEnumerable<OrderVM> search(string searchText)
+        {
+			var data = service.Search(null, searchText)
+				.Select(x => x.ToVM());
+
+			return data;
+		}
+
 		// GET: Orders/Details/5
 		public ActionResult Details(int? id)
         {
