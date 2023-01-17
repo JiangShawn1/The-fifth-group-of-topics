@@ -2,14 +2,13 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
-using 專題.Models.ViewModels;
 
 namespace 專題.Models.EFModels
 {
 	public partial class AppDbContext : DbContext
 	{
 		public AppDbContext()
-			: base("name=AppDbContext")
+			: base("name=AppDbContext1")
 		{
 		}
 
@@ -18,7 +17,6 @@ namespace 專題.Models.EFModels
 		public virtual DbSet<ForumSection> ForumSections { get; set; }
 		public virtual DbSet<ForumSectionBranch> ForumSectionBranches { get; set; }
 		public virtual DbSet<Member> Members { get; set; }
-		public virtual DbSet<Forum_SectionBranchTopicsThread_MembersVM> forum_SectionBranchTopicsThread_MembersVM { get; set; }
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
@@ -56,6 +54,12 @@ namespace 專題.Models.EFModels
 			modelBuilder.Entity<Member>()
 				.Property(e => e.Mail)
 				.IsUnicode(false);
+
+			modelBuilder.Entity<Member>()
+				.HasMany(e => e.Forum_SectionBranch1TopicsThread)
+				.WithRequired(e => e.Member)
+				.HasForeignKey(e => e.replyMemberId)
+				.WillCascadeOnDelete(false);
 
 			modelBuilder.Entity<Member>()
 				.HasMany(e => e.ForumSectionBranches)

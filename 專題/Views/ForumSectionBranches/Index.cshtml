@@ -1,16 +1,21 @@
 ﻿@model IEnumerable<專題.Models.EFModels.ForumSectionBranch>
 
 <p>
-    @Html.ActionLink("新增討論版", "Create")
+    @Html.ActionLink("新增分支", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-          區塊名稱
+            區塊名稱
         </th>
         <th>
-           討論版名稱
+            管理者
         </th>
+        <th>
+           分支名稱
+        </th>
+    
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -19,13 +24,16 @@
             @Html.DisplayFor(modelItem => item.ForumSection.sectionName)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Member.Name)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.branchName)
         </td>
-    
+       
         <td>
-            @Html.ActionLink("修改討論版", "Edit", new { id=item.id }) |
-            @Html.ActionLink("討論版詳情", "Details", new { id=item.id }) |
-            @Html.ActionLink("刪除討論版", "Delete", new { id=item.id })
+            @Html.ActionLink("修改", "Edit", new { id=item.id }) |
+            @Html.ActionLink("詳情", "Details", new { id=item.id }) |
+            @Html.ActionLink("刪除", "Delete", new { id=item.id })
         </td>
     </tr>
 }

@@ -133,12 +133,10 @@
     <Compile Include="Controllers\ForumSectionsController.cs" />
     <Compile Include="Controllers\Forum_SectionBranch1TopicsController.cs" />
     <Compile Include="Controllers\Forum_SectionBranch1TopicsThreadController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CreatViews\CreateForumSectionBranch1TopicsThread_MemberVM.cs" />
+    <Compile Include="Models\CreateModels\CreateForum_SectionBranch1TopicsThreadModel.cs" />
     <Compile Include="Models\EFModels\AppDbContext.cs" />
     <Compile Include="Models\EFModels\ForumSection.cs" />
     <Compile Include="Models\EFModels\ForumSectionBranch.cs" />

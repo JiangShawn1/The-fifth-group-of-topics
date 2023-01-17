@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>發新文章</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,43 +12,44 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-
+        <h4>建立新文章</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.topicId, "topicId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("topicId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.topicId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+       
 
         <div class="form-group">
-            @Html.LabelFor(model => model.topicState, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.topicState,"文章狀態", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.topicState, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.topicState, "", new { @class = "text-danger" })
             </div>
         </div>
 
-          <div class="form-group">
-            @Html.LabelFor(model => model.replyContent, htmlAttributes: new { @class = "control-label col-md-2" })
+       
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.replyContent,"內容", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.replyContent, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.replyContent, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        
+
         <div class="form-group">
-            @Html.LabelFor(model => model.replyState, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.replyState,"允許回覆狀態", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.replyState, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.replyState, "", new { @class = "text-danger" })
             </div>
         </div>
 
+    
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="新增回文" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -57,5 +58,4 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
 

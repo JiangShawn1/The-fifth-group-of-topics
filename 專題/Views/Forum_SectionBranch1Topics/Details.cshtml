@@ -4,13 +4,14 @@
     ViewBag.Title = "Details";
 }
 
-<h2>文章標題詳細</h2>
+<h2>詳情</h2>
 
 <div>
+
     <hr />
     <dl class="dl-horizontal">
         <dt>
-          所屬討論版
+           分支名稱
         </dt>
 
         <dd>
@@ -18,7 +19,7 @@
         </dd>
 
         <dt>
-          文章標題
+           文章標題
         </dt>
 
         <dd>
@@ -26,7 +27,7 @@
         </dd>
 
         <dt>
-           文章屬性
+          文章狀態
         </dt>
 
         <dd>
@@ -36,6 +37,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("修改文章標題", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("回到文章標題管理", "Index")
+    @Html.ActionLink("修改標題", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("回到標題管理", "Index")
 </p>

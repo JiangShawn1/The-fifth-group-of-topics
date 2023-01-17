@@ -22,10 +22,12 @@ namespace 專題.Models.EFModels
 
         public DateTime replyTime { get; set; }
 
-        public int? replyState { get; set; }
+        public int replyState { get; set; }
 
-        public int? replyMemberId { get; set; }
+        public int replyMemberId { get; set; }
 
         public virtual Forum_SectionBranch1Topics Forum_SectionBranch1Topics { get; set; }
+
+        public virtual Member Member { get; set; }
     }
 }

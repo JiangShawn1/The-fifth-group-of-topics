@@ -4,15 +4,14 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h2>刪除</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>確定要刪除嗎</h3>
 <div>
-    <h4>Forum_SectionBranch1TopicsThread</h4>
-    <hr />
+     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Forum_SectionBranch1Topics.Topic)
+          文章標題
         </dt>
 
         <dd>
@@ -20,7 +19,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.topicState)
+            回覆者
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Member.Name)
+        </dd>
+
+        <dt>
+            文章狀態
         </dt>
 
         <dd>
@@ -28,7 +35,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.replyNumber)
+          樓層
         </dt>
 
         <dd>
@@ -36,7 +43,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.replyContent)
+           文章內容
         </dt>
 
         <dd>
@@ -44,7 +51,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.replyTime)
+            回覆時間
         </dt>
 
         <dd>
@@ -52,19 +59,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.replyState)
+           回文狀態
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.replyState)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.replyMemberId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.replyMemberId)
         </dd>
 
     </dl>
@@ -73,8 +72,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="確認此文" class="btn btn-default" /> |
+            @Html.ActionLink("回到文章管理t", "Index")
         </div>
     }
 </div>

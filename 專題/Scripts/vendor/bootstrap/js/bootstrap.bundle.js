@@ -185,7 +185,8 @@
         }
       }
     },
-    findShadowRoot: function findShadowRoot(element) {
+    findShadow
+: function findShadowRoot(element) {
       if (!document.documentElement.attachShadow) {
         return null;
       } // Can find the shadow root otherwise it'll return the document

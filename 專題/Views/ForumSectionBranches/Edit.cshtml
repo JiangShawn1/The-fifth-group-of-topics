@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>討論版修改</h2>
+<h2>修改分支</h2>
 
 
 @using (Html.BeginForm())
@@ -15,10 +15,9 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.id)
-    @Html.HiddenFor(model => model.administratorId)
 
     <div class="form-group">
-       區塊名稱
+        @Html.LabelFor(model => model.sectionNameId, "區塊名稱", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("sectionNameId", null, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.sectionNameId, "", new { @class = "text-danger" })
@@ -26,7 +25,7 @@
     </div>
 
     <div class="form-group">
-       討論版名稱
+        @Html.LabelFor(model => model.branchName, "分支名稱", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.branchName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.branchName, "", new { @class = "text-danger" })
@@ -34,13 +33,25 @@
     </div>
 
 
+
     <div class="form-group">
-       管理者
+        @Html.LabelFor(model => model.administratorId, "區塊管理者", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("administratorId", null, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.administratorId, "", new { @class = "text-danger" })
         </div>
     </div>
+
+
+
+    <div class="form-group" hidden>
+        @Html.LabelFor(model => model.sectionAdministrator, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.sectionAdministrator, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.sectionAdministrator, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
@@ -51,6 +62,6 @@
 }
 
 <div>
-    @Html.ActionLink("回到討論版管理", "Index")
+    @Html.ActionLink("回到分支管理", "Index")
 </div>
 

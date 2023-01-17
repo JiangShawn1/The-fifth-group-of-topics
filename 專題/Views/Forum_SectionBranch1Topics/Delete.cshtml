@@ -4,14 +4,14 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>刪除文章標題</h2>
+<h2>刪除標題</h2>
 
-<h3>是否確定要刪除此文章標題</h3>
+<h3>是否要刪除此標題</h3>
 <div>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            討論版名稱
+           分支名稱
         </dt>
 
         <dd>
@@ -19,7 +19,7 @@
         </dd>
 
         <dt>
-            文章標題
+          標題
         </dt>
 
         <dd>
@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            文章屬性
+           文章狀態
         </dt>
 
         <dd>
@@ -40,8 +40,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="刪除文章標題" class="btn btn-default" /> |
-            @Html.ActionLink("回到文章標題管理", "Index")
+            <input type="submit" value="刪除" class="btn btn-default" /> |
+            @Html.ActionLink("回到標題管理", "Index")
         </div>
     }
 </div>

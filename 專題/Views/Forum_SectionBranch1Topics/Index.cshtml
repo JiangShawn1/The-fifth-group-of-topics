@@ -1,18 +1,18 @@
 ﻿@model IEnumerable<專題.Models.EFModels.Forum_SectionBranch1Topics>
 
 <p>
-    @Html.ActionLink("發表文章", "Create")
+    @Html.ActionLink("新增標題", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-           所屬討論版
+           分支名稱
         </th>
         <th>
-           文章標題
+            標題名稱
         </th>
         <th>
-            文章屬性
+           標題狀態
         </th>
         <th></th>
     </tr>
@@ -29,8 +29,8 @@
             @Html.DisplayFor(modelItem => item.State)
         </td>
         <td>
-            @Html.ActionLink("修改文章標題", "Edit", new { id=item.id }) |
-            @Html.ActionLink("刪除文章", "Delete", new { id=item.id })
+            @Html.ActionLink("詳情", "Details", new { id = item.id }) |
+            @Html.ActionLink("刪除", "Delete", new { id = item.id })
         </td>
     </tr>
 }

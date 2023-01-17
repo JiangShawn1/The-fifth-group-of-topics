@@ -4,14 +4,31 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>刪除討論版確認</h2>
+<h2>確認刪除</h2>
 
-<h3>你確定要刪除此討論版嗎?</h3>
+<h3>確定要刪除這個區塊嗎</h3>
 <div>
+
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            討論版名稱
+           區塊名稱
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ForumSection.sectionName)
+        </dd>
+
+        <dt>
+           分支管理者
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Member.Name)
+        </dd>
+
+        <dt>
+          分支名稱
         </dt>
 
         <dd>
@@ -19,21 +36,11 @@
         </dd>
 
         <dt>
-            所屬區塊
+            區塊管理者
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ForumSection.sectionName)
-        </dd>
-
-
-
-        <dt>
-            管理者
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Member.Name)
+            @Html.DisplayFor(model => model.sectionAdministrator)
         </dd>
 
     </dl>
@@ -42,8 +49,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="刪除" class="btn btn-default" /> |
-            @Html.ActionLink("回到討論版管理", "Index")
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("回到分支管理", "Index")
         </div>
     }
 </div>

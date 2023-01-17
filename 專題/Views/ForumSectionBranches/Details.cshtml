@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
 }
 
-<h2>討論版詳細資料</h2>
+<h2>詳情</h2>
 
 <div>
     <hr />
@@ -18,7 +18,15 @@
         </dd>
 
         <dt>
-            討論版名稱
+           分支管理者
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Member.Name)
+        </dd>
+
+        <dt>
+           分支名稱
         </dt>
 
         <dd>
@@ -26,15 +34,16 @@
         </dd>
 
         <dt>
-            管理者
+           區塊管理者
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Member.Name)
+            @Html.DisplayFor(model => model.sectionAdministrator)
         </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("修改討論版", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("回到討論版管理", "Index")
+    @Html.ActionLink("修改", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("回到分支管理", "Index")
 </p>

@@ -11,6 +11,7 @@ namespace 專題.Models.EFModels
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Member()
         {
+            Forum_SectionBranch1TopicsThread = new HashSet<Forum_SectionBranch1TopicsThread>();
             ForumSectionBranches = new HashSet<ForumSectionBranch>();
         }
 
@@ -42,7 +43,9 @@ namespace 專題.Models.EFModels
         public bool Subscription { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ForumSectionBranch> ForumSectionBranches { get; set; }
+        public virtual ICollection<Forum_SectionBranch1TopicsThread> Forum_SectionBranch1TopicsThread { get; set; }
 
-	}
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ForumSectionBranch> ForumSectionBranches { get; set; }
+    }
 }

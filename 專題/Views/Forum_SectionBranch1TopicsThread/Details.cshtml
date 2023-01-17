@@ -4,14 +4,14 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>詳情</h2>
 
 <div>
-    <h4>Forum_SectionBranch1TopicsThread</h4>
+
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Forum_SectionBranch1Topics.Topic)
+         文章標題
         </dt>
 
         <dd>
@@ -19,7 +19,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.topicState)
+          回覆者
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Member.Name)
+        </dd>
+
+        <dt>
+           文章狀態
         </dt>
 
         <dd>
@@ -27,7 +35,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.replyNumber)
+           樓層
         </dt>
 
         <dd>
@@ -35,7 +43,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.replyContent)
+          文章內容
         </dt>
 
         <dd>
@@ -43,7 +51,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.replyTime)
+           回覆時間
         </dt>
 
         <dd>
@@ -51,24 +59,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.replyState)
+           回覆狀態
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.replyState)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.replyMemberId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.replyMemberId)
-        </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("修改", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("回到文章管理", "Index")
 </p>

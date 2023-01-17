@@ -1,59 +1,64 @@
 ﻿@model IEnumerable<專題.Models.EFModels.Forum_SectionBranch1TopicsThread>
+
 <p>
-    @Html.ActionLink("新增文章", "Create")
+    @Html.ActionLink("發新文", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            文章標題
+          標題
         </th>
         <th>
-            文章屬性
-        </th>
-
-        <th>
-            回覆內容
+           回覆者
         </th>
         <th>
-            回覆時間
+          文章狀態
         </th>
         <th>
-            回覆狀態
+           樓層
         </th>
         <th>
-            留言者
+           文章內容
+        </th>
+        <th>
+           最後修改時間
+        </th>
+        <th>
+           狀態
         </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Forum_SectionBranch1Topics.Topic)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.topicState)
-            </td>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Forum_SectionBranch1Topics.Topic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Member.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.topicState)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.replyNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.replyContent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.replyTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.replyState)
+        </td>
+        <td>
+            @Html.ActionLink("詳情", "Details", new { id = item.id }) |
+            @Html.ActionLink("修改文章狀態", "Edit", new { id = item.id })|
+            @Html.ActionLink("刪除", "Delete", new { id = item.id })
 
-            <td>
-                @Html.DisplayFor(modelItem => item.replyContent)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.replyTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.replyState)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.replyMemberId)
-            </td>
-            <td>
-                @Html.ActionLink("修改回覆內容", "Edit", new { id = item.id }) |
-                @Html.ActionLink("詳細內容", "Detail", new { id = item.id })
-                @Html.ActionLink("刪除回覆", "Delete", new { id = item.id })
-            </td>
-        </tr>
-    }
+        </td>
+    </tr>
+}
 
 </table>

@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>新增文章標題</h2>
+<h2>Create</h2>
 
 
 @using (Html.BeginForm()) 
@@ -16,7 +16,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-          所屬討論版
+            @Html.LabelFor(model => model.BranchId, "BranchId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("BranchId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.BranchId, "", new { @class = "text-danger" })
@@ -24,7 +24,7 @@
         </div>
 
         <div class="form-group">
-           文章標題
+            @Html.LabelFor(model => model.Topic, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Topic, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Topic, "", new { @class = "text-danger" })
@@ -32,7 +32,7 @@
         </div>
 
         <div class="form-group">
-           文章屬性
+            @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
@@ -41,12 +41,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="新建標題" class="btn btn-default" />
+                <input type="submit" value="建立標題" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("回到文章標題管理", "Index")
+    @Html.ActionLink("回到標題管理", "Index")
 </div>
+

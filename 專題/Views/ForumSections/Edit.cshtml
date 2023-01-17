@@ -10,14 +10,14 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-<div>原名稱： @Html.DisplayFor(model => model.sectionName)</div>
-
+    
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.id)
 
         <div class="form-group">
+            @Html.LabelFor(model => model.sectionName,"區塊名稱", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.sectionName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.sectionName, "", new { @class = "text-danger" })
@@ -35,4 +35,3 @@
 <div>
     @Html.ActionLink("回到區塊管理", "Index")
 </div>
-
