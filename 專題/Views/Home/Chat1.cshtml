@@ -1,28 +1,25 @@
-﻿<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-<script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
-<script src="~/signalr/hubs"></script>
-@{
-    ViewBag.Title = "Chat";
+﻿@{
+    ViewBag.Title = "Chat1";
 }
 @{
     var Name = User.Identity.Name;
 }
-<h2 id="456123">聊天室</h2> <h3 id="user"></h3>
+<h2>聊天室</h2> <h3 id="user"></h3>
 <div class="container">
     <input type="text" id="message" />
     <input type="button" id="sendmessage" value="送出" />
     <input type="hidden" id="displayname" />
     <ul id="discussion"></ul>
 </div>
-
-
-    @if (User.Identity.IsAuthenticated == true)
-    {
-        <div style="display: none" id="123">
-            @(User.Identity.Name)
-        </div>
-    }
-    <script>
+<script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+<script src="~/signalr/hubs"></script>
+@if (User.Identity.IsAuthenticated == true)
+{
+    <div style="display: none" id="123">
+        @(User.Identity.Name)
+    </div>
+}
+<script>
         if ($("#123").length > 0) {
             $(function () {
                 var chat = $.connection.chatHub;
@@ -64,4 +61,4 @@
                 var encodedValue = $('<div />').text(value).html();
                 return encodedValue;
             }
-    </script>
+</script>

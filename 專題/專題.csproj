@@ -243,6 +243,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\undraw_posting_photo.svg" />
+    <Content Include="img\undraw_profile.svg" />
+    <Content Include="img\undraw_profile_1.svg" />
+    <Content Include="img\undraw_profile_2.svg" />
+    <Content Include="img\undraw_profile_3.svg" />
+    <Content Include="img\undraw_rocket.svg" />
     <Content Include="Scripts\jquery.signalR-2.4.3.js" />
     <Content Include="Scripts\jquery.signalR-2.4.3.min.js" />
     <Content Include="Scripts\js\demo\chart-area-demo.js" />
