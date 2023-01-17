@@ -1,0 +1,34 @@
+﻿@model 專題.Models.EFModels.CommonAnswer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>詳細內容</h2>
+
+<div>
+    <h4>常見回覆</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CommonQuestion.Question)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommonQuestion.Question)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Answer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Answer)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("編輯", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("回到清單", "Index")
+</p>

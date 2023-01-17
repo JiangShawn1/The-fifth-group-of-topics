@@ -1,0 +1,41 @@
+﻿@model 專題.Models.EFModels.ChatRoomAutoReply
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>詳細內容</h2>
+
+<div>
+    <h4>聊天室自動回覆</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AutoReply.AutoReplyContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AutoReply.AutoReplyContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChatRoom.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChatRoom.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SentTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SentTime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("回到清單", "Index")
+</p>

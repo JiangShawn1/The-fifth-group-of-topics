@@ -1,0 +1,57 @@
+﻿@model IEnumerable<專題.Models.EFModels.ChatContent>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("新增", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ChatRoom.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.Account)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Member.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SentTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChatContent1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChatRoom.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.Account)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Member.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SentTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChatContent1)
+        </td>
+        <td>
+            @Html.ActionLink("編輯", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("詳細內容", "Details", new { id=item.Id }) |
+            @Html.ActionLink("刪除", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

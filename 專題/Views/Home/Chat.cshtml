@@ -1,0 +1,67 @@
+﻿<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+<script src="~/signalr/hubs"></script>
+@{
+    ViewBag.Title = "Chat";
+}
+@{
+    var Name = User.Identity.Name;
+}
+<h2 id="456123">聊天室</h2> <h3 id="user"></h3>
+<div class="container">
+    <input type="text" id="message" />
+    <input type="button" id="sendmessage" value="送出" />
+    <input type="hidden" id="displayname" />
+    <ul id="discussion"></ul>
+</div>
+
+
+    @if (User.Identity.IsAuthenticated == true)
+    {
+        <div style="display: none" id="123">
+            @(User.Identity.Name)
+        </div>
+    }
+    <script>
+        if ($("#123").length > 0) {
+            $(function () {
+                var chat = $.connection.chatHub;
+                chat.client.addNewMessageToPage = function (name, message) {
+                    $('#discussion').append('<li><strong>' + htmlEncode(name)
+                        + '</strong>: ' + htmlEncode(message) + '</li>');
+                };
+                $('#displayname').val("客服" + "@(User.Identity.Name)");
+                $('#user').text("目前登入身分:客服" + "@(User.Identity.Name)");
+                $('#message').focus();
+                $.connection.hub.start().done(function () {
+                    $('#sendmessage').click(function () {
+                        chat.server.send($('#displayname').val(), $('#message').val());
+                        $('#message').val('').focus();
+                    });
+                });
+            });
+        }
+        else {
+            $(function () {
+                var chat = $.connection.chatHub;
+                chat.client.addNewMessageToPage = function (name, message) {
+                    $('#discussion').append('<li><strong>' + htmlEncode(name)
+                        + '</strong>: ' + htmlEncode(message) + '</li>');
+                };
+                $('#displayname').val(prompt('Enter your name:', ''));
+                $('#user').text("目前登入身分:" +$('#displayname').val());
+                $('#message').focus();
+                $.connection.hub.start().done(function () {
+                    $('#sendmessage').click(function () {
+                        chat.server.send($('#displayname').val(), $('#message').val());
+                        $('#message').val('').focus();
+                    });
+                });
+            });
+        }
+
+            function htmlEncode(value) {
+                var encodedValue = $('<div />').text(value).html();
+                return encodedValue;
+            }
+    </script>

@@ -1,0 +1,72 @@
+﻿@model 專題.Models.EFModels.CustomerFeedback
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>刪除</h2>
+
+
+<div>
+    <h4>客戶回覆</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.QuestionType.QuestionType1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuestionType.QuestionType1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FeedbackContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FeedbackContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateTime)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="刪除" class="btn btn-default" /> |
+            @Html.ActionLink("回到清單", "Index")
+        </div>
+    }
+</div>

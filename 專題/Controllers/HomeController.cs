@@ -24,7 +24,17 @@ namespace 專題.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+			return View();
+		}
+		public ActionResult CustomerService()
+		{
+
+			return View();
+		}
+        public ActionResult Chat()
+        {
             return View();
         }
-    }
+
+	}
 }

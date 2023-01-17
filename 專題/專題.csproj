@@ -52,13 +52,39 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.3\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.4.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.3\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
     </Reference>
@@ -154,6 +180,27 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="chatHub.cs" />
+    <Compile Include="Controllers\AutoRepliesController.cs" />
+    <Compile Include="Controllers\AutoReplyKeyWordsController.cs" />
+    <Compile Include="Controllers\ChatContentsController.cs" />
+    <Compile Include="Controllers\ChatRoomAutoRepliesController.cs" />
+    <Compile Include="Controllers\ChatRoomsController.cs" />
+    <Compile Include="Controllers\CommonAnswersController.cs" />
+    <Compile Include="Controllers\CommonQuestionsController.cs" />
+    <Compile Include="Controllers\CustomerFeedbacksController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\QuestionTypesController.cs" />
+    <Compile Include="Controllers\QuickRepliesController.cs" />
+    <Compile Include="Controllers\QuickReplyKeyWordsController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DTOs\EmployeeChangePasswordRequest.cs" />
+    <Compile Include="Models\DTOs\EmployeeDto.cs" />
+    <Compile Include="Models\DTOs\EmployeeRegisterDto.cs" />
+    <Compile Include="Models\DTOs\EmployeeUpdateProfileDto.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ContestsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -181,6 +228,7 @@
     <Compile Include="Models\EFModels\Coupon.cs" />
     <Compile Include="Models\EFModels\CustomerFeedback.cs" />
     <Compile Include="Models\EFModels\Employee.cs" />
+    <Compile Include="Models\EFModels\ForumSection1.cs" />
     <Compile Include="Models\EFModels\ForumSection.cs" />
     <Compile Include="Models\EFModels\ForumSection1.cs" />
     <Compile Include="Models\EFModels\ForumSectionBranch.cs" />
@@ -207,6 +255,20 @@
     <Compile Include="Models\EFModels\Stock.cs" />
     <Compile Include="Models\EFModels\Subscription.cs" />
     <Compile Include="Models\EFModels\Supplier.cs" />
+    <Compile Include="Models\EFModels\sysdiagram.cs" />
+    <Compile Include="Models\EFModels\TransactionRecord.cs" />
+    <Compile Include="Models\Infrastructures\EmployeeHashUtility.cs" />
+    <Compile Include="Models\Infrastructures\ExtensionMethods\EmployeeExts.cs" />
+    <Compile Include="Models\Services\EmailService.cs" />
+    <Compile Include="Models\Services\EmployeeService.cs" />
+    <Compile Include="Models\Services\Interfaces\IEmployeeRepository.cs" />
+    <Compile Include="Models\Services\Interfaces\Repositories\EmployeeRepository.cs" />
+    <Compile Include="Models\ViewModels\EditEmployeeProfileVM.cs" />
+    <Compile Include="Models\ViewModels\EmployeeEditPasswordVM.cs" />
+    <Compile Include="Models\ViewModels\EmployeeLoginVM.cs" />
+    <Compile Include="Models\ViewModels\EmployeeRegisterVM.cs" />
+    <Compile Include="Models\ViewModels\EmployeeResetPasswordVM.cs" />
+    <Compile Include="Models\ViewModels\SendEmailVM.cs" />
     <Compile Include="Models\EFModels\TransactionRecord.cs" />
     <Compile Include="Models\Infrastructures\Extensions\ContestExts.cs" />
     <Compile Include="Models\ViewModels\ContestCreateVM.cs" />
@@ -224,8 +286,20 @@
     <Compile Include="Models\EFModels\Stock.cs" />
     <Compile Include="Models\ViewModels\ProductVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\sb-admin-2.css" />
+    <Content Include="Content\sb-admin-2.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\sb-admin-2.css" />
     <Content Include="Content\sb-admin-2.min.css" />
     <Content Include="Content\site.css" />
@@ -420,6 +494,8 @@
     <Content Include="img\undraw_profile_2.svg" />
     <Content Include="img\undraw_profile_3.svg" />
     <Content Include="img\undraw_rocket.svg" />
+    <Content Include="Scripts\jquery.signalR-2.4.3.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.3.min.js" />
     <Content Include="Scripts\js\demo\chart-area-demo.js" />
     <Content Include="Scripts\js\demo\chart-bar-demo.js" />
     <Content Include="Scripts\js\demo\chart-pie-demo.js" />
@@ -2109,6 +2185,220 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\QuestionTypes\Create.cshtml" />
+    <Content Include="Views\QuestionTypes\Delete.cshtml" />
+    <Content Include="Views\QuestionTypes\Edit.cshtml" />
+    <Content Include="Views\QuestionTypes\Index.cshtml" />
+    <Content Include="Views\CommonQuestions\Create.cshtml" />
+    <Content Include="Views\CommonQuestions\Delete.cshtml" />
+    <Content Include="Views\CommonQuestions\Details.cshtml" />
+    <Content Include="Views\CommonQuestions\Edit.cshtml" />
+    <Content Include="Views\CommonQuestions\Index.cshtml" />
+    <Content Include="Views\CommonAnswers\Create.cshtml" />
+    <Content Include="Views\CommonAnswers\Delete.cshtml" />
+    <Content Include="Views\CommonAnswers\Details.cshtml" />
+    <Content Include="Views\CommonAnswers\Edit.cshtml" />
+    <Content Include="Views\CommonAnswers\Index.cshtml" />
+    <Content Include="Views\CustomerFeedbacks\Create.cshtml" />
+    <Content Include="Views\CustomerFeedbacks\Delete.cshtml" />
+    <Content Include="Views\CustomerFeedbacks\Details.cshtml" />
+    <Content Include="Views\CustomerFeedbacks\Edit.cshtml" />
+    <Content Include="Views\CustomerFeedbacks\Index.cshtml" />
+    <Content Include="Views\Home\CustomerService.cshtml" />
+    <Content Include="Views\CustomerFeedbacks\SentEmail.cshtml" />
+    <Content Include="Views\CustomerFeedbacks\Reply.cshtml" />
+    <Content Include="Views\CustomerFeedbacks\FailEmail.cshtml" />
+    <Content Include="Views\Home\Chat.cshtml" />
+    <Content Include="Views\AutoReplies\Create.cshtml" />
+    <Content Include="Views\AutoReplies\Delete.cshtml" />
+    <Content Include="Views\AutoReplies\Details.cshtml" />
+    <Content Include="Views\AutoReplies\Edit.cshtml" />
+    <Content Include="Views\AutoReplies\Index.cshtml" />
+    <Content Include="Views\AutoReplyKeyWords\Create.cshtml" />
+    <Content Include="Views\AutoReplyKeyWords\Delete.cshtml" />
+    <Content Include="Views\AutoReplyKeyWords\Details.cshtml" />
+    <Content Include="Views\AutoReplyKeyWords\Edit.cshtml" />
+    <Content Include="Views\AutoReplyKeyWords\Index.cshtml" />
+    <Content Include="Views\ChatContents\Create.cshtml" />
+    <Content Include="Views\ChatContents\Delete.cshtml" />
+    <Content Include="Views\ChatContents\Details.cshtml" />
+    <Content Include="Views\ChatContents\Edit.cshtml" />
+    <Content Include="Views\ChatContents\Index.cshtml" />
+    <Content Include="Views\QuickReplies\Create.cshtml" />
+    <Content Include="Views\QuickReplies\Delete.cshtml" />
+    <Content Include="Views\QuickReplies\Details.cshtml" />
+    <Content Include="Views\QuickReplies\Edit.cshtml" />
+    <Content Include="Views\QuickReplies\Index.cshtml" />
+    <Content Include="Views\QuickReplyKeyWords\Create.cshtml" />
+    <Content Include="Views\QuickReplyKeyWords\Delete.cshtml" />
+    <Content Include="Views\QuickReplyKeyWords\Details.cshtml" />
+    <Content Include="Views\QuickReplyKeyWords\Edit.cshtml" />
+    <Content Include="Views\QuickReplyKeyWords\Index.cshtml" />
+    <Content Include="Views\ChatRooms\Create.cshtml" />
+    <Content Include="Views\ChatRooms\Delete.cshtml" />
+    <Content Include="Views\ChatRooms\Details.cshtml" />
+    <Content Include="Views\ChatRooms\Edit.cshtml" />
+    <Content Include="Views\ChatRooms\Index.cshtml" />
+    <Content Include="Views\ChatRoomAutoReplies\Create.cshtml" />
+    <Content Include="Views\ChatRoomAutoReplies\Delete.cshtml" />
+    <Content Include="Views\ChatRoomAutoReplies\Details.cshtml" />
+    <Content Include="Views\ChatRoomAutoReplies\Edit.cshtml" />
+    <Content Include="Views\ChatRoomAutoReplies\Index.cshtml" />
+    <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\Employees\Register.cshtml" />
+    <Content Include="Views\Employees\RegisterConfirm.cshtml" />
+    <Content Include="Views\Employees\Login.cshtml" />
+    <Content Include="Views\Employees\EditProfile.cshtml" />
+    <Content Include="Views\Employees\EditPassword.cshtml" />
+    <Content Include="Scripts\vendor\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\vendor\bootstrap\js\bootstrap.js.map" />
+    <Content Include="Scripts\vendor\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="Scripts\vendor\bootstrap\scss\bootstrap-grid.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\bootstrap-reboot.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\bootstrap.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_alert.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_background-variant.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_badge.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_border-radius.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_box-shadow.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_breakpoints.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_buttons.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_caret.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_clearfix.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_deprecate.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_float.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_forms.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_gradients.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_grid-framework.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_grid.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_hover.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_image.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_list-group.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_lists.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_nav-divider.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_pagination.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_reset-text.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_resize.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_screen-reader.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_size.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_table-row.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_text-emphasis.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_text-hide.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_text-truncate.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_transition.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\mixins\_visibility.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\utilities\_align.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\utilities\_background.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\utilities\_borders.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\utilities\_clearfix.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\utilities\_display.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\utilities\_embed.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\utilities\_flex.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\utilities\_float.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\utilities\_interactions.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\utilities\_overflow.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\utilities\_position.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\utilities\_screenreaders.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\utilities\_shadows.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\utilities\_sizing.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\utilities\_spacing.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\utilities\_stretched-link.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\utilities\_text.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\utilities\_visibility.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\vendor\_rfs.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_alert.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_badge.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_breadcrumb.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_button-group.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_buttons.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_card.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_carousel.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_close.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_code.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_custom-forms.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_dropdown.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_forms.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_functions.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_grid.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_images.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_input-group.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_jumbotron.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_list-group.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_media.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_mixins.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_modal.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_nav.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_navbar.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_pagination.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_popover.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_print.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_progress.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_reboot.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_root.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_spinners.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_tables.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_toasts.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_tooltip.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_transitions.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_type.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_utilities.scss" />
+    <Content Include="Scripts\vendor\bootstrap\scss\_variables.scss" />
+    <Content Include="Scripts\vendor\fontawesome-free\less\brands.less" />
+    <Content Include="Scripts\vendor\fontawesome-free\less\fontawesome.less" />
+    <Content Include="Scripts\vendor\fontawesome-free\less\regular.less" />
+    <Content Include="Scripts\vendor\fontawesome-free\less\solid.less" />
+    <Content Include="Scripts\vendor\fontawesome-free\less\v4-shims.less" />
+    <Content Include="Scripts\vendor\fontawesome-free\less\_animated.less" />
+    <Content Include="Scripts\vendor\fontawesome-free\less\_bordered-pulled.less" />
+    <Content Include="Scripts\vendor\fontawesome-free\less\_core.less" />
+    <Content Include="Scripts\vendor\fontawesome-free\less\_fixed-width.less" />
+    <Content Include="Scripts\vendor\fontawesome-free\less\_icons.less" />
+    <Content Include="Scripts\vendor\fontawesome-free\less\_larger.less" />
+    <Content Include="Scripts\vendor\fontawesome-free\less\_list.less" />
+    <Content Include="Scripts\vendor\fontawesome-free\less\_mixins.less" />
+    <Content Include="Scripts\vendor\fontawesome-free\less\_rotated-flipped.less" />
+    <Content Include="Scripts\vendor\fontawesome-free\less\_screen-reader.less" />
+    <Content Include="Scripts\vendor\fontawesome-free\less\_shims.less" />
+    <Content Include="Scripts\vendor\fontawesome-free\less\_stacked.less" />
+    <Content Include="Scripts\vendor\fontawesome-free\less\_variables.less" />
+    <Content Include="Scripts\vendor\fontawesome-free\metadata\categories.yml" />
+    <Content Include="Scripts\vendor\fontawesome-free\metadata\icons.yml" />
+    <Content Include="Scripts\vendor\fontawesome-free\metadata\shims.yml" />
+    <Content Include="Scripts\vendor\fontawesome-free\metadata\sponsors.yml" />
+    <Content Include="Scripts\vendor\fontawesome-free\package.json" />
+    <Content Include="Scripts\vendor\fontawesome-free\scss\brands.scss" />
+    <Content Include="Scripts\vendor\fontawesome-free\scss\fontawesome.scss" />
+    <Content Include="Scripts\vendor\fontawesome-free\scss\regular.scss" />
+    <Content Include="Scripts\vendor\fontawesome-free\scss\solid.scss" />
+    <Content Include="Scripts\vendor\fontawesome-free\scss\v4-shims.scss" />
+    <Content Include="Scripts\vendor\fontawesome-free\scss\_animated.scss" />
+    <Content Include="Scripts\vendor\fontawesome-free\scss\_bordered-pulled.scss" />
+    <Content Include="Scripts\vendor\fontawesome-free\scss\_core.scss" />
+    <Content Include="Scripts\vendor\fontawesome-free\scss\_fixed-width.scss" />
+    <Content Include="Scripts\vendor\fontawesome-free\scss\_icons.scss" />
+    <Content Include="Scripts\vendor\fontawesome-free\scss\_larger.scss" />
+    <Content Include="Scripts\vendor\fontawesome-free\scss\_list.scss" />
+    <Content Include="Scripts\vendor\fontawesome-free\scss\_mixins.scss" />
+    <Content Include="Scripts\vendor\fontawesome-free\scss\_rotated-flipped.scss" />
+    <Content Include="Scripts\vendor\fontawesome-free\scss\_screen-reader.scss" />
+    <Content Include="Scripts\vendor\fontawesome-free\scss\_shims.scss" />
+    <Content Include="Scripts\vendor\fontawesome-free\scss\_stacked.scss" />
+    <Content Include="Scripts\vendor\fontawesome-free\scss\_variables.scss" />
+    <Content Include="Scripts\vendor\fontawesome-free\webfonts\fa-brands-400.eot" />
+    <Content Include="Scripts\vendor\fontawesome-free\webfonts\fa-brands-400.ttf" />
+    <Content Include="Scripts\vendor\fontawesome-free\webfonts\fa-brands-400.woff" />
+    <Content Include="Scripts\vendor\fontawesome-free\webfonts\fa-brands-400.woff2" />
+    <Content Include="Scripts\vendor\fontawesome-free\webfonts\fa-regular-400.eot" />
+    <Content Include="Scripts\vendor\fontawesome-free\webfonts\fa-regular-400.ttf" />
+    <Content Include="Scripts\vendor\fontawesome-free\webfonts\fa-regular-400.woff" />
+    <Content Include="Scripts\vendor\fontawesome-free\webfonts\fa-regular-400.woff2" />
+    <Content Include="Scripts\vendor\fontawesome-free\webfonts\fa-solid-900.eot" />
+    <Content Include="Scripts\vendor\fontawesome-free\webfonts\fa-solid-900.ttf" />
+    <Content Include="Scripts\vendor\fontawesome-free\webfonts\fa-solid-900.woff" />
+    <Content Include="Scripts\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
+    <Content Include="Scripts\vendor\jquery\jquery.min.map" />
+    <Content Include="Scripts\vendor\jquery\jquery.slim.min.map" />
     <Content Include="Views\Contests\Create.cshtml" />
     <Content Include="Views\Contests\Delete.cshtml" />
     <Content Include="Views\Contests\Details.cshtml" />
@@ -2145,6 +2435,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
     <Content Include="Scripts\vendor\bootstrap\js\bootstrap.bundle.js.map" />
     <Content Include="Scripts\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\vendor\bootstrap\js\bootstrap.js.map" />

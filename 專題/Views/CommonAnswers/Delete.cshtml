@@ -1,0 +1,40 @@
+﻿@model 專題.Models.EFModels.CommonAnswer
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>刪除</h2>
+
+
+<div>
+    <h4>常見回覆</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CommonQuestion.Question)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommonQuestion.Question)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Answer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Answer)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="刪除" class="btn btn-default" /> |
+            @Html.ActionLink("回到清單", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<專題.Models.EFModels.QuestionType>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>問題類型</h2>
+
+<p>
+    @Html.ActionLink("新增", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.QuestionType1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuestionType1)
+        </td>
+        <td>
+            @Html.ActionLink("編輯", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("刪除", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
