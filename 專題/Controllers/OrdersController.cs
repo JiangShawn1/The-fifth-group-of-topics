@@ -11,6 +11,7 @@ using 專題.Models.Infrastructures.Repositories;
 using 專題.Models.Services.Interfaces;
 using 專題.Models.Services;
 using 專題.Models.ViewModels;
+using PagedList;
 
 namespace 專題.Controllers
 {
@@ -18,6 +19,8 @@ namespace 專題.Controllers
     {
 		private IOrderRepository repository;
 		private OrderService service;
+
+        private int pageSize = 5;
 
 		public OrdersController()
 		{
@@ -27,16 +30,23 @@ namespace 專題.Controllers
 		private AppDbContext db = new AppDbContext();
 
         // GET: Orders
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
-            //var orders = db.Orders.Include(o => o.Coupon);
-            //return View(orders.ToList());
-             
+            int currentPage = page < 1 ? 1 : page;
             var data = service.Search(null, null)
                 .Select(x => x.ToVM());
+            var result = data.ToPagedList(currentPage, pageSize);
 
-            return View(data);
+            return View(result);
         }
+
+        public IEnumerable<OrderVM> search(string searchText)
+        {
+			var data = service.Search(null, searchText)
+				.Select(x => x.ToVM());
+
+			return data;
+		}
 
 		// GET: Orders/Details/5
 		public ActionResult Details(int? id)
@@ -65,8 +75,9 @@ namespace 專題.Controllers
         // 若要避免過量張貼攻擊，請啟用您要繫結的特定屬性。
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
-        public ActionResult Create(OrderVM model)
+        public ActionResult Create(OrderVM model, int orderTypes)
         {
+            model.OrderType = orderTypes;
 			if (!ModelState.IsValid)
 			{
 				ViewBag.UseCoupon = repository.BindCouponSelectList(model.UseCoupon);

@@ -23,6 +23,7 @@ namespace 專題.Models.DTOs
 		public string OrderAddress { get; set; }
 		public string OrderContent { get; set; }
 		public string CouponName { get; set; }
+		public DateTime? CreateAt { get; set; }
 	}
 	public static partial class OrderExts
 	{
@@ -41,6 +42,7 @@ namespace 專題.Models.DTOs
 				OrderContent = source.OrderContent,
 				CouponName = source.Coupon.CouponName,
 				MemberId = source.MemberId,
+				CreateAt = source.CreateAt,
 			};
 	}
 }
