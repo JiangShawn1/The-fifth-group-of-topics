@@ -55,7 +55,7 @@ namespace 專題.Controllers
             // 若有篩選 productName
             if (string.IsNullOrEmpty(ProductName) == false) query = query.Where(p => p.ProductName.Contains(ProductName));
 
-            query = query.OrderBy(x => x.Brand.Id)
+            query = query.OrderBy(x => x.Id)
                 ;
 
             return query.ToPagedList(pageNumber, pageSize);
@@ -141,24 +141,51 @@ namespace 專題.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Brand_Id,ProductName,ProductIntroduce,Color_Id,Price,ImageUrl")] Product product, HttpPostedFileBase ImageUrl)
+        public async Task<ActionResult> Edit(int id, HttpPostedFileBase ImageUrl)
         {
-            string path = Server.MapPath("/Images/ProductImages");
-            string fileName = System.IO.Path.GetFileName(ImageUrl.FileName);
-            string fullPath = System.IO.Path.Combine(path, fileName);
-            product.ImageUrl = Path.Combine("/Images/ProductImages/", ImageUrl.FileName);
-
-            if (ModelState.IsValid)
+            Product product = await db.Products.FindAsync(id);
+            if (product == null)
             {
-                db.Entry(product).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                ImageUrl.SaveAs(fullPath);
-                return RedirectToAction("Index");
+                return HttpNotFound();
+            }
+            string oldImagePath = product.ImageUrl;
+            if (ImageUrl != null)
+            {
+                string path = Server.MapPath("/Images/ProductImages");
+                string fileName = System.IO.Path.GetFileName(ImageUrl.FileName);
+                string fullPath = System.IO.Path.Combine(path, fileName);
+                product.ImageUrl = Path.Combine("/Images/ProductImages/", ImageUrl.FileName);
+                System.IO.File.Delete(Server.MapPath(oldImagePath));
+                if (fullPath != null)
+                {
+                    db.Entry(product).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    ImageUrl.SaveAs(fullPath);
+                    return RedirectToAction("Index");
+                }
             }
             ViewBag.Brand_Id = new SelectList(db.Brands, "Id", "Brand1", product.Brand_Id);
             ViewBag.Color_Id = new SelectList(db.Colors, "Id", "Color1", product.Color_Id);
             return View(product);
         }
+        //public async Task<ActionResult> Edit([Bind(Include = "Id,Brand_Id,ProductName,ProductIntroduce,Color_Id,Price,ImageUrl")] Product product, HttpPostedFileBase ImageUrl)
+        //{
+        //    string path = Server.MapPath("/Images/ProductImages");
+        //    string fileName = System.IO.Path.GetFileName(ImageUrl.FileName);
+        //    string fullPath = System.IO.Path.Combine(path, fileName);
+        //    product.ImageUrl = Path.Combine("/Images/ProductImages/", ImageUrl.FileName);
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(product).State = EntityState.Modified;
+        //        await db.SaveChangesAsync();
+        //        ImageUrl.SaveAs(fullPath);
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.Brand_Id = new SelectList(db.Brands, "Id", "Brand1", product.Brand_Id);
+        //    ViewBag.Color_Id = new SelectList(db.Colors, "Id", "Color1", product.Color_Id);
+        //    return View(product);
+        //}
 
         // GET: Products/Delete/5
         public async Task<ActionResult> Delete(int? id)
