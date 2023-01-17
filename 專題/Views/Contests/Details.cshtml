@@ -1,0 +1,118 @@
+﻿@model 專題.Models.ViewModels.ContestDetailVM
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Contest</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SupplierName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SupplierName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContestDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContestDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationDeadline)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationDeadline)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Area)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Area)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MapURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MapURL)
+        </dd>
+        @for (int i = 0; i < Model.QuotaList.Count(); i++)
+        {
+            <dt>
+              組別 @(i+1)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CategoryList[i])
+                金額: @Html.DisplayFor(model => model.QuotaList[i])
+                名額: @Html.DisplayFor(model => model.EnterFeeList[i])
+            </dd>            
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Detail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Detail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Review)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Review)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

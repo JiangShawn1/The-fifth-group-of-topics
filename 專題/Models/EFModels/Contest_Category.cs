@@ -1,4 +1,4 @@
-namespace 專�?.Models.EFModels
+namespace 專題.Models.EFModels
 {
     using System;
     using System.Collections.Generic;
@@ -6,22 +6,29 @@ namespace 專�?.Models.EFModels
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Color
+    public partial class Contest_Category
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Color()
+        public Contest_Category()
         {
-            Products = new HashSet<Product>();
+            Registrations = new HashSet<Registration>();
         }
 
         public int Id { get; set; }
 
-        [Column("Color")]
-        [Required]
-        [StringLength(50)]
-        public string Color1 { get; set; }
+        public int ContestID { get; set; }
+
+        public int CategoryID { get; set; }
+
+        public int Quota { get; set; }
+
+        public int EnterFee { get; set; }
+
+        public virtual Category Category { get; set; }
+
+        public virtual Contest Contest { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Registration> Registrations { get; set; }
     }
 }

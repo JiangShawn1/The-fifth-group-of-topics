@@ -1,0 +1,105 @@
+﻿@using X.PagedList.Mvc.Fluent
+@using 專題.Models.EFModels
+
+@model X.PagedList.IPagedList<Contest>
+
+@{
+    ViewBag.Title = "Index";
+    var categories = ViewBag.Supplier as IEnumerable<SelectListItem>;
+    var contestName = ViewBag.ContestName as string;
+}
+
+<h2>Index</h2>
+
+<form method="get">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="caption">
+                <h3>Search</h3>
+                <div class="row">
+                    <div class="col-md-4">主辦單位:@Html.DropDownList("supplierId", categories, new { @class = "form-control" })</div>
+                    <div class="col-md-4">活動名稱:<input type="text" name="contestName" class="form-control" value="@contestName"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px; margin-bottom: 20px; padding-left: 15px;">
+        <input type="submit" class="btn btn-primary" value="Search" />
+    </div>
+</form>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            主辦單位
+        </th>
+        <th>
+            活動名稱
+        </th>
+        <th>
+            創建日期
+        </th>
+        <th>
+            活動日期
+        </th>
+        <th>
+            報名截止日
+        </th>
+        <th>
+            活動地區
+        </th>
+        <th>
+            活動地點
+        </th>
+        <th>
+            審核狀態
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Supplier.SupplierName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContestDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationDeadline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Area)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @{var value = item.Review;
+                    var source = "";
+                    source = value == true ? "已審核" : "未審核";
+                }
+                @source
+            </td>
+            <td>
+                @Html.ActionLink("修改", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("詳細內容", "Details", new { id = item.Id }) |
+                @Html.ActionLink("刪除", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+@(Html.Pager(Model)
+    .Url(page => Url.Action("Index", new { pageNumber=page, supplierId = ViewBag.Supplier2, contestName = ViewBag.ContestName }))
+    .ClassicPlusFirstAndLast())

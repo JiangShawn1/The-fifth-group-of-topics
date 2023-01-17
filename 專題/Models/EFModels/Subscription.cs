@@ -1,4 +1,4 @@
-namespace 專�?.Models.EFModels
+namespace 專題.Models.EFModels
 {
     using System;
     using System.Collections.Generic;
@@ -6,22 +6,27 @@ namespace 專�?.Models.EFModels
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Color
+    public partial class Subscription
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Color()
+        public Subscription()
         {
-            Products = new HashSet<Product>();
+            Members_Subscriptions = new HashSet<Members_Subscriptions>();
         }
 
-        public int Id { get; set; }
+        public int SubscriptionId { get; set; }
 
-        [Column("Color")]
         [Required]
         [StringLength(50)]
-        public string Color1 { get; set; }
+        public string SubscriptionName { get; set; }
+
+        public int SubscriptionTier { get; set; }
+
+        public int SubscriptionPrice { get; set; }
+
+        public DateTime CreateAt { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Members_Subscriptions> Members_Subscriptions { get; set; }
     }
 }

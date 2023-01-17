@@ -1,4 +1,4 @@
-namespace 專�?.Models.EFModels
+namespace 專題.Models.EFModels
 {
     using System;
     using System.Collections.Generic;
@@ -6,34 +6,24 @@ namespace 專�?.Models.EFModels
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Brand
+    public partial class Category
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Brand()
+        public Category()
         {
-            Products = new HashSet<Product>();
+            Contest_Category = new HashSet<Contest_Category>();
         }
 
         public int Id { get; set; }
 
-        [Column("Brand")]
+        [Column("Category")]
         [Required]
         [StringLength(50)]
-        public string Brand1 { get; set; }
+        public string Category1 { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string BrandImageUrl { get; set; }
-
-        [Required]
-        [StringLength(350)]
-        public string BrandIntroduce { get; set; }
-
-        public int OnSale_Id { get; set; }
-
-        public virtual OnSale OnSale { get; set; }
+        public int Distance { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Contest_Category> Contest_Category { get; set; }
     }
 }

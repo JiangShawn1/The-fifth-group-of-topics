@@ -1,4 +1,4 @@
-namespace 專�?.Models.EFModels
+namespace 專題.Models.EFModels
 {
     using System;
     using System.Collections.Generic;
@@ -6,22 +6,21 @@ namespace 專�?.Models.EFModels
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Color
+    public partial class QuickReply
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Color()
+        public QuickReply()
         {
-            Products = new HashSet<Product>();
+            QuickReplyKeyWords = new HashSet<QuickReplyKeyWord>();
         }
 
         public int Id { get; set; }
 
-        [Column("Color")]
         [Required]
-        [StringLength(50)]
-        public string Color1 { get; set; }
+        [StringLength(1000)]
+        public string QuickReplyContent { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<QuickReplyKeyWord> QuickReplyKeyWords { get; set; }
     }
 }
