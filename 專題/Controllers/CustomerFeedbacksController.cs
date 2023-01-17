@@ -199,7 +199,7 @@ namespace 專題.Controllers
 
 
 			var emailService = new EmailService();
-			if (_body != null && _subject != null && _emailTo != null)
+			if (_body != null && _subject != null && _emailTo != null && _body != "" && _subject != "" && _emailTo != "")
 			{
 				emailService.SendEmail(_emailTo, _subject, _body);
 				return View("SentEmail");
