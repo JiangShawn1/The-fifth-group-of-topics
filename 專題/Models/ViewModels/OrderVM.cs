@@ -50,6 +50,10 @@ namespace 專題.Models.ViewModels
 
 		[Display(Name = "優惠券")]
 		public string CouponName { get; set; }
+
+		[Display(Name = "建立時間")]
+		public DateTime? CreateAt { get; set; }
+
 	}
 	public static partial class OrderDtoExts
 	{
@@ -69,6 +73,7 @@ namespace 專題.Models.ViewModels
 				UseCoupon= source.UseCoupon,
 				TradeStatus= source.TradeStatus,
 				CouponName = source.CouponName,
+				CreateAt = source.CreateAt,
 			};
 		}
 		public static OrderDto ToRequestDto(this OrderVM source)

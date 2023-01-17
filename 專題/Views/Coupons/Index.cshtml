@@ -1,91 +1,100 @@
-﻿@model IEnumerable<專題.Models.ViewModels.CouponVM>
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@model IEnumerable<專題.Models.ViewModels.CouponVM>
 
 @{
-    ViewBag.Title = "Index";
+	ViewBag.Title = "Index";
 }
+
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
 
 <h2>優惠券列表</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CouponName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CouponNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CouponType)
-        </th>
-        <th>
-			<text>折扣</text>
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CouponImage)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CouponContent)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndAt)
-        </th>
-        <th></th>
-    </tr>
+<a class="btn btn-primary" href="/Coupons/Create" role="button">新增優惠券</a>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CouponName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CouponNumber)
-        </td>
-		<td class="couponType">
-			@if (item.CouponType == 1)
-			{
-				<text>金額</text>
-			}
-			else if (item.CouponType == 2)
-			{
-				<text>折扣</text>
-			}
-			else
-			{
-				<text>其他</text>
-			}
-		</td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CouponDiscount)
-        </td>
-        <td>
-            @if (!string.IsNullOrEmpty(item.CouponImage))
-            {
-                <img src="~/Uploads/@item.CouponImage" alt="Uploaded Image" width="200" height="200" />
-            }
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CouponContent)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndAt)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.CouponName)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.CouponNumber)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.CouponType)
+		</th>
+		<th>
+			<text>折扣</text>
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.CouponImage)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.CouponContent)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.StartAt)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.EndAt)
+		</th>
+		<th></th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.CouponName)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.CouponNumber)
+			</td>
+			<td class="couponType">
+				@if (item.CouponType == 1)
+				{
+					<text>金額</text>
+				}
+				else if (item.CouponType == 2)
+				{
+					<text>折扣</text>
+				}
+				else
+				{
+					<text>其他</text>
+				}
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.CouponDiscount)
+			</td>
+			<td>
+				@if (!string.IsNullOrEmpty(item.CouponImage))
+				{
+					<img src="~/Uploads/@item.CouponImage" alt="Uploaded Image" width="200" height="200" />
+				}
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.CouponContent)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.StartAt)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.EndAt)
+			</td>
+			<td>
+				@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+				@Html.ActionLink("Delete", "Delete", new { id = item.Id })
+			</td>
+		</tr>
+	}
 
 </table>
+
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
 
 <script>
 	$(function () {

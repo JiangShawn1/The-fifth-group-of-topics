@@ -30,6 +30,7 @@ namespace 專題.Models.Infrastructures.Repositories
 				Amount = dto.Amount,
 				ShippingMethod = dto.ShippingMethod,
 				UseCoupon = dto.UseCoupon,
+				CreateAt = DateTime.Now,
 			};
 			_db.Orders.Add(order);
 			_db.SaveChanges();
@@ -37,7 +38,7 @@ namespace 專題.Models.Infrastructures.Repositories
 
 		public IEnumerable<OrderDto> Search(int? orderId, string orderNumber)
 		{
-			IEnumerable<Order> query = _db.Orders;
+			IEnumerable<Order> query = _db.Orders.OrderBy(x => x.Id);
 			if (orderId.HasValue) query = query.Where(x => x.Id == orderId);
 			if (!string.IsNullOrEmpty(orderNumber)) query = query.Where(x => x.OrderNumber.Contains(orderNumber));
 

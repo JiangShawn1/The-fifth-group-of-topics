@@ -1,117 +1,137 @@
-﻿@model IEnumerable<專題.Models.ViewModels.OrderVM>
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@model IEnumerable<專題.Models.ViewModels.OrderVM>
 
 @{
-    ViewBag.Title = "Index";
+	ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h2>訂單列表</h2>
+<input type="text" id="search-input" placeholder="Search">
+<button id="search-btn">Search</button>
+<a class="btn btn-primary" href="/Orders/Create" role="button">新增訂單</a>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MemberId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrderNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrderType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrderStatus)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TradeStatus)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CouponName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Amount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShippingMethod)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrderAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrderContent)
-        </th>
-        <th></th>
-    </tr>
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.MemberId)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.OrderNumber)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.OrderType)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.OrderStatus)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.TradeStatus)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.CouponName)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Amount)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.ShippingMethod)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.OrderAddress)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.CreateAt)
+		</th>
+		<th></th>
+	</tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MemberId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderType)
-        </td>
-        <td class="orderStatus">
-            @if (item.OrderStatus == 0)
-            {
-                <text>未處理</text>
-            }
-            else if (item.OrderStatus == 1)
-            {
-                <text>作業中</text>
-            }
-            else if (item.OrderStatus == 2)
-            {
-                <text>已出貨</text>
-            }
-            else if (item.OrderStatus == 3)
-            {
-                <text>已完成</text>
-            }
-            else
-            {
-                <text>其他</text>
-            }
-        </td>
-        <td class="tradeStatus">
-            @if (item.TradeStatus == 0)
-            {
-                <text>未付款</text>
-            }
-            else if (item.TradeStatus == 1)
-            {
-                <text>已付款</text>
-            }
-            else
-            {
-                <text>其他</text>
-            }
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CouponName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Amount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShippingMethod)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderContent)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-}
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.MemberId)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.OrderNumber)
+			</td>
+			<td class="orderType">
+				@if (item.OrderType == 1)
+				{
+					<text>商品訂單</text>
+				}
+				else if (item.OrderStatus == 2)
+				{
+					<text>賽事報名</text>
+				}
+				else
+				{
+					<text>其他</text>
+				}
+			</td>
+			<td class="orderStatus">
+				@if (item.OrderStatus == 0)
+				{
+					<text>未處理</text>
+				}
+				else if (item.OrderStatus == 1)
+				{
+					<text>作業中</text>
+				}
+				else if (item.OrderStatus == 2)
+				{
+					<text>已出貨</text>
+				}
+				else if (item.OrderStatus == 3)
+				{
+					<text>已完成</text>
+				}
+				else
+				{
+					<text>其他</text>
+				}
+			</td>
+			<td class="tradeStatus">
+				@if (item.TradeStatus == 0)
+				{
+					<text>未付款</text>
+				}
+				else if (item.TradeStatus == 1)
+				{
+					<text>已付款</text>
+				}
+				else
+				{
+					<text>其他</text>
+				}
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.CouponName)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Amount)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.ShippingMethod)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.OrderAddress)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.CreateAt)
+			</td>
+			<td>
+				@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+				@Html.ActionLink("Details", "Details", new { id = item.Id }) |
+				@Html.ActionLink("Delete", "Delete", new { id = item.Id })
+			</td>
+		</tr>
+	}
 
 </table>
+
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

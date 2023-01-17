@@ -13,38 +13,43 @@ using 專題.Models.Services;
 using 專題.Models.Services.Interfaces;
 using 專題.Models.ViewModels;
 using static System.Net.WebRequestMethods;
+using PagedList;
+using System.Web.UI;
 
 namespace 專題.Controllers
 {
-    public class CouponsController : Controller
-    {
-        private ICouponRepository repository;
+	public class CouponsController : Controller
+	{
+		private ICouponRepository repository;
 		private CouponService service;
+		private int pageSize = 3;
 
 		public CouponsController()
 		{
-            repository = new CouponRepository();
+			repository = new CouponRepository();
 			service = new CouponService(repository);
 		}
 		// GET: Coupons
-		public ActionResult Index()
-        {
+		public ActionResult Index(int page = 1)
+		{
+			int currentPage = page < 1 ? 1 : page;
 			var data = service.Search(null, null, null)
 				.Select(x => x.ToVM());
+			var result = data.ToPagedList(currentPage, pageSize);
 
-			return View(data);
+			return View(result);
 		}
 
-        // GET: Coupons/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+		// GET: Coupons/Create
+		public ActionResult Create()
+		{
+			return View();
+		}
 
-        // POST: Coupons/Create
-        [HttpPost]
-        public ActionResult Create(CouponVM model, HttpPostedFileBase file)
-        {
+		// POST: Coupons/Create
+		[HttpPost]
+		public ActionResult Create(CouponVM model, HttpPostedFileBase file)
+		{
 
 			if (!ModelState.IsValid)
 			{
@@ -64,14 +69,14 @@ namespace 專題.Controllers
 				string fileName = Path.GetFileName(file.FileName);
 
 				string newFileName = GetNewFileName(path, fileName);
-				
+
 				string fullPath = Path.Combine(path, newFileName);
 				try
 				{
 					file.SaveAs(fullPath);
 					model.CouponImage = newFileName;
 				}
-				catch(Exception ex)
+				catch (Exception ex)
 				{
 					ModelState.AddModelError(string.Empty, "上傳檔案失敗: " + ex.Message);
 					return View(model);
@@ -84,7 +89,7 @@ namespace 專題.Controllers
 				//model.CouponImage = path;
 			}
 
-			
+
 
 			(bool IsSuccess, string ErrorMessage) response =
 				service.CreateCoupon(model.ToRequestDto());
@@ -112,27 +117,27 @@ namespace 專題.Controllers
 				newFileName = Guid.NewGuid().ToString("N") + ext;
 				fullPath = Path.Combine(path, newFileName);
 
-			} while (System.IO.File.Exists(fullPath)==true);
+			} while (System.IO.File.Exists(fullPath) == true);
 			return newFileName;
 		}
 
 		// GET: Coupons/Edit/5
 		public ActionResult Edit(int? id)
-        {
+		{
 			if (id == null)
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
-            var coupon = repository.Find((int)id);
+			var coupon = repository.Find((int)id);
 
 			ViewBag.ImageUrl = coupon.CouponImage;
 			return View(coupon.ToVM());
 		}
 
-        // POST: Coupons/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, CouponVM model, HttpPostedFileBase file)
-        {
+		// POST: Coupons/Edit/5
+		[HttpPost]
+		public ActionResult Edit(int id, CouponVM model, HttpPostedFileBase file)
+		{
 			if (!ModelState.IsValid)
 			{
 				return View(model);
@@ -172,9 +177,9 @@ namespace 專題.Controllers
 			}
 		}
 
-        // GET: Coupons/Delete/5
-        public ActionResult Delete(int? id)
-        {
+		// GET: Coupons/Delete/5
+		public ActionResult Delete(int? id)
+		{
 			if (id == null)
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -184,7 +189,7 @@ namespace 專題.Controllers
 			return View(coupon.ToVM());
 		}
 
-        // POST: Coupons/Delete/5
+		// POST: Coupons/Delete/5
 		[HttpPost, ActionName("Delete")]
 		[ValidateAntiForgeryToken]
 		public ActionResult DeleteConfirmed(int id)

@@ -15,7 +15,7 @@ namespace 專題.Models.Infrastructures.Repositories
 
 		public IEnumerable<CouponDto> Search(int? couponId, string couponName, string couponNumber)
 		{
-			IEnumerable<Coupon> query = _db.Coupons;
+			IEnumerable<Coupon> query = _db.Coupons.OrderBy(x=>x.Id);
 			if (couponId.HasValue) query = query.Where(x => x.Id == couponId);
 			if (!string.IsNullOrEmpty(couponName)) query = query.Where(x => x.CouponName.Contains(couponName));
 			if (!string.IsNullOrEmpty(couponNumber)) query = query.Where(x => x.CouponNumber.Contains(couponNumber));
@@ -43,6 +43,7 @@ namespace 專題.Models.Infrastructures.Repositories
 				CouponImage = dto.CouponImage,
 				StartAt = dto.StartAt,
 				EndAt = dto.EndAt,
+				CreateAt = DateTime.Now,
 			};
 
 			_db.Coupons.Add(coupon);
