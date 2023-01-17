@@ -58,7 +58,7 @@
         <div class="form-group">
            <div class="control-label col-md-2">圖片</div>
            <div class="col-md-10">
-               <input type="file" name="ImageUrl" id="fileInput" onchange="showPreview()" />
+               <input type="file" name="ImageUrl" onchange="showPreview()" id="fileInput" class="btn btn-primary" />
                <img id="preview" style="display:none;" />
                <p id="error"></p>
                @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
@@ -67,15 +67,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="建立" class="btn btn-primary" onclick="return checkImageSize()" />
+                @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-secondary" })
+                <input type="submit" value="create" class="btn btn-primary" onclick="return checkImageSize()" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("回去列表", "Index")
-</div>
 
 
 <script>

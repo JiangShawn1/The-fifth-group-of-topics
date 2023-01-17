@@ -8,10 +8,10 @@
     var ProductName = ViewBag.ProductName as string;
 }
 
-<h2>Index</h2>
+<h2 class="ml-2">Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
+<p class="ml-2">
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-outline-info" })
 </p>
 <form method="get" class="ml-5">
     <div class="row">
