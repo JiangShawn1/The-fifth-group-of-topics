@@ -1,0 +1,80 @@
+﻿@model 專題.Models.ViewModels.CouponVM
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3 class="p-3 mb-2 bg-danger text-white">您確定要刪除此優惠券?</h3>
+<div>
+    <h4>優惠券</h4>
+    @Html.DisplayFor(model=>model.CouponNumber)
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CouponName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CouponName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CouponType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CouponType)
+        </dd>
+
+        <dt>
+            金額
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CouponDiscount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CouponImage)
+        </dt>
+
+        <dd>
+            <img src="~/Uploads/@Html.DisplayFor(model => model.CouponImage)" alt="Coupon Image" height="150">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CouponContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CouponContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartAt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndAt)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="刪除" class="btn btn-danger" /> 
+            @Html.ActionLink("返回", "Index", null, new { @class = "btn btn-outline-dark" })
+        </div>
+    }
+</div>

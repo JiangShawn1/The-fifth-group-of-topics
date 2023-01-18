@@ -1,0 +1,140 @@
+﻿@model 專題.Models.ViewModels.OrderVM
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3 class="p-3 mb-2 bg-danger text-white">您確定要刪除此訂單?</h3>
+<div>
+    <h4>訂單</h4>
+    @Html.DisplayFor(model => model.OrderNumber)
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderType)
+        </dt>
+
+        <dd class="orderType">
+            @Html.DisplayFor(model => model.OrderType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderStatus)
+        </dt>
+
+        <dd class="orderStatus">
+            @Html.DisplayFor(model => model.OrderStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TradeStatus)
+        </dt>
+
+        <dd class="tradeStatus">
+            @Html.DisplayFor(model => model.TradeStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UseCoupon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CouponName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShippingMethod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShippingMethod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderContent)
+        </dd>
+
+
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> 
+            @Html.ActionLink("返回", "Index", null, new { @class = "btn btn-outline-dark" })
+        </div>
+    }
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    $(function () {
+        $(".orderType").each(function () {
+            var orderType = $(this).text();
+            if (orderType == 1) {
+                $(this).text("商品訂單");
+            } else if (orderType == 2) {
+                $(this).text("賽事報名");
+            } else {
+                $(this).text("其他");
+            }
+        })
+        $(".orderStatus").each(function () {
+            var orderStatus = $(this).text();
+            if (orderStatus == 0) {
+                $(this).text("未處理");
+            } else if (orderStatus == 1) {
+                $(this).text("作業中");
+            } else if (orderStatus == 2) {
+                $(this).text("已出貨");
+            } else if (orderStatus == 3) {
+                $(this).text("已完成");
+            } else {
+                $(this).text("其他");
+            }
+        })
+
+        $(".tradeStatus").each(function () {
+            var tradeStatus = $(this).text();
+            if (tradeStatus == 0) {
+                $(this).text("未付款");
+            } else if (tradeStatus == 1) {
+                $(this).text("已付款");
+            } else {
+                $(this).text("其他");
+            }
+        })
+    })
+</script>

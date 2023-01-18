@@ -1,0 +1,165 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@model IEnumerable<專題.Models.ViewModels.OrderVM>
+
+@{
+	ViewBag.Title = "Index";
+}
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<style>
+	.fas {
+		font-size: 25px;
+	}
+</style>
+
+<h2>訂單列表</h2>
+
+<div class="container mb-2">
+    <div class="row">
+        <div class="col-3">
+            <input class="form-control" type="text" id="search-input" placeholder="編號">
+        </div>
+        <div class="col-7">
+            <button class="btn btn-info" id="search-btn">搜尋</button>
+        </div>
+        <div class="col-2">
+            <a class="btn btn-primary float-right" href="/Orders/Create" role="button">新增訂單</a>
+        </div>
+    </div>
+</div>
+
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.MemberId)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.OrderNumber)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.OrderType)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.OrderStatus)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.TradeStatus)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.CouponName)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Amount)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.ShippingMethod)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.OrderAddress)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.CreateAt)
+		</th>
+		<th></th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.MemberId)
+			</td>
+            <td>
+                <span class="orderNumber" id="orderNumber">@item.OrderNumber</span>
+            </td>
+			<td class="orderType">
+				@if (item.OrderType == 1)
+				{
+					<text>商品訂單</text>
+				}
+				else if (item.OrderType == 2)
+				{
+					<text>賽事報名</text>
+				}
+				else
+				{
+					<text>其他</text>
+				}
+			</td>
+			<td class="orderStatus">
+				@if (item.OrderStatus == 0)
+				{
+					<text><span class="text-danger">未處理</span></text>
+				}
+				else if (item.OrderStatus == 1)
+				{
+					<text><span class="text-secondary">作業中</span></text>
+				}
+				else if (item.OrderStatus == 2)
+				{
+					<text><span class="text-warning">已出貨</span></text>
+				}
+				else if (item.OrderStatus == 3)
+				{
+					<text><span class="text-success">已完成</span></text>
+				}
+				else
+				{
+					<text>其他</text>
+				}
+			</td>
+			<td class="tradeStatus">
+				@if (item.TradeStatus == 0)
+				{
+					<text><span class="text-danger">未付款</span></text>
+				}
+				else if (item.TradeStatus == 1)
+				{
+					<text><span class="text-success">已付款</span></text>
+				}
+				else
+				{
+					<text>其他</text>
+				}
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.CouponName)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Amount)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.ShippingMethod)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.OrderAddress)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.CreateAt)
+			</td>
+			<td>
+				<a href="@Url.Action("Edit", new { id = item.Id })" title="Edit" class="fas fa-edit"></a>
+				<a href="@Url.Action("Details", new { id = item.Id })" title="Details" class="fas fa-info-circle"></a>
+				<a href="@Url.Action("Delete", new { id = item.Id })" title="Delete" class="fas fa-trash-alt"></a>
+			</td>
+		</tr>
+	}
+
+</table>
+
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+	$(function () {
+        $(".orderNumber").each(function () {
+            var orderNumber = $(this).text();
+            if (orderNumber.length > 8) {
+                var shortCode = orderNumber.substring(0, 8) + "...";
+                $(this).text(shortCode);
+            }
+        });
+    })
+</script>
