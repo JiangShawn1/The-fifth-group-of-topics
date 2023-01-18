@@ -165,17 +165,7 @@ namespace 專題.Models.EFModels
                 .WithOptional(e => e.Member)
                 .HasForeignKey(e => e.MemberId);
 
-            modelBuilder.Entity<Member>()
-                .HasMany(e => e.Forum_SectionBranch1TopicsThread)
-                .WithRequired(e => e.Member)
-                .HasForeignKey(e => e.replyMemberId)
-                .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Member>()
-                .HasMany(e => e.ForumSectionBranches)
-                .WithRequired(e => e.Member)
-                .HasForeignKey(e => e.administratorId)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Member>()
                 .HasMany(e => e.Members_Coupons)
@@ -183,9 +173,6 @@ namespace 專題.Models.EFModels
                 .HasForeignKey(e => e.MemberId)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Member>()
-                .HasOptional(e => e.Members1)
-                .WithRequired(e => e.Member1);
 
             modelBuilder.Entity<Member>()
                 .HasMany(e => e.Orders)
