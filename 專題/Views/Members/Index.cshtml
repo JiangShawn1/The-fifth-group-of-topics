@@ -1,0 +1,103 @@
+﻿@using X.PagedList.Mvc.Fluent
+@using 專題.Models.EFModels
+
+@model X.PagedList.IPagedList<Member>
+@{
+    ViewBag.Title = "Index";
+
+    var Name = ViewBag.Name as string;
+    var Account = ViewBag.Account as string;
+    var Mail = ViewBag.Mail as string;
+    var Phone = ViewBag.Phone as string;
+
+}
+
+<h2>會員資料管理</h2>
+
+<p>
+    @Html.ActionLink("新增資料", "Create")
+</p>
+<form method="get">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="caption">
+                 
+                <div class="row">
+                    <div class="col-md-16" style="padding-left: 30px;">名稱:<input type="text" name="Name" class="form-control" value="@Name"></div>
+                    <div class="col-md-16" style="padding-left: 30px;">帳號:<input type="text" name="Account" class="form-control" value="@Account"></div>
+                    <div class="col-md-16" style="padding-left: 30px;">電話:<input type="text" name="Phone" class="form-control" value="@Phone"></div>
+                    <div class="col-md-16" style="padding-left: 30px;">信箱:<input type="text" name="Mail" class="form-control" value="@Mail"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="row" style="margin-top: 23px; margin-bottom: 20px; padding-left: 30px;">
+            <input type="submit" class="btn btn-primary" value="Search" />
+        </div>
+</form>
+
+
+<table class="table">
+    <tr>
+        <th>
+            名字
+        </th>
+        <th>
+            帳號
+        </th>
+        @*<th>
+                密碼
+            </th>*@
+        <th>
+            電話
+        </th>
+        <th>
+            信箱
+        </th>
+        <th>
+            權限
+        </th>
+        <th>
+            訂閱
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subscription)
+            </td>
+
+            <td>
+                @Html.ActionLink("修改", "Edit", new { id = item.Member_Id }) |
+                @Html.ActionLink("詳細", "Details", new { id = item.Member_Id }) |
+                @Html.ActionLink("刪除", "Delete", new { id = item.Member_Id })
+            </td>
+        </tr>
+    }
+
+</table>
+@(Html.Pager(Model)
+    .Url(page => Url.Action("Index", new { pageNumber=page}))
+    .ClassicPlusFirstAndLast()
+    )

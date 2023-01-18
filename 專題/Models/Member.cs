@@ -1,4 +1,4 @@
-namespace 專題.Models.EFModels
+namespace 專題.Models
 {
     using System;
     using System.Collections.Generic;
@@ -47,13 +47,11 @@ namespace 專題.Models.EFModels
         [StringLength(50)]
         public string Mail { get; set; }
 
+        public int State { get; set; }
+
         public bool Subscription { get; set; }
 
         public bool IsConfirmed { get; set; }
-
-        public bool Freeze { get; set; }
-
-        public int State { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountBalance> AccountBalances { get; set; }
@@ -78,8 +76,6 @@ namespace 專題.Models.EFModels
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Members_Coupons> Members_Coupons { get; set; }
-
-       
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Members_Subscriptions> Members_Subscriptions { get; set; }
