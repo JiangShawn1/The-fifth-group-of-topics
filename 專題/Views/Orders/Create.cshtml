@@ -124,16 +124,14 @@
 
 
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-primary" />
-        </div>
+		<div class="col-md-offset-2 col-md-10">
+			<input type="submit" value="建立" class="btn btn-primary" />
+			@Html.ActionLink("返回", "Index", null, new { @class = "btn btn-outline-dark" })
+		</div>
     </div>
 </div>
 }
 
-<div>
-	@Html.ActionLink("Back to List", "Index")
-</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
