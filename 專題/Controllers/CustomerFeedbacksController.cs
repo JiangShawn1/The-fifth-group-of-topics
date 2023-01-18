@@ -24,6 +24,7 @@ namespace 專題.Controllers
 		public ActionResult Index(int? questionTypeId, string feedbackContent, string customerName, string email, int pageNumber=1)
         {
 			ViewBag.QuestionTypes = GetFeedbackContent(questionTypeId);
+            ViewBag.QuestionTypes2 = questionTypeId;
 			ViewBag.FeedbackContent = feedbackContent;
 			ViewBag.CustomerName = customerName;
 			ViewBag.Email = email;

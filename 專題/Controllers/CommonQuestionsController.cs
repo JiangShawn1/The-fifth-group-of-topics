@@ -21,6 +21,7 @@ namespace 專題.Controllers
         {
 
 			ViewBag.QuestionTypes = GetFeedbackContent(questionTypeId);
+            ViewBag.QuestionTypes2 = questionTypeId;
 			ViewBag.Question = question;
 			var data = db.CommonQuestions.Include(x => x.QuestionType);
 			if (questionTypeId.HasValue) data = data.Where(p => p.QuestionType.Id == questionTypeId.Value);
