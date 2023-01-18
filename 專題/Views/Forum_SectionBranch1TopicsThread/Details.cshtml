@@ -4,14 +4,14 @@
     ViewBag.Title = "Details";
 }
 
-<h2>詳情</h2>
+<h2>Details</h2>
 
 <div>
-
+    <h4>Forum_SectionBranch1TopicsThread</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-         文章標題
+            @Html.DisplayNameFor(model => model.Forum_SectionBranch1Topics.Topic)
         </dt>
 
         <dd>
@@ -19,7 +19,7 @@
         </dd>
 
         <dt>
-          回覆者
+            @Html.DisplayNameFor(model => model.Member.Name)
         </dt>
 
         <dd>
@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-           文章狀態
+            @Html.DisplayNameFor(model => model.topicState)
         </dt>
 
         <dd>
@@ -35,7 +35,7 @@
         </dd>
 
         <dt>
-           樓層
+            @Html.DisplayNameFor(model => model.replyNumber)
         </dt>
 
         <dd>
@@ -43,7 +43,7 @@
         </dd>
 
         <dt>
-          文章內容
+            @Html.DisplayNameFor(model => model.replyContent)
         </dt>
 
         <dd>
@@ -51,7 +51,7 @@
         </dd>
 
         <dt>
-           回覆時間
+            @Html.DisplayNameFor(model => model.replyTime)
         </dt>
 
         <dd>
@@ -59,7 +59,7 @@
         </dd>
 
         <dt>
-           回覆狀態
+            @Html.DisplayNameFor(model => model.replyState)
         </dt>
 
         <dd>
@@ -69,6 +69,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("修改", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("回到文章管理", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
 </p>

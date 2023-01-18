@@ -1,18 +1,24 @@
 ﻿@model IEnumerable<專題.Models.EFModels.Forum_SectionBranch1Topics>
 
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
 <p>
-    @Html.ActionLink("新增標題", "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-           分支名稱
+            @Html.DisplayNameFor(model => model.ForumSectionBranch.branchName)
         </th>
         <th>
-            標題名稱
+            @Html.DisplayNameFor(model => model.Topic)
         </th>
         <th>
-           標題狀態
+            @Html.DisplayNameFor(model => model.State)
         </th>
         <th></th>
     </tr>
@@ -29,8 +35,9 @@
             @Html.DisplayFor(modelItem => item.State)
         </td>
         <td>
-            @Html.ActionLink("詳情", "Details", new { id = item.id }) |
-            @Html.ActionLink("刪除", "Delete", new { id = item.id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
         </td>
     </tr>
 }

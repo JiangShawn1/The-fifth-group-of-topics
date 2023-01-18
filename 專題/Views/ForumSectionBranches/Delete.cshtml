@@ -4,15 +4,15 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>確認刪除</h2>
+<h2>Delete</h2>
 
-<h3>確定要刪除這個區塊嗎</h3>
+<h3>Are you sure you want to delete this?</h3>
 <div>
-
+    <h4>ForumSectionBranch</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-           區塊名稱
+            @Html.DisplayNameFor(model => model.ForumSection.sectionName)
         </dt>
 
         <dd>
@@ -20,7 +20,7 @@
         </dd>
 
         <dt>
-           分支管理者
+            @Html.DisplayNameFor(model => model.Member.Name)
         </dt>
 
         <dd>
@@ -28,7 +28,7 @@
         </dd>
 
         <dt>
-          分支名稱
+            @Html.DisplayNameFor(model => model.branchName)
         </dt>
 
         <dd>
@@ -36,7 +36,7 @@
         </dd>
 
         <dt>
-            區塊管理者
+            @Html.DisplayNameFor(model => model.sectionAdministrator)
         </dt>
 
         <dd>
@@ -50,7 +50,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("回到分支管理", "Index")
+            @Html.ActionLink("Back to List", "Index")
         </div>
     }
 </div>

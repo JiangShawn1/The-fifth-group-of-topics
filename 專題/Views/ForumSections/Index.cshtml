@@ -1,12 +1,18 @@
 ﻿@model IEnumerable<專題.Models.EFModels.ForumSection>
 
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
 <p>
-    @Html.ActionLink("新增區塊", "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-           區塊名稱
+            @Html.DisplayNameFor(model => model.sectionName)
         </th>
         <th></th>
     </tr>
@@ -17,8 +23,9 @@
             @Html.DisplayFor(modelItem => item.sectionName)
         </td>
         <td>
-            @Html.ActionLink("修改", "Edit", new { id=item.id }) |
-            @Html.ActionLink("刪除", "Delete", new { id=item.id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
         </td>
     </tr>
 }

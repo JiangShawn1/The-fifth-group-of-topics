@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using 專題.Models.EFModels;
+using 專題.Models;
 
 namespace 專題.Controllers
 {
@@ -16,19 +16,19 @@ namespace 專題.Controllers
         private AppDbContext db = new AppDbContext();
 
         // GET: ForumSections
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            return View(await db.ForumSections.ToListAsync());
+            return View(db.ForumSections.ToList());
         }
 
         // GET: ForumSections/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ForumSection forumSection = await db.ForumSections.FindAsync(id);
+            ForumSection forumSection = db.ForumSections.Find(id);
             if (forumSection == null)
             {
                 return HttpNotFound();
@@ -47,12 +47,12 @@ namespace 專題.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "id,sectionName")] ForumSection forumSection)
+        public ActionResult Create([Bind(Include = "id,sectionName")] ForumSection forumSection)
         {
             if (ModelState.IsValid)
             {
                 db.ForumSections.Add(forumSection);
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -60,13 +60,13 @@ namespace 專題.Controllers
         }
 
         // GET: ForumSections/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ForumSection forumSection = await db.ForumSections.FindAsync(id);
+            ForumSection forumSection = db.ForumSections.Find(id);
             if (forumSection == null)
             {
                 return HttpNotFound();
@@ -79,25 +79,25 @@ namespace 專題.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "id,sectionName")] ForumSection forumSection)
+        public ActionResult Edit([Bind(Include = "id,sectionName")] ForumSection forumSection)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(forumSection).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(forumSection);
         }
 
         // GET: ForumSections/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ForumSection forumSection = await db.ForumSections.FindAsync(id);
+            ForumSection forumSection = db.ForumSections.Find(id);
             if (forumSection == null)
             {
                 return HttpNotFound();
@@ -108,11 +108,11 @@ namespace 專題.Controllers
         // POST: ForumSections/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            ForumSection forumSection = await db.ForumSections.FindAsync(id);
+            ForumSection forumSection = db.ForumSections.Find(id);
             db.ForumSections.Remove(forumSection);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 

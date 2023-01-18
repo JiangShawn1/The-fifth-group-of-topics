@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using 專題.Models.EFModels;
-
+using 專題.Models;
 namespace 專題.Controllers
 {
     public class Forum_SectionBranch1TopicsController : Controller
@@ -16,20 +15,20 @@ namespace 專題.Controllers
         private AppDbContext db = new AppDbContext();
 
         // GET: Forum_SectionBranch1Topics
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             var forum_SectionBranch1Topics = db.Forum_SectionBranch1Topics.Include(f => f.ForumSectionBranch);
-            return View(await forum_SectionBranch1Topics.ToListAsync());
+            return View(forum_SectionBranch1Topics.ToList());
         }
 
         // GET: Forum_SectionBranch1Topics/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Forum_SectionBranch1Topics forum_SectionBranch1Topics = await db.Forum_SectionBranch1Topics.FindAsync(id);
+            Forum_SectionBranch1Topics forum_SectionBranch1Topics = db.Forum_SectionBranch1Topics.Find(id);
             if (forum_SectionBranch1Topics == null)
             {
                 return HttpNotFound();
@@ -49,12 +48,12 @@ namespace 專題.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "id,BranchId,Topic,State")] Forum_SectionBranch1Topics forum_SectionBranch1Topics)
+        public ActionResult Create([Bind(Include = "id,BranchId,Topic,State")] Forum_SectionBranch1Topics forum_SectionBranch1Topics)
         {
             if (ModelState.IsValid)
             {
                 db.Forum_SectionBranch1Topics.Add(forum_SectionBranch1Topics);
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -63,13 +62,13 @@ namespace 專題.Controllers
         }
 
         // GET: Forum_SectionBranch1Topics/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Forum_SectionBranch1Topics forum_SectionBranch1Topics = await db.Forum_SectionBranch1Topics.FindAsync(id);
+            Forum_SectionBranch1Topics forum_SectionBranch1Topics = db.Forum_SectionBranch1Topics.Find(id);
             if (forum_SectionBranch1Topics == null)
             {
                 return HttpNotFound();
@@ -83,12 +82,12 @@ namespace 專題.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "id,BranchId,Topic,State")] Forum_SectionBranch1Topics forum_SectionBranch1Topics)
+        public ActionResult Edit([Bind(Include = "id,BranchId,Topic,State")] Forum_SectionBranch1Topics forum_SectionBranch1Topics)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(forum_SectionBranch1Topics).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.BranchId = new SelectList(db.ForumSectionBranches, "id", "branchName", forum_SectionBranch1Topics.BranchId);
@@ -96,13 +95,13 @@ namespace 專題.Controllers
         }
 
         // GET: Forum_SectionBranch1Topics/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Forum_SectionBranch1Topics forum_SectionBranch1Topics = await db.Forum_SectionBranch1Topics.FindAsync(id);
+            Forum_SectionBranch1Topics forum_SectionBranch1Topics = db.Forum_SectionBranch1Topics.Find(id);
             if (forum_SectionBranch1Topics == null)
             {
                 return HttpNotFound();
@@ -113,11 +112,11 @@ namespace 專題.Controllers
         // POST: Forum_SectionBranch1Topics/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Forum_SectionBranch1Topics forum_SectionBranch1Topics = await db.Forum_SectionBranch1Topics.FindAsync(id);
+            Forum_SectionBranch1Topics forum_SectionBranch1Topics = db.Forum_SectionBranch1Topics.Find(id);
             db.Forum_SectionBranch1Topics.Remove(forum_SectionBranch1Topics);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 

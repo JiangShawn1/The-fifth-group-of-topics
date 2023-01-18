@@ -4,14 +4,15 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>刪除區塊</h2>
+<h2>Delete</h2>
 
-<h3>確定要刪除此區塊嗎</h3>
+<h3>Are you sure you want to delete this?</h3>
 <div>
+    <h4>ForumSection</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-           區塊名稱
+            @Html.DisplayNameFor(model => model.sectionName)
         </dt>
 
         <dd>
@@ -24,8 +25,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="刪除區塊" class="btn btn-default" /> |
-            @Html.ActionLink("回到區塊管理", "Index")
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
         </div>
     }
 </div>

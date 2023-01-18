@@ -1,30 +1,36 @@
 ﻿@model IEnumerable<專題.Models.EFModels.Forum_SectionBranch1TopicsThread>
 
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
 <p>
-    @Html.ActionLink("發新文", "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-          標題
+            @Html.DisplayNameFor(model => model.Forum_SectionBranch1Topics.Topic)
         </th>
         <th>
-           回覆者
+            @Html.DisplayNameFor(model => model.Member.Name)
         </th>
         <th>
-          文章狀態
+            @Html.DisplayNameFor(model => model.topicState)
         </th>
         <th>
-           樓層
+            @Html.DisplayNameFor(model => model.replyNumber)
         </th>
         <th>
-           文章內容
+            @Html.DisplayNameFor(model => model.replyContent)
         </th>
         <th>
-           最後修改時間
+            @Html.DisplayNameFor(model => model.replyTime)
         </th>
         <th>
-           狀態
+            @Html.DisplayNameFor(model => model.replyState)
         </th>
         <th></th>
     </tr>
@@ -53,10 +59,9 @@
             @Html.DisplayFor(modelItem => item.replyState)
         </td>
         <td>
-            @Html.ActionLink("詳情", "Details", new { id = item.id }) |
-            @Html.ActionLink("修改文章狀態", "Edit", new { id = item.id })|
-            @Html.ActionLink("刪除", "Delete", new { id = item.id })
-
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
         </td>
     </tr>
 }

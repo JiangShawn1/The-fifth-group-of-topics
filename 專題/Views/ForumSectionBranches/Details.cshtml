@@ -4,13 +4,14 @@
     ViewBag.Title = "Details";
 }
 
-<h2>詳情</h2>
+<h2>Details</h2>
 
 <div>
+    <h4>ForumSectionBranch</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-          區塊名稱
+            @Html.DisplayNameFor(model => model.ForumSection.sectionName)
         </dt>
 
         <dd>
@@ -18,7 +19,7 @@
         </dd>
 
         <dt>
-           分支管理者
+            @Html.DisplayNameFor(model => model.Member.Name)
         </dt>
 
         <dd>
@@ -26,7 +27,7 @@
         </dd>
 
         <dt>
-           分支名稱
+            @Html.DisplayNameFor(model => model.branchName)
         </dt>
 
         <dd>
@@ -34,7 +35,7 @@
         </dd>
 
         <dt>
-           區塊管理者
+            @Html.DisplayNameFor(model => model.sectionAdministrator)
         </dt>
 
         <dd>
@@ -44,6 +45,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("修改", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("回到分支管理", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
 </p>
