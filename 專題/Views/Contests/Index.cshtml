@@ -9,13 +9,13 @@
     var contestName = ViewBag.ContestName as string;
 }
 
-<h2>Index</h2>
+<h2 class="ml-2">賽事管理</h2>
 
-<form method="get">
+<form method="get" class="ml-4">
     <div class="row">
         <div class="col-xs-12">
             <div class="caption">
-                <h3>Search</h3>
+                <h3>@*Search*@</h3>
                 <div class="row">
                     <div class="col-md-4">主辦單位:@Html.DropDownList("supplierId", categories, new { @class = "form-control" })</div>
                     <div class="col-md-4">活動名稱:<input type="text" name="contestName" class="form-control" value="@contestName"></div>
