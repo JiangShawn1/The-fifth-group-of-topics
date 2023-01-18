@@ -43,7 +43,7 @@ namespace 專題.Models.EFModels
         [StringLength(500)]
         public string CouponContent { get; set; }
 
-        public DateTime? StartAt { get; set; }
+        public DateTime StartAt { get; set; }
 
         public DateTime? EndAt { get; set; }
 
