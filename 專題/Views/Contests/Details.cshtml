@@ -66,13 +66,13 @@
             @Html.DisplayFor(model => model.Location)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.MapURL)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.MapURL)
-        </dd>
+        </dd>*@
         @for (int i = 0; i < Model.QuotaList.Count(); i++)
         {
             <dt>
@@ -113,6 +113,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("編輯", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("返回", "Index")
 </p>

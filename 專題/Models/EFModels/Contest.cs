@@ -18,13 +18,14 @@ namespace 專題.Models.EFModels
 
         [Required]
         [StringLength(50)]
-        public string Name { get; set; }
+		[Display(Name = "活動名稱")]
+		public string Name { get; set; }
 
         public int SupplierID { get; set; }
 
         public DateTime CreateDateTime { get; set; }
-
-        public DateTime ContestDate { get; set; }
+		[Display(Name = "活動日期")]
+		public DateTime ContestDate { get; set; }
 
         public DateTime RegistrationDeadline { get; set; }
 
